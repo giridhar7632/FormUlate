@@ -1,0 +1,19 @@
+{
+  "id": "mig_cmbaq7fbfsbuprjc9krg",
+  "parentID": "mig_cmbapmfbfsbuprjc9ko0",
+  "checksum": "1:ce9e97333731be680b622d79d59fe3e1eeaf6b791c4d1ea5f6b8b841f9a994cf",
+  "operations": [
+    {
+      "addColumn": {
+        "column": {
+          "name": "createdBy",
+          "type": "link",
+          "link": {
+            "table": "users"
+          }
+        },
+        "table": "forms"
+      }
+    }
+  ]
+}

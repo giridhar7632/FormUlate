@@ -1,22 +1,23 @@
 "use client"
 
 import { useRef } from "react"
-import { useFormStatus } from "react-dom" 
-import data from "@/utils/data.json"
+import { useFormStatus } from "react-dom"
 import { FormField } from "@/utils/types"
 
-function page() {
-    const formRef = useRef<HTMLFormElement>(null)
-	const { pending } = useFormStatus()
+type FormProps = {
+    fields: FormField[];
+  };
 
-    const formFields: FormField[] = data.fields as FormField[]
+const Form: React.FC<FormProps> = ({ fields }) => {
+  const formRef = useRef<HTMLFormElement>(null)
+	const { pending } = useFormStatus()
     return (
         <div className="p-12 border border-gray-100">
             <form ref={formRef} action={async (formData) => {
 				console.log(formData.get('gender_interests'))
 				formRef.current?.reset()
 			}}>
-            {formFields.length ? formFields.map((i: FormField, idx) => {
+            {fields.length ? fields.map((i: FormField, idx) => {
                 const {field, ...attr} = i
                 if (field === 'select') {
                     return (
@@ -87,4 +88,4 @@ function page() {
     )
 } 
 
-export default page
+export default Form

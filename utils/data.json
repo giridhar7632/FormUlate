@@ -27,16 +27,6 @@
         "placeholder": "Enter your email address"
       },
       {
-        "field": "checkbox",
-        "name": "gender_interests",
-        "label": "Gender Interests",
-        "options": [
-          { "value": "good", "label": "Good" },
-          { "value": "bad", "label": "Bad" },
-          { "value": "ok", "label": "Ok" }
-        ]
-      },
-      {
         "field": "textarea",
         "type": "textarea",
         "name": "Feedback",
@@ -52,6 +42,12 @@
           { "value": "female", "label": "Female" },
           { "value": "other", "label": "Other" }
         ]
+      },
+      {
+        "field": "input",
+        "type": "checkbox",
+        "name": "consent",
+        "label": "Do you agree to submit the form?"
       },
       {
         "field": "button",

@@ -1,4 +1,4 @@
-export interface FormData {
+export type FormData = {
     form: string
     created_by: {
       name: string
@@ -7,7 +7,7 @@ export interface FormData {
     fields: FormField[]
   }
   
-  export interface FormField {
+  export type FormField = {
     field: string
     type: string
     name: string
