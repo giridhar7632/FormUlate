@@ -1,0 +1,69 @@
+{
+    "form": "User form",
+    "created_by": {
+      "name": "Giridhar",
+      "profile": "https://github.com/giridhar7632"
+    },
+    "fields": [
+      {
+        "field": "input",
+        "type": "text",
+        "name": "name",
+        "label": "Name",
+        "placeholder": "Enter your name"
+      },
+      {
+        "field": "input",
+        "type": "number",
+        "name": "age",
+        "label": "Age",
+        "placeholder": "Enter your age"
+      },
+      {
+        "field": "input",
+        "type": "email",
+        "name": "email",
+        "label": "Email",
+        "placeholder": "Enter your email address"
+      },
+      {
+        "field": "checkbox",
+        "name": "gender_interests",
+        "label": "Gender Interests",
+        "options": [
+          { "value": "good", "label": "Good" },
+          { "value": "bad", "label": "Bad" },
+          { "value": "ok", "label": "Ok" }
+        ]
+      },
+      {
+        "field": "textarea",
+        "type": "textarea",
+        "name": "Feedback",
+        "label": "Feedback",
+        "placeholder": "Type something here..."
+      },
+      {
+        "field": "radio",
+        "name": "gender",
+        "label": "Gender",
+        "options": [
+          { "value": "male", "label": "Male" },
+          { "value": "female", "label": "Female" },
+          { "value": "other", "label": "Other" }
+        ]
+      },
+      {
+        "field": "button",
+        "type": "submit",
+        "name": "submit",
+        "value": "Submit",
+        "styles": {
+          "width": "100%",
+          "backgroundColor": "green",
+          "color": "white"
+        }
+      }
+    ]
+  }
+  
