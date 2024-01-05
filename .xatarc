@@ -1,6 +1,6 @@
 {
   "databaseURL": "https://Giridhar-s-workspace-bc9633.us-east-1.xata.sh/db/formulate",
   "codegen": {
-    "output": "src/xata.ts"
+    "output": "lib/xata.ts"
   }
 }

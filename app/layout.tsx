@@ -1,22 +1,33 @@
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
+import { Prompt } from 'next/font/google'
 import './globals.css'
+import { auth } from '@/lib/auth'
+import { SessionProvider } from 'next-auth/react'
 
-const inter = Inter({ subsets: ['latin'] })
+const prompt = Prompt({ subsets: ['latin'], weight: ["400", "500", "700"]})
 
 export const metadata: Metadata = {
   title: 'FormUIate',
   description: 'a simple AI app for crafting form UI from language',
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
+  const session = await auth()
+
   return (
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
-    </html>
+    <SessionProvider session={session}>
+      <html lang="en">
+        <body className={`max-w-5xl min-h-screen px-4 lg:px-0 mx-auto overflow-x-hidden ${prompt.className}`}>
+          
+          <main className='flex w-full h-full flex-col items-center justify-between py-24'>
+            {children}
+          </main>
+        </body>
+      </html>
+    </SessionProvider>
   )
 }

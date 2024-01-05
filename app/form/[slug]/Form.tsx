@@ -2,7 +2,7 @@
 
 import { useRef } from "react"
 import { useFormStatus } from "react-dom"
-import { FormField } from "@/utils/types"
+import { FormField } from "@/lib/types"
 
 type FormProps = {
     fields: FormField[];

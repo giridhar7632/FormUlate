@@ -1,0 +1,303 @@
+{
+  "id": "mig_cmc40s7bfsbuprjc9tv0",
+  "parentID": "mig_cmbce8jr4o6tfr2n3ec0",
+  "checksum": "1:415fad2e96b37a74702627340f703cdadc81d64250c91f81f46b789100f233fd",
+  "operations": [
+    {
+      "removeColumn": {
+        "column": "createdBy",
+        "table": "forms"
+      }
+    },
+    {
+      "removeTable": {
+        "table": "users"
+      }
+    },
+    {
+      "addTable": {
+        "table": "nextauth_users"
+      }
+    },
+    {
+      "addTable": {
+        "table": "nextauth_accounts"
+      }
+    },
+    {
+      "addTable": {
+        "table": "nextauth_verificationTokens"
+      }
+    },
+    {
+      "addTable": {
+        "table": "nextauth_users_accounts"
+      }
+    },
+    {
+      "addTable": {
+        "table": "nextauth_users_sessions"
+      }
+    },
+    {
+      "addTable": {
+        "table": "nextauth_sessions"
+      }
+    },
+    {
+      "addColumn": {
+        "column": {
+          "name": "createdBy",
+          "type": "link",
+          "link": {
+            "table": "nextauth_users"
+          }
+        },
+        "table": "forms"
+      }
+    },
+    {
+      "addColumn": {
+        "column": {
+          "name": "email",
+          "type": "email"
+        },
+        "table": "nextauth_users"
+      }
+    },
+    {
+      "addColumn": {
+        "column": {
+          "name": "emailVerified",
+          "type": "datetime"
+        },
+        "table": "nextauth_users"
+      }
+    },
+    {
+      "addColumn": {
+        "column": {
+          "name": "name",
+          "type": "string"
+        },
+        "table": "nextauth_users"
+      }
+    },
+    {
+      "addColumn": {
+        "column": {
+          "name": "image",
+          "type": "string"
+        },
+        "table": "nextauth_users"
+      }
+    },
+    {
+      "addColumn": {
+        "column": {
+          "name": "user",
+          "type": "link",
+          "link": {
+            "table": "nextauth_users"
+          }
+        },
+        "table": "nextauth_accounts"
+      }
+    },
+    {
+      "addColumn": {
+        "column": {
+          "name": "type",
+          "type": "string"
+        },
+        "table": "nextauth_accounts"
+      }
+    },
+    {
+      "addColumn": {
+        "column": {
+          "name": "provider",
+          "type": "string"
+        },
+        "table": "nextauth_accounts"
+      }
+    },
+    {
+      "addColumn": {
+        "column": {
+          "name": "providerAccountId",
+          "type": "string"
+        },
+        "table": "nextauth_accounts"
+      }
+    },
+    {
+      "addColumn": {
+        "column": {
+          "name": "refresh_token",
+          "type": "string"
+        },
+        "table": "nextauth_accounts"
+      }
+    },
+    {
+      "addColumn": {
+        "column": {
+          "name": "access_token",
+          "type": "string"
+        },
+        "table": "nextauth_accounts"
+      }
+    },
+    {
+      "addColumn": {
+        "column": {
+          "name": "expires_at",
+          "type": "int"
+        },
+        "table": "nextauth_accounts"
+      }
+    },
+    {
+      "addColumn": {
+        "column": {
+          "name": "token_type",
+          "type": "string"
+        },
+        "table": "nextauth_accounts"
+      }
+    },
+    {
+      "addColumn": {
+        "column": {
+          "name": "scope",
+          "type": "string"
+        },
+        "table": "nextauth_accounts"
+      }
+    },
+    {
+      "addColumn": {
+        "column": {
+          "name": "id_token",
+          "type": "text"
+        },
+        "table": "nextauth_accounts"
+      }
+    },
+    {
+      "addColumn": {
+        "column": {
+          "name": "session_state",
+          "type": "string"
+        },
+        "table": "nextauth_accounts"
+      }
+    },
+    {
+      "addColumn": {
+        "column": {
+          "name": "identifier",
+          "type": "string"
+        },
+        "table": "nextauth_verificationTokens"
+      }
+    },
+    {
+      "addColumn": {
+        "column": {
+          "name": "token",
+          "type": "string"
+        },
+        "table": "nextauth_verificationTokens"
+      }
+    },
+    {
+      "addColumn": {
+        "column": {
+          "name": "expires",
+          "type": "datetime"
+        },
+        "table": "nextauth_verificationTokens"
+      }
+    },
+    {
+      "addColumn": {
+        "column": {
+          "name": "user",
+          "type": "link",
+          "link": {
+            "table": "nextauth_users"
+          }
+        },
+        "table": "nextauth_users_accounts"
+      }
+    },
+    {
+      "addColumn": {
+        "column": {
+          "name": "account",
+          "type": "link",
+          "link": {
+            "table": "nextauth_accounts"
+          }
+        },
+        "table": "nextauth_users_accounts"
+      }
+    },
+    {
+      "addColumn": {
+        "column": {
+          "name": "user",
+          "type": "link",
+          "link": {
+            "table": "nextauth_users"
+          }
+        },
+        "table": "nextauth_users_sessions"
+      }
+    },
+    {
+      "addColumn": {
+        "column": {
+          "name": "session",
+          "type": "link",
+          "link": {
+            "table": "nextauth_sessions"
+          }
+        },
+        "table": "nextauth_users_sessions"
+      }
+    },
+    {
+      "addColumn": {
+        "column": {
+          "name": "sessionToken",
+          "type": "string"
+        },
+        "table": "nextauth_sessions"
+      }
+    },
+    {
+      "addColumn": {
+        "column": {
+          "name": "expires",
+          "type": "datetime"
+        },
+        "table": "nextauth_sessions"
+      }
+    },
+    {
+      "addColumn": {
+        "column": {
+          "name": "user",
+          "type": "link",
+          "link": {
+            "table": "nextauth_users"
+          }
+        },
+        "table": "nextauth_sessions"
+      }
+    }
+  ]
+}

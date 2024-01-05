@@ -8,12 +8,13 @@ export type FormData = {
   }
   
   export type FormField = {
-    field: string
+    field?: string
     type: string
     name: string
     label: string
     value?: string
     placeholder?: string
+    disabled?: boolean
     options?: { 
         value: string
         label: string 

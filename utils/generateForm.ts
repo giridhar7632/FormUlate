@@ -1,5 +1,5 @@
 import { createElement } from 'react';
-import { FormField } from './types';
+import { FormField } from '../lib/types';
 
 function generateFormComponent(fields: FormField[], disabled: Boolean) {
   const fieldComponents = fields.map((field: FormField, idx) => {
