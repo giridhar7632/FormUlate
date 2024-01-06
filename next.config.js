@@ -24,6 +24,11 @@ const nextConfig = {
           }
         ],
       },
+      experimental: {
+        serverActions: {
+          allowedOrigins: ['Giridhar-s-workspace-bc9633.us-east-1.xata.sh', 'verbose-barnacle-75wrq9676r43xr6j-3000.app.github.dev'],
+        },
+      },
 }
 
 module.exports = nextConfig

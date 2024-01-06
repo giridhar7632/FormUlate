@@ -21,7 +21,7 @@ export default function ProfileMenu({ name, email, image }: ProfileMenuProps) {
           <Popover.Button
             className={`
                 ${open ? '' : 'text-opacity-90'}
-                mx-3 flex rounded-full bg-gray-800 text-sm focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600 md:mr-0`}
+                mx-3 flex rounded-full bg-gray-800 text-sm focus:ring-4 focus:ring-gray-300 md:mr-0`}
           >
             <Image
               width={32}
@@ -43,7 +43,7 @@ export default function ProfileMenu({ name, email, image }: ProfileMenuProps) {
             <Popover.Panel className="absolute right-0 z-10 mt-3 w-52 transform  rounded-lg bg-white px-4 sm:px-0 lg:max-w-3xl">
               <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
                 <Link href="/profile">
-                  <div className="px-4 py-2 text-sm text-gray-900 dark:text-white border-b border-gray-100">
+                  <div className="px-4 py-2 text-sm text-gray-900 border-b border-gray-100">
                     <div className="text-xs text-gray-400">Logged in as:</div>
                     <div className="font-semibold mt-2">{name}</div>
                     <div className="truncate text-gray-500">{email}</div>
@@ -52,7 +52,7 @@ export default function ProfileMenu({ name, email, image }: ProfileMenuProps) {
 
                 <button
                   onClick={() => signOut({ callbackUrl: '/' })}
-                  className="flex w-full items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:text-gray-200 dark:hover:bg-gray-600 dark:hover:text-white"
+                  className="flex w-full items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
                 >
                   <Logout width={18} />
                   <span>Sign out</span>
