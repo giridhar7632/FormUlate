@@ -1,3 +1,4 @@
+import Button from "@/components/Button";
 import { auth } from "@/lib/auth";
 import { getXataClient } from "@/lib/xata";
 import Link from "next/link";
@@ -11,7 +12,12 @@ export default async function Page() {
 
   return <div className="w-full">
           <p className="text-xl">Hi there! <b>{session?.user?.name}</b></p>
-          <h2 className="text-2xl text-gray-500 my-4">Your forms</h2>
+          <div className="w-full my-4 flex items-center justify-between">
+          <h2 className="text-2xl text-gray-500 truncate">Your forms</h2>
+          <Link href="/create">
+            <Button>Create new form</Button>
+          </Link>
+          </div>
           <div className="flex gap-4 items-center flex-wrap">
             {forms.map((form) => (
               <div key={form.id} className="flex-1 border shadow-sm hover:shadow-md border-gray-100 rounded-xl">

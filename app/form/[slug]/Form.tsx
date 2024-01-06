@@ -16,7 +16,9 @@ const Form: React.FC<FormProps> = ({ fields }) => {
 	const { pending } = useFormStatus()
     return (
             <form className="flex flex-col" ref={formRef} action={async (formData) => {
-				console.log(formData.get('gender_interests'))
+              for (let pair of formData.entries()) {
+                console.log(pair[0]+ ', '+ pair[1]); 
+              }
 				formRef.current?.reset()
 			}}>
             {fields ? fields.map((i: FormField, idx) => {
