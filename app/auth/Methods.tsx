@@ -2,9 +2,9 @@
 
 import { useRef } from "react"
 import { useFormStatus } from "react-dom"
-import Input from "../../components/Input"
-import Button from "../../components/Button"
-import Provider from "../../components/Providers"
+import Input from "@/components/Input"
+import Button from "@/components/Button"
+import Provider from "@/components/Providers"
 import { signIn, signOut } from 'next-auth/react';
 
 export const SignOut: React.FC = () => <Button variant="secondary" onClick={() => signOut({ callbackUrl: '/' })}>Sign out</Button>

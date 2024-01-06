@@ -8,6 +8,7 @@ type ButtonProps = {
     disabled?: boolean
     onClick?: () => void
     children: React.ReactNode
+	type?: 'button' | 'submit' | 'reset'
 }
 
 type IconButtonProps = {
@@ -21,7 +22,7 @@ const Button: React.FC<ButtonProps> =({
 	loadingText = 'Loading...',
 	className,
 	children,
-    disabled, onClick
+    disabled, onClick, type = "button"
 }) => {
 	const variantClassname = clsx({
 		['bg-blue-500 hover:bg-blue-600 text-white disabled:bg-blue-500 disabled:ring-0']:
@@ -42,7 +43,7 @@ const Button: React.FC<ButtonProps> =({
 				className
 			)}
 			disabled={disabled || loading}
-			onClick={onClick}>
+			onClick={onClick} type={type}>
 			{loading ? loadingText : children}
 		</button>
 	)

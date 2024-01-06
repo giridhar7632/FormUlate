@@ -18,14 +18,12 @@ export default async function RootLayout({
 }) {
   const session = await auth()
 
+
   return (
     <SessionProvider session={session}>
       <html lang="en">
         <body className={`max-w-5xl min-h-screen px-4 lg:px-0 mx-auto overflow-x-hidden ${prompt.className}`}>
-          
-          <main className='flex w-full h-full flex-col items-center justify-between py-24'>
-            {children}
-          </main>
+          {children}
         </body>
       </html>
     </SessionProvider>

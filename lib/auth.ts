@@ -1,8 +1,8 @@
 import { XataAdapter } from '@next-auth/xata-adapter';
 import NextAuth, { NextAuthConfig } from 'next-auth';
 import GitHub from 'next-auth/providers/github';
-import Email, { EmailConfig } from 'next-auth/providers/email';
 import Google from 'next-auth/providers/google';
+import Email, { EmailConfig } from 'next-auth/providers/email';
 import { XataClient } from './xata';
 
 const client = new XataClient()
@@ -35,6 +35,17 @@ export const authOptions: NextAuthConfig = {
     verifyRequest: '/auth/verify-request',
     error: '/auth/error'
   },
+  callbacks: {
+    async session({ session, user }) {
+      return {
+        ...session,
+        user: {
+          ...session.user,
+          id: user.id,
+        },
+      };
+    }
+  }
 }
 
 export const {

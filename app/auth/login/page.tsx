@@ -1,8 +1,7 @@
 import Image from "next/image";
-import { EmailLogin, GitHubLogin, GoogleLogin } from "./Methods";
+import { EmailLogin, GitHubLogin, GoogleLogin } from "../Methods";
 
 export default async function Page() {
-console.log("google ", process.env.GOOGLE_CLIENT_ID)
     return (
         <>
             <Image className="mx-auto" width={72} height={72} src="/logo.png" alt="FormUlate Logo" />
