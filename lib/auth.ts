@@ -1,13 +1,12 @@
-import { XataAdapter } from '@next-auth/xata-adapter';
-import NextAuth, { NextAuthConfig } from 'next-auth';
-import GitHub from 'next-auth/providers/github';
-import Google from 'next-auth/providers/google';
-import Email, { EmailConfig } from 'next-auth/providers/email';
-import { XataClient } from './xata';
+import { XataAdapter } from '@next-auth/xata-adapter'
+import NextAuth, { NextAuthConfig } from 'next-auth'
+import GitHub from 'next-auth/providers/github'
+import Google from 'next-auth/providers/google'
+import Email, { EmailConfig } from 'next-auth/providers/email'
+import { XataClient } from './xata'
 
 const client = new XataClient()
 export const authOptions: NextAuthConfig = {
-
   adapter: XataAdapter(client),
   providers: [
     GitHub({
@@ -33,7 +32,7 @@ export const authOptions: NextAuthConfig = {
   pages: {
     signIn: '/auth/login',
     verifyRequest: '/auth/verify-request',
-    error: '/auth/error'
+    error: '/auth/error',
   },
   callbacks: {
     async session({ session, user }) {
@@ -43,12 +42,12 @@ export const authOptions: NextAuthConfig = {
           ...session.user,
           id: user.id,
         },
-      };
-    }
-  }
+      }
+    },
+  },
 }
 
 export const {
   handlers: { GET, POST },
   auth,
-} = NextAuth(authOptions);
+} = NextAuth(authOptions)

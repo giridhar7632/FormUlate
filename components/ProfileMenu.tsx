@@ -1,4 +1,4 @@
-"use client"
+'use client'
 
 import { Logout } from '@/lib/icons'
 import { Popover, Transition } from '@headlessui/react'

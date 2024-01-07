@@ -4,7 +4,7 @@ import './globals.css'
 import { auth } from '@/lib/auth'
 import { SessionProvider } from 'next-auth/react'
 
-const prompt = Prompt({ subsets: ['latin'], weight: ["400", "500", "700"]})
+const prompt = Prompt({ subsets: ['latin'], weight: ['400', '500', '700'] })
 
 export const metadata: Metadata = {
   title: 'FormUIate',
@@ -18,11 +18,12 @@ export default async function RootLayout({
 }) {
   const session = await auth()
 
-
   return (
     <SessionProvider session={session}>
       <html lang="en">
-        <body className={`max-w-5xl min-h-screen px-4 lg:px-0 mx-auto overflow-x-hidden ${prompt.className}`}>
+        <body
+          className={`max-w-5xl min-h-screen px-4 lg:px-0 mx-auto overflow-x-hidden ${prompt.className}`}
+        >
           {children}
         </body>
       </html>

@@ -1,5 +1,5 @@
-import { createElement } from 'react';
-import { FormField } from '../lib/types';
+import { createElement } from 'react'
+import { FormField } from '../lib/types'
 
 function generateFormComponent(fields: FormField[], disabled: Boolean) {
   const fieldComponents = fields.map((field: FormField, idx) => {
@@ -7,27 +7,40 @@ function generateFormComponent(fields: FormField[], disabled: Boolean) {
       return createElement(
         'select',
         { key: idx, name: field.name, id: field.name },
-        field?.options && field?.options.map((option) => (
-          createElement('option', { key: option.value, value: option.value, disabled }, option.label)
-        ))
-      );
+        field?.options &&
+          field?.options.map((option) =>
+            createElement(
+              'option',
+              { key: option.value, value: option.value, disabled },
+              option.label,
+            ),
+          ),
+      )
     } else if (field.field === 'textarea') {
-      return createElement('textarea', {
-        key: idx,
-        type: field.type,
-        name: field.name,
-        value: field.value,
-        disabled
-      }, field.label);
+      return createElement(
+        'textarea',
+        {
+          key: idx,
+          type: field.type,
+          name: field.name,
+          value: field.value,
+          disabled,
+        },
+        field.label,
+      )
     } else if (field.field === 'button') {
-      return createElement('button', {
-        key: idx,
-        type: field.type,
-        name: field.name,
-        value: field.value,
-        style: field.styles,
-        disabled
-      }, field.label);
+      return createElement(
+        'button',
+        {
+          key: idx,
+          type: field.type,
+          name: field.name,
+          value: field.value,
+          style: field.styles,
+          disabled,
+        },
+        field.label,
+      )
     } else {
       return createElement('input', {
         key: idx,
@@ -35,10 +48,10 @@ function generateFormComponent(fields: FormField[], disabled: Boolean) {
         name: field.name,
         id: field.name,
         placeholder: field.placeholder,
-        disabled
-      });
+        disabled,
+      })
     }
-  });
+  })
 
   return fieldComponents
 }

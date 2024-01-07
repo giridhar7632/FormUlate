@@ -1,4 +1,4 @@
-import { createTransport } from "nodemailer"
+import { createTransport } from 'nodemailer'
 
 async function sendVerificationRequest(params) {
   const { identifier, url, provider, theme } = params
@@ -14,7 +14,7 @@ async function sendVerificationRequest(params) {
   })
   const failed = result.rejected.concat(result.pending).filter(Boolean)
   if (failed.length) {
-    throw new Error(`Email(s) (${failed.join(", ")}) could not be sent`)
+    throw new Error(`Email(s) (${failed.join(', ')}) could not be sent`)
   }
 }
 
@@ -26,19 +26,19 @@ async function sendVerificationRequest(params) {
  *
  * @note We don't add the email address to avoid needing to escape it, if you do, remember to sanitize it!
  */
-function html(params: { url: string, host: string, theme: Theme }) {
+function html(params: { url: string; host: string; theme: Theme }) {
   const { url, host, theme } = params
 
-  const escapedHost = host.replace(/\./g, "&#8203;.")
+  const escapedHost = host.replace(/\./g, '&#8203;.')
 
-  const brandColor = theme.brandColor || "#346df1"
+  const brandColor = theme.brandColor || '#346df1'
   const color = {
-    background: "#f9f9f9",
-    text: "#444",
-    mainBackground: "#fff",
+    background: '#f9f9f9',
+    text: '#444',
+    mainBackground: '#fff',
     buttonBackground: brandColor,
     buttonBorder: brandColor,
-    buttonText: theme.buttonText || "#fff",
+    buttonText: theme.buttonText || '#fff',
   }
 
   return `
@@ -75,6 +75,6 @@ function html(params: { url: string, host: string, theme: Theme }) {
 }
 
 /** Email Text body (fallback for email clients that don't render HTML, e.g. feature phones) */
-function text({ url, host }: { url: string, host: string }) {
+function text({ url, host }: { url: string; host: string }) {
   return `Sign in to ${host}\n${url}\n\n`
 }
