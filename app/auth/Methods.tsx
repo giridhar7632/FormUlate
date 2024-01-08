@@ -34,7 +34,7 @@ export const EmailLogin: React.FC = () => {
         placeholder={'Email'}
         disabled={pending}
       />
-      <Button disabled={pending} className="w-full">
+      <Button type="submit" disabled={pending} className="w-full">
         Continue with Email
       </Button>
     </form>

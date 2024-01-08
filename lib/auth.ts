@@ -4,6 +4,7 @@ import GitHub from 'next-auth/providers/github'
 import Google from 'next-auth/providers/google'
 import Email, { EmailConfig } from 'next-auth/providers/email'
 import { XataClient } from './xata'
+import { sendVerificationRequest } from '@/utils/sendVerificationRequest'
 
 const client = new XataClient()
 export const authOptions: NextAuthConfig = {
@@ -15,7 +16,7 @@ export const authOptions: NextAuthConfig = {
     }),
     Google({
       clientId: process.env.GOOGLE_CLIENT_ID,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     }),
     Email({
       server: {
@@ -27,6 +28,7 @@ export const authOptions: NextAuthConfig = {
         },
       },
       from: process.env.EMAIL_FROM,
+      sendVerificationRequest,
     }) as EmailConfig & { options: Record<string, unknown> },
   ],
   pages: {

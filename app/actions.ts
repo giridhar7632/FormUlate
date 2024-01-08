@@ -20,7 +20,7 @@ export async function createTableQuery(table: string) {
     method: 'POST',
     path: '/sql',
     body: {
-      statement: `create table ${table}`,
+      statement: `create table "${table}" (name INT);`,
     },
   })
 
@@ -31,12 +31,12 @@ export async function createTableQuery(table: string) {
 export async function createTable(table: string, fields: FormField[]) {
   const session = await getSession()
   if (session) {
-    const tableData = await dbReq({
-      method: 'PUT',
-      path: `/tables/${table}`,
-      body: {},
-    })
-    console.log('tableData', tableData)
+    // const tableData = await dbReq({
+    //   method: 'PUT',
+    //   path: `/tables/${table}`,
+    //   body: {},
+    // })
+    // console.log('tableData', tableData)
     const columns = generateColumns(fields)
     console.log('columns', columns)
     const schemaData = await dbReq({
@@ -46,6 +46,6 @@ export async function createTable(table: string, fields: FormField[]) {
     })
     console.log('schemaData', schemaData)
 
-    return tableData
+    // return tableData
   }
 }

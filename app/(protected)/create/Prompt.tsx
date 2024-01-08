@@ -25,8 +25,8 @@ const Prompt = () => {
         console.log(formData.get('prompt'))
         try {
           const formName = 'user-information-form'
-          await createTableQuery(generateSlug(user?.id, formName))
-          // await createTable(generateSlug(user?.id, formName), data.fields)
+          // await createTableQuery(generateSlug(user?.id, formName))
+          await createTable(generateSlug(user?.id, formName), data.fields)
         } catch (error) {
           console.log(error)
         }

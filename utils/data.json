@@ -35,6 +35,7 @@
     },
     {
       "field": "radio",
+      "type": "radio",
       "name": "gender",
       "label": "Gender",
       "options": [
