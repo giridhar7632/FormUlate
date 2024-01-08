@@ -12,9 +12,9 @@ function generateFormComponent(fields: FormField[], disabled: Boolean) {
             createElement(
               'option',
               { key: option.value, value: option.value, disabled },
-              option.label,
-            ),
-          ),
+              option.label
+            )
+          )
       )
     } else if (field.field === 'textarea') {
       return createElement(
@@ -26,7 +26,7 @@ function generateFormComponent(fields: FormField[], disabled: Boolean) {
           value: field.value,
           disabled,
         },
-        field.label,
+        field.label
       )
     } else if (field.field === 'button') {
       return createElement(
@@ -36,10 +36,9 @@ function generateFormComponent(fields: FormField[], disabled: Boolean) {
           type: field.type,
           name: field.name,
           value: field.value,
-          style: field.styles,
           disabled,
         },
-        field.label,
+        field.label
       )
     } else {
       return createElement('input', {

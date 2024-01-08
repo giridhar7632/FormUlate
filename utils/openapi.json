@@ -1,0 +1,30 @@
+{
+  "form": "User Feedback",
+  "fields": [
+    {
+      "type": "text",
+      "name": "name",
+      "label": "Name"
+    },
+    {
+      "type": "email",
+      "name": "email",
+      "label": "Email"
+    },
+    {
+      "type": "select",
+      "name": "",
+      "label": "Gender",
+      "options": [
+        { "value": "male", "label": "" },
+        { "value": "female", "label": "" },
+        { "value": "other", "label": "" }
+      ]
+    },
+    {
+      "type": "textarea",
+      "name": "",
+      "label": "Feedback"
+    }
+  ]
+}

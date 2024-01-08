@@ -41,8 +41,8 @@ const Button: React.FC<ButtonProps> = ({
     <button
       className={clsx(
         variantClassname,
-        'h-lg flex cursor-pointer items-center justify-center gap-2 rounded-xl px-4 py-3 leading-snug ring-blue-200 transition duration-150 ease-in-out hover:ring focus:ring',
-        className,
+        'h-lg flex cursor-pointer items-center justify-center gap-2 rounded-xl px-4 py-3 leading-snug ring-blue-200 transition duration-150 ease-in-out hover:ring focus:ring disabled:bg-gray-200 disabled:text-gray-600 disabled:cursor-not-allowed',
+        className
       )}
       disabled={disabled || loading}
       onClick={onClick}

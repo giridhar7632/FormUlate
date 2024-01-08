@@ -27,7 +27,7 @@ export default async function Page() {
         {forms.map((form) => (
           <div
             key={form.id}
-            className="flex-1 border shadow-sm hover:shadow-md border-gray-100 rounded-xl"
+            className="flex-1 min-w-[40%] border shadow-sm hover:shadow-md border-gray-100 rounded-xl"
           >
             <Link href={`/form/${form.slug}`}>
               <div className="p-4 md:p-6">

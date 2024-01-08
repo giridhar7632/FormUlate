@@ -1,0 +1,28 @@
+generate a json file in the format given from the given description:
+format:
+export type FormData = {
+  form: string
+  created_by: {
+    name: string
+    profile: string
+  }
+  fields: FormField[]
+}
+
+export type FormField = {
+  id?: string
+  field?: string
+  type: string
+  name: string
+  label: string
+  value?: string
+  placeholder?: string
+  disabled?: boolean
+  options?: {
+    value: string
+    label: string
+    name?: string
+  }[]
+}
+
+description: "I need a form to collect user feedback for my product. The form should have fields for collecting the user data like name, email, gender and their valuable feedback."

@@ -21,11 +21,6 @@ export type FormField = {
     label: string
     name?: string
   }[]
-  styles?: {
-    width: string
-    backgroundColor: string
-    color: string
-  }
 }
 
 export type SetTableSchema = {

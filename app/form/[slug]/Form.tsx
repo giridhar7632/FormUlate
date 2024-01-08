@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import { useFormStatus } from 'react-dom'
 import { FormField } from '@/lib/types'
 import clsx from 'clsx'
@@ -13,6 +13,7 @@ type FormProps = {
 
 const Form: React.FC<FormProps> = ({ fields }) => {
   const formRef = useRef<HTMLFormElement>(null)
+  const [consent, setConsent] = useState(false)
   const { pending } = useFormStatus()
   return (
     <form
@@ -30,20 +31,28 @@ const Form: React.FC<FormProps> = ({ fields }) => {
             const { field, ...attr } = i
             if (field === 'select') {
               return (
-                <select disabled={pending} key={idx} name={attr.name}>
-                  {attr?.options?.map((option) => (
-                    <option key={option.value} value={option.value}>
-                      {option.label}
-                    </option>
-                  ))}
-                </select>
+                <div className="min-h-12 mb-3" key={idx}>
+                  <label
+                    htmlFor={attr.name}
+                    className="mb-1 block text-sm text-gray-500"
+                  >
+                    {attr.label}
+                  </label>
+                  <select disabled={pending} key={idx} name={attr.name}>
+                    {attr?.options?.map((option) => (
+                      <option key={option.value} value={option.value}>
+                        {option.label}
+                      </option>
+                    ))}
+                  </select>
+                </div>
               )
             } else if (field === 'textarea') {
               return (
                 <div className="min-h-12 mb-3" key={idx}>
                   <label
                     htmlFor={attr.name}
-                    className="mb-1 block text-sm font-medium text-gray-500"
+                    className="mb-1 block text-sm text-gray-500"
                   >
                     {attr.label}
                   </label>
@@ -62,7 +71,7 @@ const Form: React.FC<FormProps> = ({ fields }) => {
             if (field === 'checkbox') {
               return (
                 <fieldset className="min-h-12 mb-3" name={attr.name} key={idx}>
-                  <legend className="mb-1 block text-sm font-medium text-gray-500">
+                  <legend className="mb-1 block text-sm  text-gray-500">
                     {attr.label}
                   </legend>
                   {attr?.options?.map((option) => (
@@ -85,7 +94,7 @@ const Form: React.FC<FormProps> = ({ fields }) => {
             } else if (field === 'radio') {
               return (
                 <fieldset className="min-h-12 mb-3" name={attr.name} key={idx}>
-                  <legend className="mb-1 block text-sm font-medium text-gray-500">
+                  <legend className="mb-1 block text-sm  text-gray-500">
                     {attr.label}
                   </legend>
                   {attr?.options?.map((option) => (
@@ -112,9 +121,24 @@ const Form: React.FC<FormProps> = ({ fields }) => {
           })
         : null}
       {fields?.length ? (
-        <Button disabled={pending} type="submit" className="mt-4 w-full">
-          Submit
-        </Button>
+        <div className="w-full mt-3">
+          <div className="flex items-center gap-2">
+            <input
+              type="checkbox"
+              name={'consent'}
+              checked={consent}
+              onChange={() => setConsent((prev) => !prev)}
+            />
+            <label htmlFor="consent">I agree to submit this form!</label>
+          </div>
+          <Button
+            disabled={pending || !consent}
+            type="submit"
+            className="w-full mt-4"
+          >
+            Submit
+          </Button>
+        </div>
       ) : (
         <div>
           No fields to display
