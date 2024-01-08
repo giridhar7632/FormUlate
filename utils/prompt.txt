@@ -1,17 +1,13 @@
 generate a json file in the format given from the given description:
 format:
 export type FormData = {
-  form: string
-  created_by: {
-    name: string
-    profile: string
-  }
+  title: string
   fields: FormField[]
 }
 
 export type FormField = {
   id?: string
-  field?: string
+  field: string // type of html element
   type: string
   name: string
   label: string

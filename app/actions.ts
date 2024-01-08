@@ -5,6 +5,7 @@ import { FormField } from '@/lib/types'
 import { dbReq } from '@/utils/xataRequest'
 import { generateColumns } from '@/utils/generateColumns'
 import { type Session } from 'next-auth'
+import { model } from '@/lib/model'
 
 export async function getSession(): Promise<Session> {
   let session = await auth()
@@ -47,5 +48,13 @@ export async function createTable(table: string, fields: FormField[]) {
     console.log('schemaData', schemaData)
 
     // return tableData
+  }
+}
+
+export async function generateJson(prompt: string) {
+  const session = await getSession()
+  if (session) {
+    const res = await model(prompt)
+    return res
   }
 }
