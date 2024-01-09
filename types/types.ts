@@ -1,9 +1,6 @@
-export type FormData = {
-  form: string
-  created_by: {
-    name: string
-    profile: string
-  }
+export type PageData = {
+  title: string
+  action: string
   fields: FormField[]
 }
 
@@ -68,4 +65,27 @@ type ColumnVector = {
 
 type ColumnFile = {
   defaultPublicAccess?: boolean
+}
+
+export type IconTypes = {
+  tag: string
+  attr: {
+    viewBox: string
+    fill: string
+    stroke: string
+    strokeWidth: string
+    strokeLinecap: string
+    strokeLinejoin: string
+  }
+  child: {
+    tag: string
+    attr: {
+      points?: string
+      d?: string
+    }
+  }[]
+}
+
+export type IconPropsType = {
+  [key: string]: any
 }

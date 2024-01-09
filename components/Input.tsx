@@ -1,4 +1,4 @@
-import { FormField } from '@/lib/types'
+import { FormField } from '@/types/types'
 import clsx from 'clsx'
 
 const Input: React.FC<FormField> = ({

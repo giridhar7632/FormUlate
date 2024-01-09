@@ -1,11 +1,14 @@
 'use server'
 
 import { auth } from '@/lib/auth'
-import { FormField } from '@/lib/types'
+import { FormField, PageData } from '@/types/types'
 import { dbReq } from '@/utils/xataRequest'
 import { generateColumns } from '@/utils/generateColumns'
 import { type Session } from 'next-auth'
 import { model } from '@/lib/model'
+import { XataClient } from '@/lib/xata'
+
+const xata = new XataClient()
 
 export async function getSession(): Promise<Session> {
   let session = await auth()
@@ -16,28 +19,18 @@ export async function getSession(): Promise<Session> {
   return session
 }
 
-export async function createTableQuery(table: string) {
-  const res = await dbReq({
-    method: 'POST',
-    path: '/sql',
-    body: {
-      statement: `create table "${table}" (name INT);`,
-    },
-  })
-
-  console.log('res', res)
-  return res
-}
-
 export async function createTable(table: string, fields: FormField[]) {
   const session = await getSession()
   if (session) {
-    // const tableData = await dbReq({
-    //   method: 'PUT',
-    //   path: `/tables/${table}`,
-    //   body: {},
-    // })
-    // console.log('tableData', tableData)
+    // step-1: create table
+    const tableData = await dbReq({
+      method: 'PUT',
+      path: `/tables/${table}`,
+      body: {},
+    })
+    console.log('tableData', tableData)
+
+    // step-2: add schema
     const columns = generateColumns(fields)
     console.log('columns', columns)
     const schemaData = await dbReq({
@@ -47,14 +40,43 @@ export async function createTable(table: string, fields: FormField[]) {
     })
     console.log('schemaData', schemaData)
 
-    // return tableData
+    return schemaData
   }
 }
 
-export async function generateJson(prompt: string) {
+export async function updateTable(table: string, fields: FormField[]) {
   const session = await getSession()
   if (session) {
-    const res = await model(prompt)
+    const columns = generateColumns(fields)
+    console.log('columns', columns)
+    const schemaData = await dbReq({
+      method: 'PUT',
+      path: `/tables/${table}/schema`,
+      body: { columns },
+    })
+    console.log('schemaData', schemaData)
+
+    return schemaData
+  }
+}
+
+export async function generateJson(prompt: string, old = {}) {
+  const session = await getSession()
+  if (session) {
+    const res = await model(old, prompt)
+    return res
+  }
+}
+
+export async function addPage(table: string, input: PageData) {
+  const session = await getSession()
+  if (session) {
+    const res = await xata.db.forms.create({
+      name: input.title,
+      page: input,
+      createdBy: session?.user?.id,
+      slug: table,
+    })
     return res
   }
 }

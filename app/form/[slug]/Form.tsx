@@ -2,7 +2,7 @@
 
 import { useRef, useState } from 'react'
 import { useFormStatus } from 'react-dom'
-import { FormField } from '@/lib/types'
+import { FormField } from '@/types/types'
 import clsx from 'clsx'
 import Input from '@/components/Input'
 import Button from '@/components/Button'

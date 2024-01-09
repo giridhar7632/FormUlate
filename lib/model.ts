@@ -7,7 +7,7 @@ const {
 const MODEL_NAME = 'gemini-pro'
 const API_KEY = process.env.GEMINI_API_KEY
 
-export async function model(input: string) {
+export async function model(old: Object, input: string) {
   const genAI = new GoogleGenerativeAI(API_KEY)
   const model = genAI.getGenerativeModel({ model: MODEL_NAME })
 
@@ -39,7 +39,9 @@ export async function model(input: string) {
 
   const parts = [
     {
-      text: `generate a json file in the format given from the given description:\nformat:\nexport type FormData = {\n title: string\n fields: FormField[]\n}\n\nexport type FormField = {\n id?: string\n field: string // type of html element\n type: string\n name: string\n label: string\n value?: string\n placeholder?: string\n disabled?: boolean\n options?: {\n  value: string\n  label: string\n  name?: string\n }[]\n}\n\ndescription: \"${input}\"`,
+      text: `understand and generate a new json file in the format given (do not include submit button) from the given description:\nformat:\nexport type FormData = {\n title: string\n action: 'create' | 'update' | 'delete' // understand what user wanted to do\n fields: FormField[]\n}\n\nexport type FormField = {\n id?: string\n field: string // type of html element\n type: string\n name: string\n label: string\n value?: string\n placeholder?: string\n disabled?: boolean\n options?: {\n  value: string\n  label: string\n  name?: string\n }[]\n}\n\ndescription: "${input}" \n\nold: "${JSON.stringify(
+        old
+      )}"`,
     },
   ]
 
@@ -50,6 +52,6 @@ export async function model(input: string) {
   })
 
   const response = result.response
-  console.log('result', result)
+  console.log('result', response.text())
   return response.text()
 }

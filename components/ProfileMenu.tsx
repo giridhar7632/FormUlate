@@ -24,9 +24,9 @@ export default function ProfileMenu({ name, email, image }: ProfileMenuProps) {
                 mx-3 flex rounded-full bg-gray-800 text-sm focus:ring-4 focus:ring-gray-300 md:mr-0`}
           >
             <Image
-              width={32}
-              height={32}
-              className="h-8 w-8 rounded-full"
+              width={48}
+              height={48}
+              className="h-12 w-12 rounded-full"
               src={image || 'https://api.multiavatar.com/v.png'}
               alt={name || 'Avatar'}
             />
@@ -48,6 +48,13 @@ export default function ProfileMenu({ name, email, image }: ProfileMenuProps) {
                     <div className="font-semibold mt-2">{name}</div>
                     <div className="truncate text-gray-500">{email}</div>
                   </div>
+                </Link>
+
+                <Link
+                  href="/app"
+                  className="flex w-full items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 border-b border-gray-100"
+                >
+                  Dashboard
                 </Link>
 
                 <button

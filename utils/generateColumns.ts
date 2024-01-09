@@ -1,6 +1,7 @@
-import { Column, FormField } from '@/lib/types'
+import { Column, FormField } from '@/types/types'
 
 const typeMap: { [key: string]: string } = {
+  input: 'string',
   text: 'string',
   textarea: 'text',
   select: 'string',
@@ -16,7 +17,9 @@ export function generateColumns(fields: FormField[]): Column[] {
     field.type !== 'submit' &&
       cols.push({
         name: field.name,
-        type: typeMap[field.type] as Column['type'],
+        type: typeMap[
+          field?.type || (field?.field as string)
+        ] as Column['type'],
       })
   })
   return cols

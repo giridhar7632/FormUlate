@@ -1,39 +1,17 @@
+import { IconTypes, IconPropsType } from '@/types/types'
 import React from 'react'
 
-type IconTypes = {
-  tag: string
-  attr: {
-    viewBox: string
-    fill: string
-    stroke: string
-    strokeWidth: string
-    strokeLinecap: string
-    strokeLinejoin: string
-  }
-  child: {
-    tag: string
-    attr: {
-      points?: string
-      d?: string
-    }
-  }[]
-}
-
-type PropsType = {
-  [key: string]: any
-}
-
-function GenerateIcon(data: IconTypes, props: PropsType): JSX.Element {
+function GenerateIcon(data: IconTypes, props: IconPropsType): JSX.Element {
   return React.createElement(
     data.tag,
     { ...data.attr, ...props },
     data.child.map((item, index) =>
-      React.createElement(item.tag, { ...item.attr, key: index }),
-    ),
+      React.createElement(item.tag, { ...item.attr, key: index })
+    )
   )
 }
 
-export function ChevronLeft(props: PropsType) {
+export function ChevronLeft(props: IconPropsType) {
   return GenerateIcon(
     {
       tag: 'svg',
@@ -47,11 +25,11 @@ export function ChevronLeft(props: PropsType) {
       },
       child: [{ tag: 'polyline', attr: { points: '15 6 9 12 15 18' } }],
     },
-    props,
+    props
   )
 }
 
-export function ChevronRight(props: PropsType) {
+export function ChevronRight(props: IconPropsType) {
   return GenerateIcon(
     {
       tag: 'svg',
@@ -65,11 +43,11 @@ export function ChevronRight(props: PropsType) {
       },
       child: [{ tag: 'polyline', attr: { points: '9 6 15 12 9 18' } }],
     },
-    props,
+    props
   )
 }
 
-export function Logout(props: PropsType) {
+export function Logout(props: IconPropsType) {
   return GenerateIcon(
     {
       tag: 'svg',
@@ -96,6 +74,6 @@ export function Logout(props: PropsType) {
         },
       ],
     },
-    props,
+    props
   )
 }
