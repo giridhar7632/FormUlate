@@ -22,7 +22,11 @@ export default async function Page({ params }: { params: { slug: string } }) {
         <i>created by:</i> {record?.createdBy?.name}
       </p>
       <div className="h-1 my-6 border border-gray-100"></div>
-      <Form fields={record?.page.fields} />
+      <Form
+        table={params.slug}
+        owner={record?.createdBy?.name?.split(' ')[0] as string}
+        fields={record?.page.fields}
+      />
     </div>
   )
 }

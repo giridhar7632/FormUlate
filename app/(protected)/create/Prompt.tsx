@@ -51,7 +51,9 @@ const Prompt = () => {
         if (tableRes.status === 'completed') {
           await addPage(table, res)
           setAddingPage(false)
-          await router.push(`/form/${table}`)
+          router.push(`/form/${table}`)
+        } else {
+          throw new Error('Something went wrong when creating your form! 😕')
         }
       }
     } catch (error) {

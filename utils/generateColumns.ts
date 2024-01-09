@@ -5,7 +5,7 @@ const typeMap: { [key: string]: string } = {
   text: 'string',
   textarea: 'text',
   select: 'string',
-  checkbox: 'bool',
+  checkbox: 'string',
   radio: 'string',
   email: 'email',
   number: 'int',

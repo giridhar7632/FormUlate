@@ -80,3 +80,14 @@ export async function addPage(table: string, input: PageData) {
     return res
   }
 }
+
+export async function handleFormSubmission(table: string, values: Object) {
+  const res = await dbReq({
+    method: 'POST',
+    path: `/tables/${table}/data`,
+    body: { ...values },
+  })
+
+  console.log('res', res)
+  return res
+}

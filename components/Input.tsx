@@ -7,13 +7,14 @@ const Input: React.FC<FormField> = ({
   type,
   disabled,
   label,
+  required,
   placeholder,
 }) => {
   return (
     <div className={'min-h-12 mb-3'}>
       {field && type != 'checkbox' ? (
         <label htmlFor={name} className="mb-1 block text-sm text-gray-500">
-          {label}
+          {label} {required ? <span className="text-red-500">*</span> : null}
         </label>
       ) : null}
       <input
@@ -28,6 +29,7 @@ const Input: React.FC<FormField> = ({
         id={name}
         placeholder={placeholder}
         disabled={disabled}
+        required={required}
       />
       {type == 'checkbox' ? (
         <label htmlFor={name} className="mb-1 text-sm text-gray-600">

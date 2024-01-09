@@ -6,12 +6,16 @@ import { FormField } from '@/types/types'
 import clsx from 'clsx'
 import Input from '@/components/Input'
 import Button from '@/components/Button'
+import toast from 'react-hot-toast'
+import { handleFormSubmission } from '@/app/actions'
 
 type FormProps = {
+  table: string
+  owner: string
   fields: FormField[]
 }
 
-const Form: React.FC<FormProps> = ({ fields }) => {
+const Form: React.FC<FormProps> = ({ table, owner, fields }) => {
   const formRef = useRef<HTMLFormElement>(null)
   const [consent, setConsent] = useState(false)
   const { pending } = useFormStatus()
@@ -20,10 +24,26 @@ const Form: React.FC<FormProps> = ({ fields }) => {
       className="flex flex-col"
       ref={formRef}
       action={async (formData) => {
-        for (let pair of formData.entries()) {
-          console.log(pair[0] + ', ' + pair[1])
+        if (formData.get('consent') === 'on') {
+          formData.delete('consent')
+          const values = Object.fromEntries(formData.entries())
+          // check if every field is empty
+          const isEmpty = Object.values(values).every((x) => x === '')
+          if (isEmpty) {
+            toast.error(`${owner} won't like an empty form! 😙`)
+            return
+          }
+          console.log({ values })
+          try {
+            await handleFormSubmission(table, values)
+            toast.success('Form submitted successfully! 🎊')
+          } catch (error) {
+            toast.error('Something went wrong! 😕')
+          }
+          formRef.current?.reset()
+        } else {
+          toast.error('Please agree to submit this form! 😇')
         }
-        formRef.current?.reset()
       }}
     >
       {fields
@@ -135,6 +155,7 @@ const Form: React.FC<FormProps> = ({ fields }) => {
             disabled={pending || !consent}
             type="submit"
             className="w-full mt-4"
+            loading={pending}
           >
             Submit
           </Button>

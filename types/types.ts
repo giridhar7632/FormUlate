@@ -13,6 +13,7 @@ export type FormField = {
   value?: string
   placeholder?: string
   disabled?: boolean
+  required?: boolean
   options?: {
     value: string
     label: string
