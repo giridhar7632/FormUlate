@@ -1,11 +1,11 @@
 export async function dbReq({
   method,
   path,
-  body,
+  body = {},
 }: {
   method: 'GET' | 'POST' | 'PUT' | 'DELETE'
   path: string
-  body: any
+  body?: any
 }) {
   const res = await fetch(
     `https://giridhar-s-workspace-bc9633.us-east-1.xata.sh/db/formulate:main${path}`,

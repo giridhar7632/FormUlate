@@ -8,7 +8,7 @@ import { createTable, updateTable, generateJson, addPage } from '@/app/actions'
 import { generateSlug } from '@/utils/generateSlug'
 import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
-import toast from 'react-hot-toast'
+import toast, { CheckmarkIcon } from 'react-hot-toast'
 import Spinner from '@/components/Spinner'
 import { extractAndParseJson } from '@/utils/extractAndParseJson'
 
@@ -19,9 +19,9 @@ const Prompt = () => {
   const { data } = useSession()
   const [prompt, setPrompt] = useState('')
   const [loading, setLoading] = useState(false)
-  const [generatingForm, setGeneratingForm] = useState(false)
-  const [creatingTable, setCreatingTable] = useState(false)
-  const [addingPage, setAddingPage] = useState(false)
+  const [generatingForm, setGeneratingForm] = useState('pending')
+  const [creatingTable, setCreatingTable] = useState('pending')
+  const [addingPage, setAddingPage] = useState('pending')
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -29,11 +29,11 @@ const Prompt = () => {
     setLoading(true)
     try {
       if (prompt !== '') {
-        setGeneratingForm(true)
+        setGeneratingForm('started')
         let res = await generateJson(prompt)
         res = extractAndParseJson(res)
-        setGeneratingForm(false)
-        setCreatingTable(true)
+        setGeneratingForm('completed')
+        setCreatingTable('started')
         const table = generateSlug(data?.user.id as string, res.title)
         if (res.fields.length === 0)
           throw new Error('Add at least one field 😁')
@@ -43,14 +43,14 @@ const Prompt = () => {
         } else {
           tableRes = await updateTable(table, res.fields)
         }
-        setCreatingTable(false)
+        setCreatingTable('completed')
 
         console.log({ tableRes })
 
-        setAddingPage(true)
+        setAddingPage('started')
         if (tableRes.status === 'completed') {
           await addPage(table, res)
-          setAddingPage(false)
+          setAddingPage('completed')
           router.push(`/form/${table}`)
         } else {
           throw new Error('Something went wrong when creating your form! 😕')
@@ -58,9 +58,13 @@ const Prompt = () => {
       }
     } catch (error) {
       console.log(error)
-      toast.error((error as Error)?.message || 'Something went wrong! 😕')
+      toast.error('Something went wrong! 😕')
+    } finally {
+      setGeneratingForm('pending')
+      setCreatingTable('pending')
+      setAddingPage('pending')
+      setLoading(false)
     }
-    setLoading(false)
     formRef.current?.reset()
   }
 
@@ -72,9 +76,21 @@ const Prompt = () => {
     >
       {loading ? (
         <div className="flex w-full flex-col items-center justify-center">
-          <LoadAnimation loading={generatingForm} text="Generating form" />
-          <LoadAnimation loading={creatingTable} text="Creating table" />
-          <LoadAnimation loading={addingPage} text="Adding page" />
+          <LoadAnimation
+            loading={generatingForm === 'started'}
+            completed={generatingForm === 'completed'}
+            text="Generating form"
+          />
+          <LoadAnimation
+            loading={creatingTable === 'started'}
+            completed={creatingTable === 'completed'}
+            text="Creating table"
+          />
+          <LoadAnimation
+            loading={addingPage === 'started'}
+            completed={addingPage === 'completed'}
+            text="Adding page"
+          />
         </div>
       ) : (
         <>
@@ -97,14 +113,25 @@ const Prompt = () => {
   )
 }
 
-function LoadAnimation({ loading, text }: { loading: boolean; text: string }) {
+function LoadAnimation({
+  loading,
+  text,
+  completed,
+}: {
+  loading: boolean
+  text: string
+  completed: boolean
+}) {
   return (
     <div className="flex gap-2 my-2 items-center justify-center">
-      <Spinner loading={loading} size={18} />
+      {completed ? <CheckmarkIcon /> : <Spinner loading={loading} size={18} />}
       <p
-        className={`transition duration-300 ease-in-out ${
-          loading ? 'text-blue-500 text-lg' : 'text-gray-500 text-sm'
-        }`}
+        className={clsx(
+          'transition duration-300 ease-in-out',
+          loading && 'text-blue-500 text-lg',
+          completed && 'text-green-500',
+          !loading && !completed && 'text-gray-500 text-sm'
+        )}
       >
         {text}...
       </p>

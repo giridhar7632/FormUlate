@@ -2,6 +2,8 @@ export function extractAndParseJson(input: string): Object {
   const jsonStart = input.indexOf('{')
   const jsonEnd = input.lastIndexOf('}')
   const jsonString = input.slice(jsonStart, jsonEnd + 1)
+  console.log('jsonString', jsonString)
+  jsonString.replace('\n ', ' ')
   return JSON.parse(jsonString)
 }
 

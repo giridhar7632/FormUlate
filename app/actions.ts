@@ -23,11 +23,7 @@ export async function createTable(table: string, fields: FormField[]) {
   const session = await getSession()
   if (session) {
     // step-1: create table
-    const tableData = await dbReq({
-      method: 'PUT',
-      path: `/tables/${table}`,
-      body: {},
-    })
+    const tableData = await dbReq({ method: 'PUT', path: `/tables/${table}` })
     console.log('tableData', tableData)
 
     // step-2: add schema
@@ -38,6 +34,10 @@ export async function createTable(table: string, fields: FormField[]) {
       path: `/tables/${table}/schema`,
       body: { columns },
     })
+
+    if (schemaData.status !== 'completed') {
+      await dbReq({ method: 'DELETE', path: `/tables/${table}` })
+    }
     console.log('schemaData', schemaData)
 
     return schemaData

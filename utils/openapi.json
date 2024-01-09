@@ -1,35 +1,64 @@
 {
-  "title": "User Feedback Form",
+  "title": "Product Feedback Form",
+  "action": "create",
   "fields": [
     {
+      "id": "product_name",
       "field": "input",
       "type": "text",
-      "name": "name",
-      "label": "Name"
+      "name": "product_name",
+      "label": "Product Name",
+      "placeholder": "Enter the name of the product",
+      "required": true
     },
     {
+      "id": "product_version",
+      "field": "input",
+      "type": "text",
+      "name": "product_version",
+      "label": "Product Version",
+      "placeholder": "Enter the version of the product",
+      "required": true
+    },
+    {
+      "id": "feedback_type",
+      "field": "select",
+      "type": "dropdown",
+      "name": "feedback_type",
+      "label": "Feedback Type",
+      "options": [
+        {
+          "value": "bug",
+          "label": "Bug"
+        },
+        {
+          "value": "suggestion",
+          "label": "Suggestion"
+        },
+        {
+          "value": "other",
+          "label": "Other"
+        }
+      ],
+      "required": true
+    },
+    {
+      "id": "feedback_description",
+      "field": "textarea",
+      "type": "text",
+      "name": "feedback_description",
+      "label": "Feedback Description",
+      "placeholder": "Enter a detailed description of your feedback",
+      "required": true
+    },
+    {
+      "id": "contact_email",
       "field": "input",
       "type": "email",
-      "name": "email",
-      "label": "Email"
-    },
-    {
-      "field": "select",
-      "type": "select",
-      "name": "gender",
-      "label": "Gender",
-      "options": [
-        { "value": "male", "label": "male" },
-        { "value": "female", "label": "female" },
-        { "value": "others", "label": "others" }
-      ]
-    },
-    {
-      "field": "textarea",
-      "type": "textarea",
-      "name": "Feedback",
-      "label": "Feedback",
-      "placeholder": "Enter your feedback here"
+      "name": "contact_email",
+      "label": "Contact Email",
+      "placeholder": "Enter your email address so we can contact you if needed",
+      "required": true
     }
   ]
 }
