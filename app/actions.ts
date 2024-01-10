@@ -7,6 +7,8 @@ import { generateColumns } from '@/utils/generateColumns'
 import { type Session } from 'next-auth'
 import { model } from '@/lib/model'
 import { XataClient } from '@/lib/xata'
+import { revalidatePath } from 'next/cache'
+import { redirect } from 'next/navigation'
 
 const xata = new XataClient()
 
@@ -17,6 +19,23 @@ export async function getSession(): Promise<Session> {
   }
 
   return session
+}
+
+export async function getDataFromTable(table: string) {
+  const session = await getSession()
+  if (session) {
+    const res = await xata.db.forms.filter({ slug: table }).getFirst()
+    if (res?.createdBy?.id === session?.user?.id) {
+      const data = await dbReq({
+        method: 'POST',
+        path: `/tables/${table}/query`,
+      })
+      return data.records
+    } else {
+      // throw new Error('Caught you! You are not authorized to view this page.')
+      redirect('/app')
+    }
+  }
 }
 
 export async function createTable(table: string, fields: FormField[]) {
@@ -39,6 +58,8 @@ export async function createTable(table: string, fields: FormField[]) {
       await dbReq({ method: 'DELETE', path: `/tables/${table}` })
     }
     console.log('schemaData', schemaData)
+
+    revalidatePath('/app')
 
     return schemaData
   }
@@ -87,6 +108,10 @@ export async function handleFormSubmission(table: string, values: Object) {
     path: `/tables/${table}/data`,
     body: { ...values },
   })
+
+  // if (table !== '') {
+  //   const res = await xata.db[table].create({ ...values })
+  // }
 
   console.log('res', res)
   return res

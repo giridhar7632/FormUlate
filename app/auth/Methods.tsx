@@ -44,7 +44,7 @@ export const EmailLogin: React.FC = () => {
 export const GoogleLogin: React.FC = () => (
   <Button
     className="flex-1"
-    variant="gray"
+    variant="outline"
     onClick={() => {
       signIn('google', {
         callbackUrl: `/app`,
@@ -58,7 +58,7 @@ export const GoogleLogin: React.FC = () => (
 export const GitHubLogin: React.FC = () => (
   <Button
     className="flex-1"
-    variant="gray"
+    variant="outline"
     onClick={() => {
       signIn('github', {
         callbackUrl: `/app`,
