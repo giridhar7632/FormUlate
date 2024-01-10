@@ -1,7 +1,7 @@
 import clsx from 'clsx'
 
 type ButtonProps = {
-  variant?: 'primary' | 'secondary' | 'text' | 'gray'
+  variant?: 'primary' | 'secondary' | 'text' | 'gray' | 'outline'
   loading?: boolean
   loadingText?: string
   className?: string
@@ -35,6 +35,8 @@ const Button: React.FC<ButtonProps> = ({
       variant === 'text',
     ['bg-gray-100 hover:ring-gray-200 hover:bg-gray-200 text-gray-500 disabled:bg-gray-300 disabled:ring-0']:
       variant === 'gray',
+    ['hover:bg-gray-100 hover:ring-gray-200 border-2 border-gray-200 disabled:bg-gray-300 disabled:ring-0']:
+      variant === 'outline',
   })
 
   return (
