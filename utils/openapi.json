@@ -1,39 +1,40 @@
 {
-  "title": "Product Feedback Form",
+  "title": "Luggage Information Form",
   "action": "create",
   "fields": [
     {
-      "id": "product_name",
       "field": "input",
       "type": "text",
-      "name": "product_name",
-      "label": "Product Name",
-      "placeholder": "Enter the name of the product",
+      "name": "name",
+      "label": "Your Name",
+      "placeholder": "John Doe",
       "required": true
     },
     {
-      "id": "product_version",
       "field": "input",
-      "type": "text",
-      "name": "product_version",
-      "label": "Product Version",
-      "placeholder": "Enter the version of the product",
+      "type": "email",
+      "name": "email",
+      "label": "Your Email",
+      "placeholder": "johndoe@example.com",
       "required": true
     },
     {
-      "id": "feedback_type",
       "field": "select",
       "type": "dropdown",
-      "name": "feedback_type",
-      "label": "Feedback Type",
+      "name": "luggageType",
+      "label": "Type of Luggage",
       "options": [
         {
-          "value": "bug",
-          "label": "Bug"
+          "value": "suitcase",
+          "label": "Suitcase"
         },
         {
-          "value": "suggestion",
-          "label": "Suggestion"
+          "value": "backpack",
+          "label": "Backpack"
+        },
+        {
+          "value": "duffel",
+          "label": "Duffel Bag"
         },
         {
           "value": "other",
@@ -43,22 +44,44 @@
       "required": true
     },
     {
-      "id": "feedback_description",
-      "field": "textarea",
+      "field": "input",
       "type": "text",
-      "name": "feedback_description",
-      "label": "Feedback Description",
-      "placeholder": "Enter a detailed description of your feedback",
+      "name": "luggageBrand",
+      "label": "Luggage Brand",
+      "placeholder": "Samsonite",
+      "required": false
+    },
+    {
+      "field": "input",
+      "type": "text",
+      "name": "luggageModel",
+      "label": "Luggage Model",
+      "placeholder": "Horizon 2.0",
+      "required": false
+    },
+    {
+      "field": "input",
+      "type": "number",
+      "name": "luggageWeight",
+      "label": "Luggage Weight (in kg)",
+      "placeholder": "20",
       "required": true
     },
     {
-      "id": "contact_email",
       "field": "input",
-      "type": "email",
-      "name": "contact_email",
-      "label": "Contact Email",
-      "placeholder": "Enter your email address so we can contact you if needed",
+      "type": "number",
+      "name": "luggageDimensions",
+      "label": "Luggage Dimensions (in cm)",
+      "placeholder": "55x40x25",
       "required": true
+    },
+    {
+      "field": "textarea",
+      "type": "text",
+      "name": "luggageDescription",
+      "label": "Luggage Description",
+      "placeholder": "Any special features or markings on your luggage?",
+      "required": false
     }
   ]
 }

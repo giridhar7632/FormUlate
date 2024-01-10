@@ -52,6 +52,5 @@ export async function model(old: Object, input: string) {
   })
 
   const response = result.response
-  console.log('result', response.text())
   return response.text()
 }

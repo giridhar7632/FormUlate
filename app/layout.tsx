@@ -22,9 +22,7 @@ export default async function RootLayout({
   return (
     <SessionProvider session={session}>
       <html lang="en">
-        <body
-          className={`max-w-5xl min-h-screen px-4 lg:px-0 mx-auto overflow-x-hidden ${prompt.className}`}
-        >
+        <body className={`${prompt.className}`}>
           {children}
           <Toaster />
         </body>

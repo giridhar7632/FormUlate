@@ -57,6 +57,13 @@ export default function ProfileMenu({ name, email, image }: ProfileMenuProps) {
                   Dashboard
                 </Link>
 
+                <Link
+                  href="/create"
+                  className="flex md:hidden w-full items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 border-b border-gray-100"
+                >
+                  Create new form
+                </Link>
+
                 <button
                   onClick={() => signOut({ callbackUrl: '/' })}
                   className="flex w-full items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"

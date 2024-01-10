@@ -11,7 +11,7 @@ export default async function AuthLayout({
 }) {
   // const session = await auth()
   return (
-    <div className='max-w-5xl min-h-screen px-4 lg:px-0 mx-auto overflow-x-hidden'>
+    <div className="max-w-5xl min-h-screen px-4 mx-auto overflow-x-hidden flex flex-col justify-between">
       <nav className="flex py-4 items-center justify-between">
         <Link href="/">
           <div className="flex items-center gap-4">
@@ -23,20 +23,26 @@ export default async function AuthLayout({
 						<Button>Login</Button>
 					</Link>} */}
       </nav>
-      <main className="flex w-full h-full flex-col items-center justify-between py-24">
-        {children}
-      </main>
+      <main className="flex-1 w-full h-full py-24">{children}</main>
       <footer className="flex flex-col gap-2 sm:flex-row py-6 w-full shrink-0 items-center px-4 md:px-6 border-t">
-          <Link href={'/'} className="text-xs text-gray-500 dark:text-gray-400">© FormUlate.</Link>
-          <nav className="sm:ml-auto flex gap-4 sm:gap-6">
-            <Link className="text-xs hover:underline underline-offset-4" href="/terms">
-              Terms of Service
-            </Link>
-            <Link className="text-xs hover:underline underline-offset-4" href="/policy">
-              Privacy
-            </Link>
-          </nav>
-        </footer>
+        <Link href={'/'} className="text-xs text-gray-500 dark:text-gray-400">
+          © FormUlate.
+        </Link>
+        <nav className="sm:ml-auto flex gap-4 sm:gap-6">
+          <Link
+            className="text-xs hover:underline underline-offset-4"
+            href="/terms"
+          >
+            Terms of Service
+          </Link>
+          <Link
+            className="text-xs hover:underline underline-offset-4"
+            href="/policy"
+          >
+            Privacy
+          </Link>
+        </nav>
+      </footer>
     </div>
   )
 }
