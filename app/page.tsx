@@ -129,6 +129,12 @@ export default async function Home() {
           >
             Privacy
           </Link>
+          <Link
+            className="text-xs hover:underline underline-offset-4"
+            href="/form/contact-us"
+          >
+            Contact
+          </Link>
         </nav>
       </footer>
     </>

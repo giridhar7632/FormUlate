@@ -32,6 +32,15 @@ export default function Error({
           <Link className="mx-auto mt-6" href={'/'}>
             <Button variant="secondary">Go to home</Button>
           </Link>
+          <p className="text-xs text-center text-gray-400 my-4">
+            If this is not what expected, let us know{' '}
+            <Link
+              className="underline underline-offset-4 text-blue-500"
+              href="/form/contact-us"
+            >
+              here.
+            </Link>{' '}
+          </p>
         </div>
       </main>
     </div>
