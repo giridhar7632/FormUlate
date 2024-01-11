@@ -27,7 +27,7 @@ export default function Error({
             src="/formulate.svg"
             alt="FormUlate Logo"
           />
-          <h1 className="my-6 text-center text-2xl">Aww!</h1>
+          <h1 className="my-6 text-center text-2xl">Aww x_x</h1>
           <p className="text-center">Something went wrong!</p>
           <Link className="mx-auto mt-6" href={'/'}>
             <Button variant="secondary">Go to home</Button>

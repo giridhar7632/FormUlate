@@ -1,7 +1,7 @@
 import Image from 'next/image'
-import { EmailLogin, GitHubLogin, GoogleLogin } from '../Methods'
+import { EmailLogin, SocialLogin } from '../Methods'
 
-export default async function Page() {
+export default async function Login() {
   return (
     <>
       <Image
@@ -16,8 +16,8 @@ export default async function Page() {
       <div className="my-6">
         <p className="text-gray-400 text-center">- Or -</p>
         <div className="flex items-center gap-4 pt-4">
-          <GoogleLogin />
-          <GitHubLogin />
+          <SocialLogin type="Google" />
+          <SocialLogin type="GitHub" />
         </div>
       </div>
     </>

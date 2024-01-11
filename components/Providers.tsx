@@ -3,7 +3,7 @@ type ProviderProps = {
 }
 
 export default function Provider({ id }: ProviderProps): JSX.Element {
-  if (id === 'google') {
+  if (id === 'Google') {
     return (
       <svg
         style={{ marginRight: '5px' }}
@@ -35,7 +35,7 @@ export default function Provider({ id }: ProviderProps): JSX.Element {
         />
       </svg>
     )
-  } else if (id === 'github') {
+  } else if (id === 'GitHub') {
     return (
       <svg
         width="24"

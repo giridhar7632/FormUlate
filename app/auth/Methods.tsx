@@ -6,6 +6,7 @@ import Input from '@/components/Input'
 import Button from '@/components/Button'
 import Provider from '@/components/Providers'
 import { signIn, signOut } from 'next-auth/react'
+import { useSearchParams } from 'next/navigation'
 
 export const SignOut: React.FC = () => (
   <Button variant="secondary" onClick={() => signOut({ callbackUrl: '/' })}>
@@ -13,7 +14,9 @@ export const SignOut: React.FC = () => (
   </Button>
 )
 
-export const EmailLogin: React.FC = () => {
+export const EmailLogin = () => {
+  const searchParams = useSearchParams()
+  const callbackUrl = searchParams.get('callbackUrl') as string
   const formRef = useRef<HTMLFormElement>(null)
   const { pending } = useFormStatus()
   return (
@@ -22,7 +25,7 @@ export const EmailLogin: React.FC = () => {
       action={async (formData) => {
         await signIn('email', {
           email: formData.get('email'),
-          callbackUrl: `/app`,
+          callbackUrl: callbackUrl || `/app`,
         })
         formRef.current?.reset()
       }}
@@ -41,30 +44,24 @@ export const EmailLogin: React.FC = () => {
   )
 }
 
-export const GoogleLogin: React.FC = () => (
-  <Button
-    className="flex-1"
-    variant="outline"
-    onClick={() => {
-      signIn('google', {
-        callbackUrl: `/app`,
-      })
-    }}
-  >
-    <Provider id={'google'} /> Google
-  </Button>
-)
+type SocialLoginProps = {
+  type: 'Google' | 'GitHub'
+}
 
-export const GitHubLogin: React.FC = () => (
-  <Button
-    className="flex-1"
-    variant="outline"
-    onClick={() => {
-      signIn('github', {
-        callbackUrl: `/app`,
-      })
-    }}
-  >
-    <Provider id={'github'} /> GitHub
-  </Button>
-)
+export const SocialLogin = ({ type }: SocialLoginProps) => {
+  const searchParams = useSearchParams()
+  const callbackUrl = searchParams.get('callbackUrl') as string
+  return (
+    <Button
+      className="flex-1"
+      variant="outline"
+      onClick={() => {
+        signIn(type.toLowerCase(), {
+          callbackUrl: callbackUrl || `/app`,
+        })
+      }}
+    >
+      <Provider id={type} /> {type}
+    </Button>
+  )
+}
