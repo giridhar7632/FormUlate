@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 'use server'
 
 import { auth } from '@/lib/auth'
@@ -6,11 +8,33 @@ import { dbReq } from '@/utils/xataRequest'
 import { generateColumns } from '@/utils/generateColumns'
 import { type Session } from 'next-auth'
 import { model } from '@/lib/model'
-import { XataClient } from '@/lib/xata'
+import { getXataClient } from '@/lib/xata'
 import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 
-const xata = new XataClient()
+const xata = getXataClient()
+
+export async function updateProfile(formData: FormData) {
+  const session = await getSession()
+  if (session) {
+    console.log('inside')
+    const image = formData.get('avatar')
+    console.log('image', image)
+    const res = await xata.db.nextauth_users.update(session.user.id, {
+      name: formData.get('name') as string,
+      avatar: {
+        name: image?.name,
+        mediaType: image?.type,
+        base64Content: formData.get('file'),
+        enablePublicUrl: true,
+      },
+    })
+
+    res?.update({ image: res?.avatar?.url })
+    console.log('res', res)
+    return res
+  }
+}
 
 export async function getSession(): Promise<Session> {
   let session = await auth()

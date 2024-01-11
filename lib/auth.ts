@@ -3,10 +3,10 @@ import NextAuth, { NextAuthConfig } from 'next-auth'
 import GitHub from 'next-auth/providers/github'
 import Google from 'next-auth/providers/google'
 import Email, { EmailConfig } from 'next-auth/providers/email'
-import { XataClient } from './xata'
+import { getXataClient } from './xata'
 import { sendVerificationRequest } from '@/utils/sendVerificationRequest'
 
-const client = new XataClient()
+const client = getXataClient()
 export const authOptions: NextAuthConfig = {
   adapter: XataAdapter(client),
   providers: [

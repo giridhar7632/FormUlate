@@ -83,6 +83,11 @@ export type IconTypes = {
     attr: {
       points?: string
       d?: string
+      stroke?: string
+      x1?: string
+      y1?: string
+      x2?: string
+      y2?: string
     }
   }[]
 }
