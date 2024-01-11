@@ -14,7 +14,7 @@ export default async function Page() {
       />
       <h1 className="my-6 text-center text-2xl">Check your email</h1>
       <p className="text-center">
-        ✨ Use that magic link we've sent to sign in to your account
+        ✨ {"Use that magic link we've sent to sign in to your account"}
       </p>
       <Link className="mx-auto mt-6" href={'/'}>
         <Button variant="secondary">Back to home</Button>
