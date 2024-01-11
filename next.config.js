@@ -22,6 +22,10 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'avatars.githubusercontent.com',
       },
+      {
+        protocol: 'https',
+        hostname: 'us-east-1.storage.xata.sh',
+      },
     ],
   },
   experimental: {
