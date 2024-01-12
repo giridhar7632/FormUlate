@@ -1,29 +1,16 @@
-import { getDataFromTable } from '@/app/actions'
 import { Suspense } from 'react'
 import { LoaderIcon } from 'react-hot-toast'
+import Table from './Table'
 
 export default function Data({ params }: { params: { slug: string } }) {
   return (
     <div className="flex flex-col gap-4">
-      {' '}
-      Submissions!
-      <div className="flex flex-col">
+      <h1 className="text-3xl font-bold md:text-5xl/none">Submissions</h1>
+      <div className="flex my-6 flex-col">
         <Suspense fallback={<LoaderIcon />}>
-          <TableResponses table={params.slug} />
+          <Table table={params.slug} />
         </Suspense>
       </div>
     </div>
   )
-}
-
-const TableResponses = async ({ table }: { table: string }) => {
-  const data = await getDataFromTable(table)
-  return data.map((record: any) => (
-    <div
-      className="p-12 w-full border border-gray-100 rounded-2xl shadow-sm"
-      key={record.id}
-    >
-      {record.name}
-    </div>
-  ))
 }

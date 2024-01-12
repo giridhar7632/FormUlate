@@ -17,9 +17,7 @@ const xata = getXataClient()
 export async function updateProfile(formData: FormData) {
   const session = await getSession()
   if (session) {
-    console.log('inside')
     const image = formData.get('avatar')
-    console.log('image', image)
     const res = await xata.db.nextauth_users.update(session.user.id, {
       name: formData.get('name') as string,
       avatar: {
@@ -31,7 +29,6 @@ export async function updateProfile(formData: FormData) {
     })
 
     res?.update({ image: res?.avatar?.url })
-    console.log('res', res)
     return res
   }
 }
@@ -57,7 +54,7 @@ export async function getDataFromTable(table: string) {
       return data.records
     } else {
       // throw new Error('Caught you! You are not authorized to view this page.')
-      redirect('/app')
+      redirect(`/form/${table}/error`)
     }
   }
 }
