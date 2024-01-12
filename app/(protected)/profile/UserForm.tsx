@@ -5,6 +5,7 @@ import Button from '@/components/Button'
 import Input from '@/components/Input'
 import { Pencil } from '@/lib/icons'
 import Image from 'next/image'
+import Link from 'next/link'
 import { useState } from 'react'
 import toast from 'react-hot-toast'
 
@@ -12,9 +13,10 @@ type UserFormProps = {
   image?: string | null
   name?: string | null
   email?: string | null
+  id?: string | null
 }
 
-const UserForm = ({ image, name, email }: UserFormProps) => {
+const UserForm = ({ id, image, name, email }: UserFormProps) => {
   const [previewImage, setPreviewImage] = useState<string | null>(null)
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -94,6 +96,16 @@ const UserForm = ({ image, name, email }: UserFormProps) => {
       <Button type="submit" className="w-full" variant="outline">
         Update profile
       </Button>
+
+      <p className="text-xs text-center text-gray-400 my-4">
+        You can see your public profile{' '}
+        <Link
+          className="underline underline-offset-4 text-blue-500"
+          href={`/user/${id}`}
+        >
+          here.
+        </Link>{' '}
+      </p>
     </form>
   )
 }

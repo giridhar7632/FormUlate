@@ -28,7 +28,13 @@ export default async function Page({ params }: { params: { slug: string } }) {
     <div className="p-12 w-full border border-gray-100 rounded-2xl shadow-sm">
       <h1 className="text-3xl md:text-4xl font-bold mb-2">{record?.name}</h1>
       <p className="text-sm text-gray-500">
-        <i>created by:</i> {record?.createdBy?.name || record?.createdBy?.email}
+        <i>created by:</i>{' '}
+        <Link
+          className="cursor-pointer underline underline-offset-4"
+          href={`/user/${record?.createdBy?.id}`}
+        >
+          {record?.createdBy?.name || record?.createdBy?.email}
+        </Link>
       </p>
       <div className="h-1 my-6 border border-gray-100"></div>
       <Form
