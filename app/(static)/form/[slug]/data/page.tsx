@@ -5,17 +5,53 @@ import { getXataClient } from '@/lib/xata'
 import Export from './Export'
 import { auth } from '@/lib/auth'
 import { redirect } from 'next/navigation'
+import { getRecordCount } from '@/app/actions'
 
 const xata = getXataClient()
 
-export default async function Data({ params }: { params: { slug: string } }) {
+export default async function Data({
+  params,
+  searchParams,
+}: {
+  params: { slug: string }
+  searchParams: { page: string }
+}) {
   const session = await auth()
   const form = await xata.db.forms.filter({ slug: params.slug }).getFirst()
   if (form?.createdBy?.id !== session?.user?.id) {
     redirect(`/form/${params.slug}/error`)
   }
-  const res = await xata.db[params.slug].getAll()
-  const data = res.map((item: any) => {
+  const pageNumber = parseInt(searchParams.page) || 1
+
+  const recordPagePromise = xata.db[params.slug]
+    .sort('xata.createdAt', 'desc')
+    .getPaginated({
+      pagination: { size: 12, offset: 12 * pageNumber - 12 },
+    })
+
+  const recordCountPromise = getRecordCount(params.slug)
+
+  console.time('Fetching images')
+  const [recordsPage, recordCount] = await Promise.all([
+    recordPagePromise,
+    recordCountPromise,
+  ])
+  console.timeEnd('Fetching images')
+
+  const totalNumberOfPages = Math.ceil(recordCount / 12)
+
+  // This page object is needed for building the buttons in the pagination component
+  const page = {
+    pageNumber,
+    hasNextPage: recordsPage.hasNextPage(),
+    hasPreviousPage: pageNumber > 1,
+    totalNumberOfPages,
+  }
+
+  // const res = await xata.db[params.slug].getPaginated({
+  //   pagination: { size: 10, offset: 0 },
+  // })
+  const data = recordsPage.records.map((item: any) => {
     const { id, xata, ...rest } = item
     return {
       ...rest,

@@ -42,10 +42,36 @@ export async function updateProfile(formData: FormData) {
   }
 }
 
+export async function getRecordCount(table: string) {
+  const totalNumberOfSubmissions = await xata.db[table].summarize({
+    columns: [],
+    summaries: {
+      count: { count: '*' },
+    },
+  })
+  return totalNumberOfSubmissions.summaries[0].count
+}
+
 export async function bulkExportData(table: string) {
   const session = await getSession()
   if (session) {
     const data = await xata.db[table].getAll()
+    return data.map((item: any) => {
+      const { id, xata, ...rest } = item
+      return {
+        ...rest,
+        'Submitted at': new Date(xata.createdAt).toLocaleString(),
+      }
+    })
+  }
+}
+
+export async function getData(table: string) {
+  const session = await getSession()
+  if (session) {
+    const data = await xata.db[table].getPaginated({
+      pagination: { size: 10, offset: 0 },
+    })
     return data.map((item: any) => {
       const { id, xata, ...rest } = item
       return {
