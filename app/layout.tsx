@@ -8,8 +8,40 @@ import { Toaster } from 'react-hot-toast'
 const prompt = Prompt({ subsets: ['latin'], weight: ['400', '500', '700'] })
 
 export const metadata: Metadata = {
-  title: 'FormUlate',
-  description: 'a simple AI app for crafting form UI from language',
+  metadataBase: new URL('https://formulate-six.vercel.app'),
+  title: {
+    default: 'FormUlate simple forms from language',
+    template: '%s | FormUlate',
+  },
+  description:
+    'Type in your requirements and get the beautiful forms generated with AI.',
+  openGraph: {
+    title: 'FormUlate simple forms from language',
+    description:
+      'Type in your requirements and get the beautiful forms generated with AI.',
+    url: 'https://formulate-six.vercel.app',
+    siteName: 'FormUlate',
+    locale: 'en_US',
+    type: 'website',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  twitter: {
+    title: 'FormUlate simple forms from language',
+    card: 'summary_large_image',
+  },
+  verification: {
+    google: '2MoK1TYNBlfHGllJGjNf-OjxhPujgb4FrznsWELiVkU',
+  },
 }
 
 export default async function RootLayout({
