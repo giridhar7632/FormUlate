@@ -10,7 +10,7 @@ export default async function Home() {
   return (
     <>
       <header className="px-4 lg:px-6 py-4 flex items-center">
-        <Link className="flex items-center justify-center" href="#">
+        <Link className="flex items-center justify-center" href="/">
           <Image
             alt="Formulate logo"
             src="/formulate.svg"

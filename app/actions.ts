@@ -14,6 +14,15 @@ import { redirect } from 'next/navigation'
 
 const xata = getXataClient()
 
+export async function getSession(): Promise<Session> {
+  let session = await auth()
+  if (!session || !session.user) {
+    throw new Error('Unauthorized')
+  }
+
+  return session
+}
+
 export async function updateProfile(formData: FormData) {
   const session = await getSession()
   if (session) {
@@ -33,13 +42,18 @@ export async function updateProfile(formData: FormData) {
   }
 }
 
-export async function getSession(): Promise<Session> {
-  let session = await auth()
-  if (!session || !session.user) {
-    throw new Error('Unauthorized')
+export async function bulkExportData(table: string) {
+  const session = await getSession()
+  if (session) {
+    const data = await xata.db[table].getAll()
+    return data.map((item: any) => {
+      const { id, xata, ...rest } = item
+      return {
+        ...rest,
+        'Submitted at': new Date(xata.createdAt).toLocaleString(),
+      }
+    })
   }
-
-  return session
 }
 
 export async function getDataFromTable(table: string) {
@@ -47,11 +61,19 @@ export async function getDataFromTable(table: string) {
   if (session) {
     const res = await xata.db.forms.filter({ slug: table }).getFirst()
     if (res?.createdBy?.id === session?.user?.id) {
-      const data = await dbReq({
-        method: 'POST',
-        path: `/tables/${table}/query`,
+      // const data = await dbReq({
+      //   method: 'POST',
+      //   path: `/tables/${table}/query`,
+      // })
+      const data = await xata.db[table].getMany()
+      // console.log('testdata', testdata)
+      return data.map((item: any) => {
+        const { id, xata, ...rest } = item
+        return {
+          ...rest,
+          'Submitted at': new Date(xata.createdAt).toLocaleString(),
+        }
       })
-      return data.records
     } else {
       // throw new Error('Caught you! You are not authorized to view this page.')
       redirect(`/form/${table}/error`)

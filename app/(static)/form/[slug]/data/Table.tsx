@@ -1,17 +1,10 @@
-import { getDataFromTable } from '@/app/actions'
-
-const Table = async ({ table }: { table: string }) => {
-  const data = await getDataFromTable(table)
-  const columnNames =
-    data.length &&
-    Object.keys(data[0]).filter((key) => key !== 'id' && key !== 'xata')
-
-  return columnNames ? (
-    <div className="container mx-auto overflow-x-auto">
-      <table className="w-full table-auto shadow-md">
+const Table = async ({ data }: { data: any }) => {
+  return (
+    <div className="mx-auto rounded-xl shadow-sm border border-gray-100 overflow-x-auto">
+      <table className="w-full">
         <thead className="bg-gray-200 text-gray-600">
           <tr>
-            {columnNames.map((columnName: string) => (
+            {Object.keys(data[0]).map((columnName: string) => (
               <th key={columnName} className="py-3 px-4 text-left font-medium">
                 {columnName.toLocaleUpperCase()}
               </th>
@@ -19,9 +12,9 @@ const Table = async ({ table }: { table: string }) => {
           </tr>
         </thead>
         <tbody className="bg-white">
-          {data.map((row: any) => (
-            <tr key={row.id} className="border-b border-gray-200">
-              {columnNames.map((columnName: any) => (
+          {data.map((row: any, idx: number) => (
+            <tr key={idx} className="border-b border-gray-100">
+              {Object.keys(data[0]).map((columnName: any) => (
                 <td key={columnName} className="py-4 px-4">
                   {row[columnName]}
                 </td>
@@ -31,10 +24,6 @@ const Table = async ({ table }: { table: string }) => {
         </tbody>
       </table>
     </div>
-  ) : (
-    <p className="text-gray-500">
-      No submissions yet! Share the form with your friends to get started.
-    </p>
   )
 }
 
