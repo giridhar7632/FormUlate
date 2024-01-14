@@ -1,3 +1,4 @@
+//@ts-nocheck
 import { Suspense } from 'react'
 import { LoaderIcon } from 'react-hot-toast'
 import Table from './Table'
@@ -7,9 +8,9 @@ import { auth } from '@/lib/auth'
 import { redirect } from 'next/navigation'
 import { getRecordCount } from '@/app/actions'
 import { Pagination } from './Pagination'
+import { ENTRIES_PER_PAGE } from '@/utils/constants'
 
 const xata = getXataClient()
-export const ENTRIES_PER_PAGE = 12
 
 export default async function Data({
   params,

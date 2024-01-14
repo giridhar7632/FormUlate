@@ -1,4 +1,4 @@
-import { ENTRIES_PER_PAGE } from './page'
+import { ENTRIES_PER_PAGE } from '@/utils/constants'
 
 const Table = async ({ data, page }: { data: any; page: number }) => {
   return (
