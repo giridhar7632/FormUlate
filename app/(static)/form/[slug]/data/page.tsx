@@ -36,12 +36,12 @@ export default async function Data({
 
   const recordCountPromise = getRecordCount(params.slug)
 
-  console.time('Fetching images')
+  console.time('Fetching records')
   const [recordsPage, recordCount] = await Promise.all([
     recordPagePromise,
     recordCountPromise,
   ])
-  console.timeEnd('Fetching images')
+  console.timeEnd('Fetching records')
 
   const totalNumberOfPages = Math.ceil(recordCount / ENTRIES_PER_PAGE)
 
@@ -66,6 +66,7 @@ export default async function Data({
 
   return (
     <div className="flex flex-col gap-4">
+      <p>{form?.name}</p>
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
           <h1 className="text-3xl font-bold md:text-5xl/none">Submissions</h1>

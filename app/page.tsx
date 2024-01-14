@@ -86,21 +86,21 @@ export default async function Home() {
               </div>
             </div>
             <div className="mx-auto grid items-start gap-8 sm:max-w-4xl sm:grid-cols-2 md:gap-8 lg:max-w-5xl lg:grid-cols-3">
-              <div className="grid h-full gap-1 p-4 border border-gray-100 shadow-sm rounded-xl">
+              <div className="grid h-full gap-1 p-4 border border-gray-200 shadow-sm rounded-xl">
                 <h3 className="text-lg font-bold">Prompt-Based Creation</h3>
                 <p className="text-sm text-gray-500">
                   Simply tell us what you want your form to do, and we will
                   build it for you using the state-of-the-art Gemini Pro Model.
                 </p>
               </div>
-              <div className="grid h-full gap-1 p-4 border border-gray-100 shadow-sm rounded-xl">
+              <div className="grid h-full gap-1 p-4 border border-gray-200 shadow-sm rounded-xl">
                 <h3 className="text-lg font-bold">Instant Shareable Pages</h3>
                 <p className="text-sm text-gray-500">
                   Generate instant, sharable web page (using the unique link
                   provided) for your form with a single click.
                 </p>
               </div>
-              <div className="grid h-full gap-1 p-4 border border-gray-100 shadow-sm rounded-xl">
+              <div className="grid h-full gap-1 p-4 border border-gray-200 shadow-sm rounded-xl">
                 <h3 className="text-lg font-bold">
                   Data Insights at your Fingertips
                 </h3>

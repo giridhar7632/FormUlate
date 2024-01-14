@@ -5,5 +5,12 @@ export function generateSlug(s: string, name: string): string {
     .createHash('md5')
     .update(s + Date.now())
     .digest('hex')
-  return hash.substring(0, 5) + '-' + name.toLowerCase().split(' ').join('-')
+
+  const slug = name
+    .toLowerCase()
+    .replace(/[^a-z0-9\-]/g, '')
+    .replace(/-+/g, '-')
+    .replace(/^-+|-+$/g, '')
+
+  return hash.substring(0, 5) + '-' + slug
 }

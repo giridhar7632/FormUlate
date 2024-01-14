@@ -71,7 +71,7 @@ const typeMap: {
 
   // Single-line text inputs with specific validation
   email: 'email',
-  number: 'number',
+  number: 'int',
   date: 'datetime',
   month: 'datetime',
   week: 'datetime',
@@ -80,7 +80,7 @@ const typeMap: {
   'datetime-local': 'datetime',
 
   // Numeric inputs
-  range: 'number',
+  range: 'int',
 
   // Selection-based inputs
   select: 'string', // Assuming single-select

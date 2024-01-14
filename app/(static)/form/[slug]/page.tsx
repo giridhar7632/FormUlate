@@ -25,7 +25,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
     ])
     .getFirst()
   return record ? (
-    <div className="p-12 w-full border border-gray-100 rounded-2xl shadow-sm">
+    <div className="p-12 w-full border border-gray-200 rounded-2xl shadow-sm">
       <h1 className="text-3xl md:text-4xl font-bold mb-2">{record?.name}</h1>
       <p className="text-sm text-gray-500">
         <i>created by:</i>{' '}
@@ -36,7 +36,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
           {record?.createdBy?.name || record?.createdBy?.email}
         </Link>
       </p>
-      <div className="h-1 my-6 border border-gray-100"></div>
+      <div className="h-1 my-6 border border-gray-200"></div>
       <Form
         table={params.slug}
         owner={record?.createdBy?.name?.split(' ')[0] as string}

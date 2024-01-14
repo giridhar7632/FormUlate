@@ -43,7 +43,7 @@ export default function ProfileMenu({ name, email, image }: ProfileMenuProps) {
             <Popover.Panel className="absolute right-0 z-10 mt-3 w-52 transform  rounded-lg bg-white px-4 sm:px-0 lg:max-w-3xl">
               <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
                 <Link href="/profile">
-                  <div className="px-4 py-2 text-sm text-gray-900 border-b border-gray-100">
+                  <div className="px-4 py-2 text-sm text-gray-900 border-b border-gray-200">
                     <div className="text-xs text-gray-400">Logged in as:</div>
                     <div className="font-semibold mt-2">{name}</div>
                     <div className="truncate text-gray-500">{email}</div>
@@ -52,14 +52,14 @@ export default function ProfileMenu({ name, email, image }: ProfileMenuProps) {
 
                 <Link
                   href="/app"
-                  className="flex w-full items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 border-b border-gray-100"
+                  className="flex w-full items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 border-b border-gray-200"
                 >
                   Dashboard
                 </Link>
 
                 <Link
                   href="/create"
-                  className="flex md:hidden w-full items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 border-b border-gray-100"
+                  className="flex md:hidden w-full items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 border-b border-gray-200"
                 >
                   Create new form
                 </Link>
