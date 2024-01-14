@@ -15,7 +15,7 @@ export default async function AuthLayout({
   return (
     <div className="max-w-5xl min-h-screen px-4 lg:px-0 mx-auto overflow-x-hidden">
       <nav className="flex py-4 items-center justify-between px-2">
-        <Link className="flex items-center justify-center" href="#">
+        <Link className="flex items-center justify-center" href="/">
           <Image
             alt="Formulate logo"
             src="/formulate.svg"
