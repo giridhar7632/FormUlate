@@ -1,4 +1,6 @@
-const Table = async ({ data }: { data: any }) => {
+import { ENTRIES_PER_PAGE } from './page'
+
+const Table = async ({ data, page }: { data: any; page: number }) => {
   return (
     <div className="mx-auto rounded-xl shadow-sm border border-gray-200 overflow-x-auto">
       <table className="w-full">
@@ -17,7 +19,9 @@ const Table = async ({ data }: { data: any }) => {
         <tbody className="bg-white">
           {data.map((row: any, idx: number) => (
             <tr key={idx} className="border-b border-gray-200">
-              <td className="p-4 border-r border-gray-200">{idx + 1}</td>
+              <td className="p-4 border-r border-gray-200">
+                {(page - 1) * ENTRIES_PER_PAGE + (idx + 1)}
+              </td>
               {Object.keys(data[0]).map((columnName: any) => (
                 <td key={columnName} className="p-4">
                   {row[columnName]}

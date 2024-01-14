@@ -27,7 +27,7 @@ const Button: React.FC<ButtonProps> = ({
   type = 'button',
 }) => {
   const variantClassname = clsx({
-    ['bg-blue-500 hover:bg-blue-600 text-white disabled:bg-blue-500 disabled:ring-0']:
+    ['bg-blue-500 ring-blue-200 hover:bg-blue-600 text-white disabled:bg-blue-500 disabled:ring-0']:
       variant === 'primary',
     ['bg-blue-100 ring-0 text-blue-500 hover:text-blue-600 disabled:bg-blue-100 disabled:ring-0']:
       variant === 'secondary',
@@ -43,7 +43,7 @@ const Button: React.FC<ButtonProps> = ({
     <button
       className={clsx(
         variantClassname,
-        'h-lg flex cursor-pointer items-center justify-center gap-2 rounded-xl px-4 py-3 leading-snug ring-blue-200 transition duration-150 ease-in-out hover:ring focus:ring disabled:bg-gray-200 disabled:text-gray-600 disabled:cursor-not-allowed',
+        'h-lg flex cursor-pointer items-center justify-center gap-2 rounded-xl px-4 py-3 leading-snug transition duration-150 ease-in-out hover:ring focus:ring disabled:bg-gray-200 disabled:text-gray-600 disabled:cursor-not-allowed',
         className
       )}
       disabled={disabled || loading}

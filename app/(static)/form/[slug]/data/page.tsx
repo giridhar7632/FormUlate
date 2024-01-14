@@ -6,8 +6,10 @@ import Export from './Export'
 import { auth } from '@/lib/auth'
 import { redirect } from 'next/navigation'
 import { getRecordCount } from '@/app/actions'
+import { Pagination } from './Pagination'
 
 const xata = getXataClient()
+export const ENTRIES_PER_PAGE = 12
 
 export default async function Data({
   params,
@@ -26,7 +28,10 @@ export default async function Data({
   const recordPagePromise = xata.db[params.slug]
     .sort('xata.createdAt', 'desc')
     .getPaginated({
-      pagination: { size: 12, offset: 12 * pageNumber - 12 },
+      pagination: {
+        size: ENTRIES_PER_PAGE,
+        offset: ENTRIES_PER_PAGE * pageNumber - ENTRIES_PER_PAGE,
+      },
     })
 
   const recordCountPromise = getRecordCount(params.slug)
@@ -38,7 +43,7 @@ export default async function Data({
   ])
   console.timeEnd('Fetching images')
 
-  const totalNumberOfPages = Math.ceil(recordCount / 12)
+  const totalNumberOfPages = Math.ceil(recordCount / ENTRIES_PER_PAGE)
 
   // This page object is needed for building the buttons in the pagination component
   const page = {
@@ -62,13 +67,18 @@ export default async function Data({
   return (
     <div className="flex flex-col gap-4">
       <div className="flex items-center justify-between">
-        <h1 className="text-3xl font-bold md:text-5xl/none">Submissions</h1>
+        <div className="flex items-center gap-2">
+          <h1 className="text-3xl font-bold md:text-5xl/none">Submissions</h1>
+          <span className="inline-block rounded-lg bg-gray-100 px-3 py-1 text-sm">
+            {recordCount}
+          </span>
+        </div>
         <Export table={params.slug} data={data} />
       </div>
       <div className="my-6">
         <Suspense fallback={<LoaderIcon />}>
           {data.length ? (
-            <Table data={data} />
+            <Table data={data} page={pageNumber} />
           ) : (
             <p className="text-gray-500">
               No submissions yet! Share the form with your friends to get
@@ -77,6 +87,11 @@ export default async function Data({
           )}
         </Suspense>
       </div>
+      <Pagination
+        slug={params.slug}
+        currPage={pageNumber}
+        totalPages={page.totalNumberOfPages}
+      />
     </div>
   )
 }

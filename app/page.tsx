@@ -106,7 +106,7 @@ export default async function Home() {
                 </h3>
                 <p className="text-sm text-gray-500  ">
                   Each form comes with a dedicated table in our database, making
-                  data fetching and analysis a breeze.
+                  data fetching and analysis a breeze (in progress).
                 </p>
               </div>
             </div>
