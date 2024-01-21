@@ -20,7 +20,7 @@ export default async function Profile({
   const user = await xata.db.nextauth_users.read(params.slug as string)
 
   return (
-    <div className="w-92 sm:w-96 flex flex-col border items-center mx-auto border-gray-200 rounded-2xl p-6 md:p-12">
+    <div className="w-92 sm:w-96 flex flex-col border items-center mx-auto bg-white border-gray-200 dark:bg-gray-800 dark:border-gray-600 rounded-2xl p-6 md:p-12">
       {user ? (
         <>
           <Image

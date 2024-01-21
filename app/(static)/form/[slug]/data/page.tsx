@@ -37,12 +37,10 @@ export default async function Data({
 
   const recordCountPromise = getRecordCount(params.slug)
 
-  console.time('Fetching records')
   const [recordsPage, recordCount] = await Promise.all([
     recordPagePromise,
     recordCountPromise,
   ])
-  console.timeEnd('Fetching records')
 
   const totalNumberOfPages = Math.ceil(recordCount / ENTRIES_PER_PAGE)
 
@@ -71,7 +69,7 @@ export default async function Data({
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
           <h1 className="text-3xl font-bold md:text-5xl/none">Submissions</h1>
-          <span className="inline-block rounded-lg bg-gray-100 px-3 py-1 text-sm">
+          <span className="inline-block rounded-lg bg-gray-100 dark:text-gray-800 px-3 py-1 text-sm">
             {recordCount}
           </span>
         </div>

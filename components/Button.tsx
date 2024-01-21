@@ -27,15 +27,15 @@ const Button: React.FC<ButtonProps> = ({
   type = 'button',
 }) => {
   const variantClassname = clsx({
-    ['bg-blue-500 ring-blue-200 hover:bg-blue-600 text-white disabled:bg-blue-500 disabled:ring-0']:
+    ['bg-blue-500 ring-blue-200 dark:ring-blue-400 hover:bg-blue-600 text-white disabled:bg-blue-500 disabled:ring-0']:
       variant === 'primary',
-    ['bg-blue-100 ring-0 text-blue-500 hover:text-blue-600 disabled:bg-blue-100 disabled:ring-0']:
+    ['bg-blue-100 dark:bg-blue-100 ring-0 text-blue-500 hover:text-blue-600 disabled:bg-blue-100 disabled:ring-0']:
       variant === 'secondary',
     ['text-blue-500 hover:text-blue-600 hover:ring-0 disabled:text-blue-300 bg-white bg-opacity-10 backdrop-blur-sm']:
       variant === 'text',
     ['bg-gray-100 hover:ring-gray-200 hover:bg-gray-200 text-gray-500 disabled:bg-gray-300 disabled:ring-0']:
       variant === 'gray',
-    ['hover:bg-gray-100 hover:ring-gray-200 border-2 border-gray-200 disabled:bg-gray-300 disabled:ring-0']:
+    ['hover:bg-gray-100 dark:hover:bg-gray-900 text-gray-900 dark:text-gray-200 hover:ring-gray-200 dark:hover:ring-gray-700 border-2 border-gray-200 dark:border-gray-600 disabled:bg-gray-300 disabled:ring-0']:
       variant === 'outline',
   })
 

@@ -119,8 +119,9 @@ const PageButton = ({
     <Link
       href={link}
       className={clsx(
-        'inline-flex items-center justify-center rounded-md text-sm font-medium text-gray-500 hover:bg-gray-100 hover:text-gray-900 h-8 px-3 py-2 gap-2 pr-2.5',
-        active && 'ring bg-gray-100 ring-gray-200 min-w-8 h-8 text-gray-900',
+        'inline-flex items-center justify-center rounded-md text-sm font-medium text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-gray-300 h-8 px-3 py-2 gap-2 pr-2.5',
+        active &&
+          'ring bg-gray-100 dark:bg-gray-800 ring-gray-200 dark:ring-gray-700 min-w-8 h-8 text-gray-900 dark:text-gray-100',
         disabled && 'pointer-events-none opacity-50'
       )}
     >

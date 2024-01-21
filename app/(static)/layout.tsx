@@ -1,6 +1,7 @@
 // import { auth } from "@/lib/auth"
 import Link from 'next/link'
 import Image from 'next/image'
+import { ThemeSwitch } from '@/components/Theme'
 // import Button from "@/components/Button"
 // import ProfileMenu from "@/components/ProfileMenu"
 
@@ -19,12 +20,10 @@ export default async function AuthLayout({
             <p className="text-xl leading-none">FormUlate</p>
           </div>
         </Link>
-        {/* {session?.user ? <ProfileMenu {...session.user} />  : <Link href={'/auth/login'}>
-						<Button>Login</Button>
-					</Link>} */}
+        <ThemeSwitch />
       </nav>
       <main className="flex-1 w-full h-full py-24">{children}</main>
-      <footer className="flex flex-col gap-2 sm:flex-row py-6 w-full shrink-0 items-center px-4 md:px-6 border-t">
+      <footer className="flex flex-col gap-2 sm:flex-row py-6 w-full shrink-0 items-center px-4 md:px-6 border-t dark:border-gray-600">
         <Link href={'/'} className="text-xs text-gray-500 dark:text-gray-400">
           © FormUlate.
         </Link>

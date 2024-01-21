@@ -65,7 +65,7 @@ const UserForm = ({ id, image, name, email }: UserFormProps) => {
       <div className="relative flex items-center justify-center mx-auto mb-4 h-36 w-36 overflow-hidden cursor-pointer">
         <Image
           fill={true}
-          className="rounded-full border border-gray-200 object-cover"
+          className="rounded-full bg-white border border-gray-200 dark:bg-gray-800 dark:border-gray-600 object-cover"
           src={previewImage || image || 'https://api.multiavatar.com/v.png'}
           alt="upload image"
         />

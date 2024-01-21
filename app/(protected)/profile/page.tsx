@@ -9,7 +9,7 @@ export default async function Page() {
   const user = await xata.db.nextauth_users.read(session?.user?.id as string)
 
   return (
-    <div className="w-92 sm:w-96 flex flex-col border items-center border-gray-200 rounded-2xl p-6 md:p-12">
+    <div className="w-92 sm:w-96 flex flex-col border items-center bg-white border-gray-200 dark:bg-gray-800 dark:border-gray-600 rounded-2xl p-6 md:p-12">
       {user ? (
         <UserForm
           id={user.id}
@@ -18,7 +18,7 @@ export default async function Page() {
           name={user.name}
         />
       ) : (
-        <p>User not found!</p>
+        <p className="dark:text-gray-300">User not found!</p>
       )}
     </div>
   )
