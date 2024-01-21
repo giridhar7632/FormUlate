@@ -4,6 +4,7 @@ import './globals.css'
 import { auth } from '@/lib/auth'
 import { SessionProvider } from 'next-auth/react'
 import { Toaster } from 'react-hot-toast'
+import { ThemeProvider } from '@/components/Theme'
 
 const prompt = Prompt({ subsets: ['latin'], weight: ['400', '500', '700'] })
 
@@ -54,9 +55,16 @@ export default async function RootLayout({
   return (
     <SessionProvider session={session}>
       <html lang="en">
-        <body className={`${prompt.className}`}>
-          {children}
-          <Toaster />
+        <body className={`${prompt.className} dark:bg-gray-900`}>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            {children}
+            <Toaster />
+          </ThemeProvider>
         </body>
       </html>
     </SessionProvider>

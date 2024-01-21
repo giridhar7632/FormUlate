@@ -25,18 +25,18 @@ export default async function Page({ params }: { params: { slug: string } }) {
     ])
     .getFirst()
   return record ? (
-    <div className="p-12 w-full border border-gray-200 rounded-2xl shadow-sm">
+    <div className="p-12 w-full border border-gray-200 dark:border-gray-600 rounded-2xl shadow-sm">
       <h1 className="text-3xl md:text-4xl font-bold mb-2">{record?.name}</h1>
       <p className="text-sm text-gray-500">
         <i>created by:</i>{' '}
         <Link
-          className="cursor-pointer underline underline-offset-4"
+          className="cursor-pointer underline underline-offset-4 dark:text-gray-300"
           href={`/user/${record?.createdBy?.id}`}
         >
           {record?.createdBy?.name || record?.createdBy?.email}
         </Link>
       </p>
-      <div className="h-1 my-6 border border-gray-200"></div>
+      <div className="h-1 my-6 border border-gray-200 dark:border-gray-600"></div>
       <Form
         table={params.slug}
         owner={record?.createdBy?.name?.split(' ')[0] as string}
@@ -44,7 +44,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
       />
     </div>
   ) : (
-    <div className="w-80 mx-auto sm:w-96 flex flex-col border border-gray-200 rounded-2xl p-6 md:p-12">
+    <div className="w-80 mx-auto sm:w-96 flex flex-col border border-gray-200 dark:border-gray-600 rounded-2xl p-6 md:p-12">
       <Image
         className="mx-auto"
         width={72}

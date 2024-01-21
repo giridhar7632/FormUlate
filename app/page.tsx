@@ -35,7 +35,7 @@ export default async function Home() {
         </nav>
       </header>
       <main className="flex-1">
-        <section className="w-full pt-12 md:pt-24 lg:pt-32 border-y">
+        <section className="w-full relative pt-12 md:pt-24 lg:pt-32 border-y dark:border-gray-600">
           <div className="px-4 md:px-6 space-y-10 xl:space-y-16">
             <div className="grid max-w-[1300px] mx-auto gap-4 px-4 sm:px-6 md:px-10 md:grid-cols-2 md:gap-16">
               <div>
@@ -45,7 +45,7 @@ export default async function Home() {
                 </h1>
               </div>
               <div className="flex flex-col items-start space-y-4">
-                <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl  ">
+                <p className="mx-auto max-w-[700px] text-gray-500 dark:text-gray-300 md:text-xl">
                   Type in your requirements and get the beautiful forms
                   generated with AI
                 </p>
@@ -67,44 +67,48 @@ export default async function Home() {
               placeholder="blur"
               blurDataURL={getBlurDataUrl()}
             />
+            <div
+              style={{ zIndex: -1 }}
+              className="blur-[100px] hidden dark:block absolute radial-gradient bg-purple-500 w-1/2 h-1/2 opacity-30 -bottom-20 -z-1"
+            ></div>
           </div>
         </section>
         <section className="w-full py-12 md:py-24 lg:py-32">
           <div className="container mx-auto space-y-12 px-4 md:px-6">
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
               <div className="space-y-2">
-                <div className="inline-block rounded-lg bg-gray-100 px-3 py-1 text-sm">
+                <div className="inline-block rounded-lg bg-gray-100 px-3 py-1 text-sm dark:text-gray-800">
                   Features
                 </div>
                 <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">
                   Why Choose FormUlate?
                 </h2>
-                <p className="max-w-[900px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed  ">
+                <p className="max-w-[900px] text-gray-500 dark:text-gray-300 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed  ">
                   FormUlate is designed to make the creation of forms and data
                   collection easy and accessible.
                 </p>
               </div>
             </div>
             <div className="mx-auto grid items-start gap-8 sm:max-w-4xl sm:grid-cols-2 md:gap-8 lg:max-w-5xl lg:grid-cols-3">
-              <div className="grid h-full gap-1 p-4 border border-gray-200 shadow-sm rounded-xl">
+              <div className="grid h-full gap-1 p-4 border border-gray-200 dark:border-gray-600 shadow-sm rounded-xl">
                 <h3 className="text-lg font-bold">Prompt-Based Creation</h3>
-                <p className="text-sm text-gray-500">
+                <p className="text-sm text-gray-500 dark:text-gray-300">
                   Simply tell us what you want your form to do, and we will
                   build it for you using the state-of-the-art Gemini Pro Model.
                 </p>
               </div>
-              <div className="grid h-full gap-1 p-4 border border-gray-200 shadow-sm rounded-xl">
+              <div className="grid h-full gap-1 p-4 border border-gray-200 dark:border-gray-600 shadow-sm rounded-xl">
                 <h3 className="text-lg font-bold">Instant Shareable Pages</h3>
-                <p className="text-sm text-gray-500">
+                <p className="text-sm text-gray-500 dark:text-gray-300">
                   Generate instant, sharable web page (using the unique link
                   provided) for your form with a single click.
                 </p>
               </div>
-              <div className="grid h-full gap-1 p-4 border border-gray-200 shadow-sm rounded-xl">
+              <div className="grid h-full gap-1 p-4 border border-gray-200 dark:border-gray-600 shadow-sm rounded-xl">
                 <h3 className="text-lg font-bold">
                   Data Insights at your Fingertips
                 </h3>
-                <p className="text-sm text-gray-500  ">
+                <p className="text-sm text-gray-500 dark:text-gray-300">
                   Each form comes with a dedicated table in our database, making
                   data fetching and analysis a breeze (in progress).
                 </p>
@@ -113,7 +117,7 @@ export default async function Home() {
           </div>
         </section>
       </main>
-      <footer className="flex flex-col gap-2 sm:flex-row py-6 w-full shrink-0 items-center px-4 md:px-6 border-t">
+      <footer className="flex flex-col gap-2 sm:flex-row py-6 w-full shrink-0 items-center px-4 md:px-6 border-t dark:border-gray-600">
         <Link href={'/'} className="text-xs text-gray-500  ">
           © FormUlate.
         </Link>

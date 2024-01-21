@@ -19,7 +19,7 @@ export default function Error({
   return (
     <div className="max-w-5xl min-h-screen px-4 lg:px-0 mx-auto overflow-x-hidden flex flex-col">
       <main className="flex-1 mx-auto py-24">
-        <div className="w-80 sm:w-96 flex flex-col border border-gray-200 rounded-2xl p-6 md:p-12">
+        <div className="w-80 sm:w-96 flex flex-col border bg-white border-gray-200 dark:bg-gray-800 dark:border-gray-600 rounded-2xl p-6 md:p-12">
           <Image
             className="mx-auto"
             width={72}

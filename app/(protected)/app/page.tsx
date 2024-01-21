@@ -20,7 +20,7 @@ export default async function Page() {
       </p>
       <div className="w-full my-4 flex items-center justify-between">
         <h2 className="text-2xl text-gray-500 truncate">Your forms</h2>
-        <Link href="/create">
+        <Link className="mr-1" href="/create">
           <Button>Create new form</Button>
         </Link>
       </div>
@@ -28,7 +28,7 @@ export default async function Page() {
         {forms.map((form) => (
           <div
             key={form.id}
-            className="flex-1 p-4 md:p-6 flex items-center justify-between w-full md:min-w-[40%] border shadow-sm hover:shadow-md border-gray-200 rounded-xl"
+            className="flex-1 p-4 md:p-6 flex items-center justify-between w-full md:min-w-[40%] border shadow-sm hover:shadow-md border-gray-200 rounded-xl bg-white dark:border-gray-600 dark:bg-gray-800"
           >
             <Link href={`/form/${form.slug}`}>
               <p className="text-blue-500">{form.name}</p>

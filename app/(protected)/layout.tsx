@@ -4,6 +4,7 @@ import Button from '@/components/Button'
 import { redirect } from 'next/navigation'
 import ProfileMenu from '@/components/ProfileMenu'
 import Image from 'next/image'
+import { ThemeSwitch } from '@/components/Theme'
 
 export default async function AuthLayout({
   children,
@@ -24,13 +25,16 @@ export default async function AuthLayout({
           />
           <span className="sr-only">FormUlate</span>
         </Link>
-        {session?.user ? (
-          <ProfileMenu {...session.user} />
-        ) : (
-          <Link href={'/auth/login'}>
-            <Button>Login</Button>
-          </Link>
-        )}
+        <div className="flex items-center justify-end gap-3">
+          {session?.user ? (
+            <ProfileMenu {...session.user} />
+          ) : (
+            <Link href={'/auth/login'}>
+              <Button>Login</Button>
+            </Link>
+          )}
+          <ThemeSwitch />
+        </div>
       </nav>
       <main className="flex w-full h-full flex-col items-center justify-between py-24">
         {children}

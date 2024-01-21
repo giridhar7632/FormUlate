@@ -4,7 +4,7 @@ import Link from 'next/link'
 
 export default function ErrorPage() {
   return (
-    <div className="w-80 sm:w-96 mx-auto flex flex-col border border-gray-200 rounded-2xl p-6 md:p-12">
+    <div className="w-80 sm:w-96 mx-auto flex flex-col bg-white border border-gray-200 dark:bg-gray-800 dark:border-gray-600 rounded-2xl p-6 md:p-12">
       <Image
         className="mx-auto"
         width={72}

@@ -100,8 +100,8 @@ const Prompt = () => {
             disabled={pending}
             placeholder="I need a form to collect user feedback for my product. The form should have fields for collecting the user data like name, email, gender and their valuable feedback ..."
             className={clsx([
-              'min-h-96 w-full sm:w-[600px] bg-gray-100 bg-clip-padding mb-4 p-6 font-normal text-gray-700 focus:border focus:ring-2',
-              'rounded-xl transition ease-in-out focus:border-blue-500 focus:text-gray-700 focus:outline-none focus:ring-blue-100',
+              'min-h-96 w-full sm:w-[600px] bg-gray-100 dark:bg-gray-800 bg-clip-padding mb-4 p-6 font-normal text-gray-700 dark:text-gray-200 border focus:ring-2',
+              'rounded-xl transition border-gray-200 dark:border-gray-600 focus:border-blue-500 focus:outline-none focus:ring-blue-100 dark:focus:ring-blue-400',
             ])}
           />
           <Button className="w-48" type="submit">
