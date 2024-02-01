@@ -1,3 +1,4 @@
+//@ts-nocheck
 import { XataAdapter } from '@next-auth/xata-adapter'
 import NextAuth, { NextAuthConfig } from 'next-auth'
 import GitHub from 'next-auth/providers/github'
