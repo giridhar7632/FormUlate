@@ -9,6 +9,8 @@ import { redirect } from 'next/navigation'
 import { getRecordCount } from '@/app/actions'
 import { Pagination } from './Pagination'
 import { ENTRIES_PER_PAGE } from '@/utils/constants'
+import ShareButton from './ShareButton'
+import { headers } from 'next/headers'
 
 const xata = getXataClient()
 
@@ -63,6 +65,9 @@ export default async function Data({
     }
   })
 
+  const headersList = headers()
+  const fullLink = `${headersList.get('host')}${headersList.get('next-url')}`
+
   return (
     <div className="flex flex-col gap-4">
       <p>{form?.name}</p>
@@ -73,7 +78,10 @@ export default async function Data({
             {recordCount}
           </span>
         </div>
-        <Export table={params.slug} data={data} />
+        <div className="flex items-center gap-2">
+          <ShareButton link={fullLink} />
+          <Export table={params.slug} data={data} />
+        </div>
       </div>
       <div className="my-6">
         <Suspense fallback={<LoaderIcon />}>

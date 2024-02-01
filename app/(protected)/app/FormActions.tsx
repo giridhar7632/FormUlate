@@ -1,12 +1,18 @@
 'use client'
 
+import copy from 'copy-text-to-clipboard'
+
 import { Kebab } from '@/lib/icons'
 import { Popover, Transition } from '@headlessui/react'
 import clsx from 'clsx'
 import Link from 'next/link'
 import { Fragment } from 'react'
+import toast from 'react-hot-toast'
 
 export default function FormActions({ slug }: { slug: string }) {
+  const fullLink = window
+    ? `${window.location.origin}/form/${slug}`
+    : `https://formulate-six.vercel.app/form/${slug}`
   return (
     <Popover className="relative">
       {({ open }) => (
@@ -36,6 +42,22 @@ export default function FormActions({ slug }: { slug: string }) {
                 >
                   View submissions
                 </Link>
+                <button
+                  onClick={() => {
+                    try {
+                      copy(fullLink)
+                      toast.success('Copied to clipboard! 🎉')
+                    } catch (error) {
+                      console.error(error)
+                      toast.error(
+                        'Failed to copy to clipboard! 😢\n Please try again.'
+                      )
+                    }
+                  }}
+                  className="flex w-full items-center gap-2 px-4 py-2 text-sm text-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-900"
+                >
+                  Copy link
+                </button>
               </div>
             </Popover.Panel>
           </Transition>
