@@ -158,11 +158,17 @@ export async function generateJson(prompt: string, old = {}) {
   }
 }
 
-export async function addPage(table: string, input: PageData) {
+export async function addPage(
+  table: string,
+  title: string,
+  description: string,
+  input: PageData
+) {
   const session = await getSession()
   if (session) {
     const res = await xata.db.forms.create({
-      name: input.title,
+      name: title ? title : input.title,
+      description,
       page: input,
       createdBy: session?.user?.id,
       slug: table,

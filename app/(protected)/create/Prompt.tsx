@@ -11,12 +11,15 @@ import { useRouter } from 'next/navigation'
 import toast, { CheckmarkIcon } from 'react-hot-toast'
 import Spinner from '@/components/Spinner'
 import { extractAndParseJson } from '@/utils/extractAndParseJson'
+import Input from '@/components/Input'
 
 const Prompt = () => {
   const formRef = useRef<HTMLFormElement>(null)
   const { pending } = useFormStatus()
   const router = useRouter()
   const { data } = useSession()
+  const [title, setTitle] = useState('')
+  const [description, setDescription] = useState('')
   const [prompt, setPrompt] = useState('')
   const [loading, setLoading] = useState(false)
   const [generatingForm, setGeneratingForm] = useState('pending')
@@ -49,7 +52,7 @@ const Prompt = () => {
 
         setAddingPage('started')
         if (tableRes.status === 'completed') {
-          await addPage(table, res)
+          await addPage(table, title, description, res)
           setAddingPage('completed')
           router.push(`/form/${table}`)
         } else {
@@ -94,13 +97,33 @@ const Prompt = () => {
         </div>
       ) : (
         <>
+          <Input
+            label="Title of the form"
+            name="title"
+            type="text"
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            disabled={pending}
+            placeholder="Title (Product Feedback Form)"
+            className="w-full sm:w-[600px]"
+          />
+          <Input
+            label="Description"
+            name="description"
+            type="text"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            disabled={pending}
+            placeholder="Description (Please give us your valuable feedback!)"
+            className="w-full sm:w-[600px]"
+          />
           <textarea
             name="prompt"
             onChange={(e) => setPrompt(e.target.value)}
             disabled={pending}
-            placeholder="I need a form to collect user feedback for my product. The form should have fields for collecting the user data like name, email, gender and their valuable feedback ..."
+            placeholder="Requirements (I need a form to collect user feedback for my product. The form should have fields for collecting the user data like name, email, gender and their valuable feedback ...)"
             className={clsx([
-              'min-h-96 w-full sm:w-[600px] bg-gray-100 dark:bg-gray-800 bg-clip-padding mb-4 p-6 font-normal text-gray-700 dark:text-gray-200 border focus:ring-2',
+              'min-h-72 w-full sm:w-[600px] bg-gray-100 dark:bg-gray-800 bg-clip-padding mb-4 p-6 font-normal text-gray-700 dark:text-gray-200 border focus:ring-2',
               'rounded-xl transition border-gray-200 dark:border-gray-600 focus:border-blue-500 focus:outline-none focus:ring-blue-100 dark:focus:ring-blue-400',
             ])}
           />
