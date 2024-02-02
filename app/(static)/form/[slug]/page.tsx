@@ -25,7 +25,7 @@ export async function generateMetadata(
 ): Promise<Metadata> {
   const form = await xata.db.forms
     .filter({ slug: params.slug })
-    .select(['createdBy.name', 'name'])
+    .select(['createdBy.name', 'name', 'description'])
     .getFirst()
 
   if (!form) {
@@ -34,16 +34,20 @@ export async function generateMetadata(
 
   const previousImages = (await parent).openGraph?.images || []
   const title = `${form?.name} by ${form.createdBy?.name}`
+  const { description } = form
 
   return {
     title,
+    description,
     openGraph: {
       title,
+      description: description as string,
       images: previousImages,
     },
     twitter: {
       card: 'summary_large_image',
       title,
+      description: description as string,
       images: previousImages,
     },
   }
@@ -57,6 +61,7 @@ export default async function Page({ params }: PramsProps) {
       'createdBy.email',
       'createdBy.id',
       'name',
+      'description',
       'page',
     ])
     .getFirst()
@@ -72,6 +77,7 @@ export default async function Page({ params }: PramsProps) {
           {record?.createdBy?.name || record?.createdBy?.email}
         </Link>
       </p>
+      <p className="text-sm my-2">{record.description}</p>
       <div className="h-1 my-6 border border-gray-200 dark:border-gray-600"></div>
       <Form
         table={params.slug}

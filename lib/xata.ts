@@ -12,6 +12,8 @@ const tables = [
     columns: [
       { name: 'page', type: 'json', notNull: true, defaultValue: '{}' },
       { name: 'name', type: 'string' },
+      { name: 'prompt', type: 'string' },
+      { name: 'description', type: 'string' },
       { name: 'slug', type: 'string', unique: true },
       { name: 'createdBy', type: 'link', link: { table: 'nextauth_users' } },
     ],
