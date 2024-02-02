@@ -66,7 +66,7 @@ export default async function Data({
   })
 
   const headersList = headers()
-  const fullLink = `${headersList.get('host')}${headersList.get('next-url')}`
+  const fullLink = `${headersList.get('host')}/form/${params.slug}`
 
   return (
     <div className="flex flex-col gap-4">
