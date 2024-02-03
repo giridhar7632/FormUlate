@@ -10,7 +10,6 @@ import { getRecordCount } from '@/app/actions'
 import { Pagination } from './Pagination'
 import { ENTRIES_PER_PAGE } from '@/utils/constants'
 import ShareButton from './ShareButton'
-import { headers } from 'next/headers'
 
 const xata = getXataClient()
 
@@ -65,9 +64,6 @@ export default async function Data({
     }
   })
 
-  const headersList = headers()
-  const fullLink = `${headersList.get('host')}/form/${params.slug}`
-
   return (
     <div className="flex flex-col gap-4">
       <p>{form?.name}</p>
@@ -79,7 +75,7 @@ export default async function Data({
           </span>
         </div>
         <div className="flex items-center gap-2">
-          <ShareButton link={fullLink} />
+          <ShareButton slug={params.slug} />
           <Export table={params.slug} data={data} />
         </div>
       </div>

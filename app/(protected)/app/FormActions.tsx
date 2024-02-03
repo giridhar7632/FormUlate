@@ -6,13 +6,20 @@ import { Kebab } from '@/lib/icons'
 import { Popover, Transition } from '@headlessui/react'
 import clsx from 'clsx'
 import Link from 'next/link'
-import { Fragment } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
 
 export default function FormActions({ slug }: { slug: string }) {
-  const fullLink = window
-    ? `${window.location.origin}/form/${slug}`
-    : `https://formulate-six.vercel.app/form/${slug}`
+  const [fullLink, setFullLink] = useState('')
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setFullLink(`${window.location.origin}/form/${slug}`)
+    } else {
+      setFullLink(`https://formulate-six.vercel.app/form/${slug}`)
+    }
+  }, [slug])
+
   return (
     <Popover className="relative">
       {({ open }) => (

@@ -2,12 +2,22 @@
 
 import Button from '@/components/Button'
 import { Dialog, Transition } from '@headlessui/react'
-import React, { Fragment, useState } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import copy from 'copy-text-to-clipboard'
 import toast from 'react-hot-toast'
 
-const ShareButton = ({ link }: { link: string }) => {
+const ShareButton = ({ slug }: { slug: string }) => {
   const [isOpen, setIsOpen] = useState(false)
+  const [fullLink, setFullLink] = useState('')
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setFullLink(`${window.location.origin}/form/${slug}`)
+    } else {
+      setFullLink(`https://formulate-six.vercel.app/form/${slug}`)
+    }
+  }, [slug])
+
   const handleClose = () => setIsOpen(false)
   const handleOpen = () => setIsOpen(true)
 
@@ -55,14 +65,14 @@ const ShareButton = ({ link }: { link: string }) => {
                     <input
                       name="link"
                       type="link"
-                      defaultValue={link}
+                      defaultValue={fullLink}
                       className="flex-1 bg-gray-100 dark:bg-gray-700 dark:border dark:border-gray-600 bg-clip-padding px-4 py-2 font-normal text-gray-700 dark:text-gray-100 focus:border focus:ring-2
                       m-0 rounded-xl transition ease-in-out focus:outline-none focus:ring-blue-100 dark:focus:ring-blue-400"
                     />
                     <Button
                       onClick={() => {
                         try {
-                          copy(link)
+                          copy(fullLink)
                           toast.success('Copied to clipboard! 🎉')
                           handleClose()
                         } catch (error) {
