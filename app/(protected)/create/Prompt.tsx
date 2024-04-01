@@ -12,6 +12,7 @@ import toast, { CheckmarkIcon } from 'react-hot-toast'
 import Spinner from '@/components/Spinner'
 import { extractAndParseJson } from '@/utils/extractAndParseJson'
 import Input from '@/components/Input'
+import { PageData } from '@/types/types'
 
 const Prompt = () => {
   const formRef = useRef<HTMLFormElement>(null)
@@ -26,6 +27,23 @@ const Prompt = () => {
   const [creatingTable, setCreatingTable] = useState('pending')
   const [addingPage, setAddingPage] = useState('pending')
 
+  async function fn(res: any, cnt = 0): Promise<any> {
+    console.log('trail', cnt)
+    try {
+      res = await generateJson(res)
+      return extractAndParseJson(res)
+    } catch (error) {
+      console.log(error)
+      if (cnt < 5) {
+        return await fn(res, cnt + 1) // Use 'await' here
+      } else {
+        throw new Error(
+          'Sorry! Gemini was unable to generate the form at the moment 😕'
+        )
+      }
+    }
+  }
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     console.log('prompt:', prompt)
@@ -33,11 +51,15 @@ const Prompt = () => {
     try {
       if (prompt !== '') {
         setGeneratingForm('started')
-        let res = await generateJson(prompt)
-        res = extractAndParseJson(res)
+        let res = (await fn(prompt)) as PageData
+
+        console.log({ parsed: res })
         setGeneratingForm('completed')
         setCreatingTable('started')
-        const table = generateSlug(data?.user.id as string, res.title)
+        const table = generateSlug(
+          data?.user.id as string,
+          title ? title : res.title ?? 'untitled'
+        )
         if (res.fields.length === 0)
           throw new Error('Add at least one field 😁')
         let tableRes
@@ -47,21 +69,18 @@ const Prompt = () => {
           tableRes = await updateTable(table, res.fields)
         }
         setCreatingTable('completed')
-
-        console.log({ tableRes })
-
         setAddingPage('started')
         if (tableRes.status === 'completed') {
-          await addPage(table, title, description, res)
+          await addPage(table, title, description, res, prompt)
           setAddingPage('completed')
           router.push(`/form/${table}`)
         } else {
           throw new Error('Something went wrong when creating your form! 😕')
         }
       }
-    } catch (error) {
+    } catch (error: any) {
       console.log(error)
-      toast.error('Something went wrong! 😕')
+      toast.error(error.message ?? 'Something went wrong! 😕')
     } finally {
       setGeneratingForm('pending')
       setCreatingTable('pending')

@@ -9,25 +9,19 @@ export function extractAndParseJson(input: string): Object {
 // )
 
 function tryParseJSON(jsonString: string) {
-  try {
+  const fixedJsonString = fixJSONFormatting(jsonString)
+  if (fixedJsonString) {
     return JSON.parse(jsonString)
-  } catch (error) {
-    const fixedJsonString = fixJSONFormatting(jsonString)
-    if (fixedJsonString) {
-      return JSON.parse(fixedJsonString)
-    }
-
-    throw error
   }
 }
 
 function fixJSONFormatting(jsonString: string) {
+  jsonString = jsonString
+    .replace(/\n/g, ' ')
+    .replace(/\r/g, ' ')
+    .replace(/\t/g, ' ')
   jsonString = jsonString.replace(/,\s*}/g, '}')
-  jsonString = jsonString.replace(/([\{,])\s*([^"'\{\}\[\]:]+)\s*:/g, '$1"$2":')
-  jsonString = jsonString.replace(
-    /([^"'\{\}\[\]:,])\s*([^"'\{\}\[\]:]+)/g,
-    '$1"$2":'
-  )
+  jsonString = jsonString.replace('\n', ' ')
   jsonString = jsonString.replace('\n ', ' ')
   jsonString = jsonString.replace(' ', ' ')
 

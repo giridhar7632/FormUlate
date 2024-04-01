@@ -124,7 +124,7 @@ export async function createTable(table: string, fields: FormField[]) {
     })
 
     if (schemaData.status !== 'completed') {
-      await dbReq({ method: 'DELETE', path: `/tables/${table}` })
+      await dbReqWithoutBody({ method: 'DELETE', path: `/tables/${table}` })
     }
     console.log('schemaData', schemaData)
 
@@ -181,7 +181,8 @@ export async function addPage(
   table: string,
   title: string,
   description: string,
-  input: PageData
+  input: PageData,
+  prompt?: string
 ) {
   const session = await getSession()
   if (session) {
@@ -191,6 +192,7 @@ export async function addPage(
       page: input,
       createdBy: session?.user?.id,
       slug: table,
+      prompt,
     })
     return res
   }
