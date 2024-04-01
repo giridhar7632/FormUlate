@@ -8,8 +8,15 @@ import clsx from 'clsx'
 import Link from 'next/link'
 import { Fragment, useEffect, useState } from 'react'
 import toast from 'react-hot-toast'
+import DeleteButton from './DeleteButton'
 
-export default function FormActions({ slug }: { slug: string }) {
+export default function FormActions({
+  id,
+  slug,
+}: {
+  id: string
+  slug: string
+}) {
   const [fullLink, setFullLink] = useState('')
 
   useEffect(() => {
@@ -35,13 +42,13 @@ export default function FormActions({ slug }: { slug: string }) {
           <Transition
             as={Fragment}
             enter="transition ease-out duration-200"
-            enterFrom="opacity-0 translate-y-1"
-            enterTo="opacity-100 translate-y-0"
+            enterFrom="opacity-0 trangray-y-1"
+            enterTo="opacity-100 trangray-y-0"
             leave="transition ease-in duration-150"
-            leaveFrom="opacity-100 translate-y-0"
-            leaveTo="opacity-0 translate-y-1"
+            leaveFrom="opacity-100 trangray-y-0"
+            leaveTo="opacity-0 trangray-y-1"
           >
-            <Popover.Panel className="absolute right-0 z-10 mt-3 w-52 transform  rounded-lg bg-white dark:bg-gray-800 px-4 sm:px-0 lg:max-w-3xl dark:border dark:border-gray-600">
+            <Popover.Panel className="absolute right-0 z-10 mt-3 w-52 transform  rounded-lg bg-white dark:bg-gray-800 sm:px-0 lg:max-w-3xl dark:border dark:border-gray-600">
               <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
                 <Link
                   href={`/form/${slug}/data`}
@@ -65,6 +72,8 @@ export default function FormActions({ slug }: { slug: string }) {
                 >
                   Copy link
                 </button>
+
+                <DeleteButton slug={slug} id={id} />
               </div>
             </Popover.Panel>
           </Transition>

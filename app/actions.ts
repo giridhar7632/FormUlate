@@ -4,7 +4,7 @@
 
 import { auth } from '@/lib/auth'
 import { FormField, PageData } from '@/types/types'
-import { dbReq } from '@/utils/xataRequest'
+import { dbReq, dbReqWithoutBody } from '@/utils/xataRequest'
 import { generateColumns } from '@/utils/generateColumns'
 import { type Session } from 'next-auth'
 import { model } from '@/lib/model'
@@ -150,10 +150,29 @@ export async function updateTable(table: string, fields: FormField[]) {
   }
 }
 
+export async function deleteForm(record: string, slug: string) {
+  const session = await getSession()
+  if (session) {
+    await dbReqWithoutBody({
+      method: 'DELETE',
+      path: `/tables/forms/data/${record}`,
+    })
+    await dbReqWithoutBody({ method: 'DELETE', path: `/tables/${slug}` })
+
+    revalidatePath('/app')
+
+    return {
+      staus: 'success',
+      message: 'Form deleted successfully!',
+    }
+  }
+}
+
 export async function generateJson(prompt: string, old = {}) {
   const session = await getSession()
   if (session) {
     const res = await model(old, prompt)
+    console.log({ modelRes: res })
     return res
   }
 }

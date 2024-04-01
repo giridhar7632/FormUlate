@@ -25,20 +25,26 @@ export default async function Page() {
         </Link>
       </div>
       <div className="flex gap-4 flex-col md:flex-row items-center flex-wrap">
-        {forms.map((form) => (
-          <div
-            key={form.id}
-            className="flex-1 p-4 md:p-6 flex items-center justify-between w-full md:min-w-[40%] border shadow-sm hover:shadow-md border-gray-200 rounded-xl bg-white dark:border-gray-600 dark:bg-gray-800"
-          >
-            <Link href={`/form/${form.slug}`}>
-              <p className="text-blue-500">{form.name}</p>
-              <p className="text-sm text-gray-500">
-                created on: {form.xata.createdAt.toDateString().substring(4)}
-              </p>
-            </Link>
-            <FormActions slug={form.slug as string} />
-          </div>
-        ))}
+        {forms.length ? (
+          forms.map((form) => (
+            <div
+              key={form.id}
+              className="flex-1 p-4 md:p-6 flex items-center justify-between w-full md:min-w-[40%] border shadow-sm hover:shadow-md border-gray-200 rounded-xl bg-white dark:border-gray-600 dark:bg-gray-800"
+            >
+              <Link href={`/form/${form.slug}`}>
+                <p className="text-blue-500">{form.name}</p>
+                <p className="text-sm text-gray-500">
+                  created on: {form.xata.createdAt.toDateString().substring(4)}
+                </p>
+              </Link>
+              <FormActions id={form.id} slug={form.slug as string} />
+            </div>
+          ))
+        ) : (
+          <p className="text-gray-500 mt-24">
+            No forms yet! Click on the button above to create new forms.
+          </p>
+        )}
       </div>
     </div>
   )

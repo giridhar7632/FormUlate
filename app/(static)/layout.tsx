@@ -1,7 +1,8 @@
-// import { auth } from "@/lib/auth"
+import { auth } from '@/lib/auth'
 import Link from 'next/link'
 import Image from 'next/image'
 import { ThemeSwitch } from '@/components/Theme'
+import ProfileMenu from '@/components/ProfileMenu'
 // import Button from "@/components/Button"
 // import ProfileMenu from "@/components/ProfileMenu"
 
@@ -10,7 +11,7 @@ export default async function AuthLayout({
 }: {
   children: React.ReactNode
 }) {
-  // const session = await auth()
+  const session = await auth()
   return (
     <div className="max-w-5xl min-h-screen px-4 mx-auto overflow-x-hidden flex flex-col justify-between">
       <nav className="flex py-4 items-center justify-between">
@@ -20,7 +21,10 @@ export default async function AuthLayout({
             <p className="text-xl leading-none">FormUlate</p>
           </div>
         </Link>
-        <ThemeSwitch />
+        <div className="flex items-center gap-2">
+          {session?.user ? <ProfileMenu {...session.user} /> : null}
+          <ThemeSwitch />
+        </div>
       </nav>
       <main className="flex-1 w-full h-full py-24">{children}</main>
       <footer className="flex flex-col gap-2 sm:flex-row py-6 w-full shrink-0 items-center px-4 md:px-6 border-t dark:border-gray-600">
