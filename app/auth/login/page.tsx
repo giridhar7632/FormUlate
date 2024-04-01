@@ -1,9 +1,11 @@
 import Image from 'next/image'
 import { EmailLogin, SocialLogin } from '../Methods'
+import ErrorRedirect from './errorRedirect'
 
 export default async function Login() {
   return (
     <>
+      <ErrorRedirect />
       <Image
         className="mx-auto"
         width={72}

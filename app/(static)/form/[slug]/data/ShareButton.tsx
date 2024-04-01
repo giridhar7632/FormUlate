@@ -27,7 +27,7 @@ const ShareButton = ({ slug }: { slug: string }) => {
         className="h-lg flex cursor-pointer items-center justify-center gap-2 rounded-xl px-4 py-3 leading-snug transition duration-150 hover:ring focus:ring text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 hover:ring-gray-200 dark:hover:ring-gray-700 focus:ring-gray-200 focus:border-gray-200 dark:focus:ring-gray-700 border-2 focus:outline-0 border-gray-200 dark:border-gray-600"
         onClick={handleOpen}
       >
-        Share form
+        Copy link
       </button>
       <Transition appear show={isOpen} as={Fragment}>
         <Dialog as="div" className="relative z-10" onClose={handleClose}>
@@ -61,15 +61,16 @@ const ShareButton = ({ slug }: { slug: string }) => {
                   >
                     Share form link
                   </Dialog.Title>
-                  <div className="my-2 flex items-center gap-2">
+                  <div className="my-2 flex flex-col items-center gap-2">
                     <input
                       name="link"
                       type="link"
                       defaultValue={fullLink}
-                      className="flex-1 bg-gray-100 dark:bg-gray-700 dark:border dark:border-gray-600 bg-clip-padding px-4 py-2 font-normal text-gray-700 dark:text-gray-100 focus:border focus:ring-2
+                      className="flex-1 w-full bg-gray-100 dark:bg-gray-700 dark:border dark:border-gray-600 bg-clip-padding px-4 py-2 font-normal text-gray-700 dark:text-gray-100 focus:border focus:ring-2
                       m-0 rounded-xl transition ease-in-out focus:outline-none focus:ring-blue-100 dark:focus:ring-blue-400"
                     />
                     <Button
+                      className="w-full"
                       onClick={() => {
                         try {
                           copy(fullLink)

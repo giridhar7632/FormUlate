@@ -25,6 +25,8 @@ export default function Error() {
       <p className="text-center">
         {error === 'CallbackRouteError'
           ? 'You may have used other methods to sign in!'
+          : error === 'OAuthAccountNotLinked'
+          ? 'You did not use any OAuth providers to login. Please continue with email!'
           : 'Something went wrong while signing you in!'}{' '}
       </p>
       <Link className="mx-auto mt-6" href={'/auth/login'}>

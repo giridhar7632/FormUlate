@@ -59,7 +59,7 @@ export default function Export({ table, data }: { table: string; data: any }) {
             leaveFrom="opacity-100 translate-y-0"
             leaveTo="opacity-0 translate-y-1"
           >
-            <Popover.Panel className="absolute right-0 z-10 mt-3 w-52 transform  rounded-lg bg-white dark:bg-gray-800 px-4 sm:px-0 lg:max-w-3xl dark:border dark:border-gray-600">
+            <Popover.Panel className="absolute right-0 z-10 mt-3 w-52 transform  rounded-lg bg-white dark:bg-gray-800 sm:px-0 lg:max-w-3xl dark:border dark:border-gray-600">
               <div className="overflow-hidden rounded-lg shadow-lg ring-1 ring-black ring-opacity-5">
                 <button
                   onClick={handleBulkExport}

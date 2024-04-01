@@ -1,7 +1,6 @@
 'use client'
 
-import { useRef } from 'react'
-import { useFormStatus } from 'react-dom'
+import { useRef, useState } from 'react'
 import Input from '@/components/Input'
 import Button from '@/components/Button'
 import Provider from '@/components/Providers'
@@ -16,28 +15,39 @@ export const SignOut: React.FC = () => (
 
 export const EmailLogin = () => {
   const searchParams = useSearchParams()
+  const [loading, setLoading] = useState(false)
+  const [email, setEmail] = useState('')
   const callbackUrl = searchParams.get('callbackUrl') as string
   const formRef = useRef<HTMLFormElement>(null)
-  const { pending } = useFormStatus()
   return (
     <form
       ref={formRef}
-      action={async (formData) => {
+      onSubmit={async (e) => {
+        e.preventDefault()
+        setLoading(true)
         await signIn('email', {
-          email: formData.get('email'),
+          email,
           callbackUrl: callbackUrl || `/app`,
         })
         formRef.current?.reset()
+        setLoading(false)
       }}
     >
       <Input
         name={'email'}
         label={'Email'}
         type={'email'}
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
         placeholder={'Email'}
-        disabled={pending}
+        disabled={loading}
       />
-      <Button type="submit" disabled={pending} className="w-full">
+      <Button
+        type="submit"
+        loading={loading}
+        loadingText="Sending email..."
+        className="w-full"
+      >
         Continue with Email
       </Button>
     </form>

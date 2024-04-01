@@ -39,7 +39,7 @@ export async function model(old: Object, input: string) {
 
   const parts = [
     {
-      text: `understand and generate a parsable json file in the format given (do not include submit button) from the given description:\nformat:\nexport type FormData = {\n title: string\n action: 'create' | 'update' | 'delete' // understand what user wanted to do\n fields: FormField[]\n}\n\nexport type FormField = {\n id?: string\n field: string // html element\n type: string // type of form element\n name: string\n label: string\n value?: string\n placeholder?: string\n disabled?: boolean\n required?: boolean\n options?: {\n  value: string\n  label: string\n  name?: string\n }[]\n}\n\ndescription: "${input}" \n\nold: "${JSON.stringify(
+      text: `understand and generate a parsable json file in the format given (do not include submit button) from the given description:\nformat:\nexport type FormData = {\n title: string\n action: 'create' | 'update' | 'delete' // understand what user wanted to do\n fields: FormField[]\n}\n\nexport type FormField = {\n id?: string\n field: string // html element\n type: string // type of form element\n name: string\n label: string\n value?: string\n placeholder?: string\n disabled?: boolean\n required?: boolean\n options?: {\n  value: string\n  label: string\n  name?: string\n }[]\n}\n\ndescription: "${input}" \n comeup with atleast one field \n\nold: "${JSON.stringify(
         old
       )}"`,
     },

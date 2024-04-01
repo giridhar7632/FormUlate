@@ -10,6 +10,7 @@ import { getRecordCount } from '@/app/actions'
 import { Pagination } from './Pagination'
 import { ENTRIES_PER_PAGE } from '@/utils/constants'
 import ShareButton from './ShareButton'
+import ShareForm from './ShareForm'
 
 const xata = getXataClient()
 
@@ -67,7 +68,7 @@ export default async function Data({
   return (
     <div className="flex flex-col gap-4">
       <p>{form?.name}</p>
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col md:flex-row gap-2 items-center md:justify-between">
         <div className="flex items-center gap-2">
           <h1 className="text-3xl font-bold md:text-5xl/none">Submissions</h1>
           <span className="inline-block rounded-lg bg-gray-100 dark:text-gray-800 px-3 py-1 text-sm">
@@ -75,6 +76,11 @@ export default async function Data({
           </span>
         </div>
         <div className="flex items-center gap-2">
+          <ShareForm
+            title={form?.name}
+            text="Hey! please submit your response here: "
+            slug={params.slug}
+          />
           <ShareButton slug={params.slug} />
           <Export table={params.slug} data={data} />
         </div>
@@ -91,11 +97,13 @@ export default async function Data({
           )}
         </Suspense>
       </div>
-      <Pagination
-        slug={params.slug}
-        currPage={pageNumber}
-        totalPages={page.totalNumberOfPages}
-      />
+      <div className="my-4">
+        <Pagination
+          slug={params.slug}
+          currPage={pageNumber}
+          totalPages={page.totalNumberOfPages}
+        />
+      </div>
     </div>
   )
 }
