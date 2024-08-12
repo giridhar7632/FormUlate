@@ -1,30 +1,16 @@
-# Next.js on Firebase App Hosting
 
-This is an example [Next.js](https://nextjs.org/) project to demonstrate SSG,
-SSR, and ISR on [Firebase App Hosting](https://firebase.google.com/docs/app-hosting).
+<div align="center">
+      <img src="https://formulate-six.vercel.app/logo.png" width="100px"><br/>
+        <h1> <a href="https://formulate-six.vercel.app/"><span style="color:#3B82F6">FormUlate</span> simple forms from language</h1></a>
+  <p>Type in your requirements and get the beautiful forms generated with AI.</p>
+     </div>
+<p align="center"> <a href="https://formulate-six.vercel.app" target="_blank"><img alt="" src="https://img.shields.io/badge/Website-3B82F6?style=normal&logoColor=white" style="vertical-align:center" /></a></p>
+          
+![screenshots](https://formulate-six.vercel.app/hero.webp)
 
-## Getting Started
+# Features
 
-Run the development server:
-
-```bash
-npm run dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-## Deploy to Firebase App Hosting
-
-### 1. Get your project set up on GitHub
-
-[Create a new GitHub repository](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-new-repository) and push the newly-initialized sample code to it:
-
-<pre>
-git remote add origin https://github.com/<b>$YOUR_NEW_REPOSITORY</b>.git
-git branch -M main
-git push -u origin main
-</pre>
-
-### 2. Set up Firebase App Hosting
-
-Continue to [Get started with Firebase App Hosting](https://firebase.google.com/docs/app-hosting/get-started#step-1:).
+- Prompt-Based form creation - powered by [Gemini pro model](https://storage.googleapis.com/deepmind-media/gemini/gemini_1_report.pdf)
+- Get instant shareable form pages
+- Easily view or export collected data
+- Data insights at your fingertips (work in progress)
