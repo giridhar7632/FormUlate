@@ -7,7 +7,6 @@ import clsx from "clsx";
 import Input from "@/components/Input";
 import Button from "@/components/Button";
 import toast from "react-hot-toast";
-import { handleFormSubmission } from "@/app/actions";
 import { insertDataToForm } from "@/lib/firebase/firestore";
 
 type FormProps = {
