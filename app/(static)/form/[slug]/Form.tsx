@@ -1,54 +1,55 @@
-'use client'
+"use client";
 
-import { useRef, useState } from 'react'
-import { useFormStatus } from 'react-dom'
-import { FormField } from '@/types/types'
-import clsx from 'clsx'
-import Input from '@/components/Input'
-import Button from '@/components/Button'
-import toast from 'react-hot-toast'
-import { handleFormSubmission } from '@/app/actions'
+import { useRef, useState } from "react";
+import { useFormStatus } from "react-dom";
+import { FormField } from "@/types/types";
+import clsx from "clsx";
+import Input from "@/components/Input";
+import Button from "@/components/Button";
+import toast from "react-hot-toast";
+import { handleFormSubmission } from "@/app/actions";
+import { insertDataToForm } from "@/lib/firebase/firestore";
 
 type FormProps = {
-  table: string
-  owner: string
-  fields: FormField[]
-}
+  table: string;
+  owner: string;
+  fields: FormField[];
+};
 
 const Form: React.FC<FormProps> = ({ table, owner, fields }) => {
-  const formRef = useRef<HTMLFormElement>(null)
-  const [consent, setConsent] = useState(false)
-  const { pending } = useFormStatus()
+  const formRef = useRef<HTMLFormElement>(null);
+  const [consent, setConsent] = useState(false);
+  const { pending } = useFormStatus();
   return (
     <form
       className="flex flex-col"
       ref={formRef}
       action={async (formData) => {
-        if (formData.get('consent') === 'on') {
-          formData.delete('consent')
-          const values = Object.fromEntries(formData.entries())
+        if (formData.get("consent") === "on") {
+          formData.delete("consent");
+          const values = Object.fromEntries(formData.entries());
           // check if every field is empty
-          const isEmpty = Object.values(values).every((x) => x === '')
+          const isEmpty = Object.values(values).every((x) => x === "");
           if (isEmpty) {
-            toast.error(`${owner} won't like an empty form! 😙`)
-            return
+            toast.error(`${owner} won't like an empty form! 😙`);
+            return;
           }
-          console.log({ values })
+          console.log({ values });
           try {
-            await handleFormSubmission(table, values)
-            toast.success('Form submitted successfully! 🎊')
+            await insertDataToForm(table, values);
+            toast.success("Form submitted successfully! 🎊");
           } catch (error) {
-            toast.error('Something went wrong! 😕')
+            toast.error("Something went wrong! 😕");
           }
-          formRef.current?.reset()
+          formRef.current?.reset();
         } else {
-          toast.error('Please agree to submit this form! 😇')
+          toast.error("Please agree to submit this form! 😇");
         }
       }}
     >
       {fields.map((i: FormField, idx) => {
-        const { field, ...attr } = i
-        if (field === 'select') {
+        const { field, ...attr } = i;
+        if (field === "select") {
           return (
             <div className="min-h-12 mb-3" key={idx}>
               <label
@@ -65,8 +66,8 @@ const Form: React.FC<FormProps> = ({ table, owner, fields }) => {
                 ))}
               </select>
             </div>
-          )
-        } else if (field === 'textarea') {
+          );
+        } else if (field === "textarea") {
           return (
             <div className="min-h-12 mb-3" key={idx}>
               <label
@@ -77,17 +78,17 @@ const Form: React.FC<FormProps> = ({ table, owner, fields }) => {
               </label>
               <textarea
                 className={clsx([
-                  'h-xl block w-full bg-gray-100 dark:bg-gray-700 bg-clip-padding px-4 py-2 font-normal text-gray-700 focus:border focus:ring-2',
-                  'm-0 rounded-xl transition ease-in-out focus:border-blue-500 focus:text-gray-700 focus:outline-none focus:ring-blue-100',
-                  pending && 'cursor-not-allowed opacity-70',
+                  "h-xl block w-full bg-gray-100 dark:bg-gray-700 bg-clip-padding px-4 py-2 font-normal text-gray-700 focus:border focus:ring-2",
+                  "m-0 rounded-xl transition ease-in-out focus:border-blue-500 focus:text-gray-700 focus:outline-none focus:ring-blue-100",
+                  pending && "cursor-not-allowed opacity-70",
                 ])}
                 disabled={pending}
                 {...attr}
               />
             </div>
-          )
+          );
         }
-        if (field === 'checkbox') {
+        if (field === "checkbox") {
           return (
             <fieldset className="min-h-12 mb-3" name={attr.name} key={idx}>
               <legend className="mb-1 block text-sm  text-gray-500">
@@ -109,8 +110,8 @@ const Form: React.FC<FormProps> = ({ table, owner, fields }) => {
                 </div>
               ))}
             </fieldset>
-          )
-        } else if (field === 'radio') {
+          );
+        } else if (field === "radio") {
           return (
             <fieldset className="min-h-12 mb-3" name={attr.name} key={idx}>
               <legend className="mb-1 block text-sm  text-gray-500">
@@ -131,9 +132,9 @@ const Form: React.FC<FormProps> = ({ table, owner, fields }) => {
                 </div>
               ))}
             </fieldset>
-          )
+          );
         } else {
-          return <Input key={idx} disabled={pending} field={field} {...attr} />
+          return <Input key={idx} disabled={pending} field={field} {...attr} />;
         }
       })}
 
@@ -141,7 +142,7 @@ const Form: React.FC<FormProps> = ({ table, owner, fields }) => {
         <div className="flex items-center gap-2">
           <input
             type="checkbox"
-            name={'consent'}
+            name={"consent"}
             checked={consent}
             onChange={() => setConsent((prev) => !prev)}
           />
@@ -157,7 +158,7 @@ const Form: React.FC<FormProps> = ({ table, owner, fields }) => {
         </Button>
       </div>
     </form>
-  )
-}
+  );
+};
 
-export default Form
+export default Form;

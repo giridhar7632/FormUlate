@@ -1,25 +1,25 @@
-'use client'
+"use client";
 
-import Button from '@/components/Button'
-import { Dialog, Transition } from '@headlessui/react'
-import React, { Fragment, useEffect, useState } from 'react'
-import toast from 'react-hot-toast'
-import { deleteForm } from '@/app/actions'
+import Button from "@/components/Button";
+import { deleteForm } from "@/lib/firebase/firestore";
+import { Dialog, Transition } from "@headlessui/react";
+import React, { Fragment, useState } from "react";
+import toast from "react-hot-toast";
 
 const DeleteButton = ({ slug, id }: { slug: string; id: string }) => {
-  const [isOpen, setIsOpen] = useState(false)
+  const [isOpen, setIsOpen] = useState(false);
 
-  const handleClose = () => setIsOpen(false)
-  const handleOpen = () => setIsOpen(true)
+  const handleClose = () => setIsOpen(false);
+  const handleOpen = () => setIsOpen(true);
 
   async function handleDelete() {
     try {
-      const res = await deleteForm(id, slug)
-      setIsOpen(false)
-      toast.success(res?.message || 'Form deleted!')
+      const res = await deleteForm(id, slug);
+      setIsOpen(false);
+      toast.success(res?.message || "Form deleted!");
     } catch (error) {
-      console.error(error)
-      toast.error('Failed to perform the action! 😢\n Please try again.')
+      console.error(error);
+      toast.error("Failed to perform the action! 😢\n Please try again.");
     }
   }
 
@@ -93,7 +93,7 @@ const DeleteButton = ({ slug, id }: { slug: string; id: string }) => {
         </Dialog>
       </Transition>
     </>
-  )
-}
+  );
+};
 
-export default DeleteButton
+export default DeleteButton;

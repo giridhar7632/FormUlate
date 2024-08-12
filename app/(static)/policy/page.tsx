@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import Link from "next/link";
 
 export default function Policy() {
   return (
@@ -32,7 +32,7 @@ export default function Policy() {
 
       <h2 className="text-2xl font-bold">Contact</h2>
       <p>
-        If you have any questions about these Terms, please contact us at{' '}
+        If you have any questions about these Terms, please contact us at{" "}
         <Link
           className="text-blue-500 italic"
           href="mailto:giridhar.talla5139@gmail.com"
@@ -41,7 +41,7 @@ export default function Policy() {
         </Link>
       </p>
     </article>
-  )
+  );
 }
 
 // ## Simple Privacy Policy

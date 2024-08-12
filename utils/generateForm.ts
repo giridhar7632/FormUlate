@@ -1,24 +1,24 @@
-import { createElement } from 'react'
-import { FormField } from '../types/types'
+import { createElement } from "react";
+import { FormField } from "../types/types";
 
 function generateFormComponent(fields: FormField[], disabled: Boolean) {
   const fieldComponents = fields.map((field: FormField, idx) => {
-    if (field.field === 'select') {
+    if (field.field === "select") {
       return createElement(
-        'select',
+        "select",
         { key: idx, name: field.name, id: field.name },
         field?.options &&
           field?.options.map((option) =>
             createElement(
-              'option',
+              "option",
               { key: option.value, value: option.value, disabled },
-              option.label
-            )
-          )
-      )
-    } else if (field.field === 'textarea') {
+              option.label,
+            ),
+          ),
+      );
+    } else if (field.field === "textarea") {
       return createElement(
-        'textarea',
+        "textarea",
         {
           key: idx,
           type: field.type,
@@ -26,11 +26,11 @@ function generateFormComponent(fields: FormField[], disabled: Boolean) {
           value: field.value,
           disabled,
         },
-        field.label
-      )
-    } else if (field.field === 'button') {
+        field.label,
+      );
+    } else if (field.field === "button") {
       return createElement(
-        'button',
+        "button",
         {
           key: idx,
           type: field.type,
@@ -38,21 +38,21 @@ function generateFormComponent(fields: FormField[], disabled: Boolean) {
           value: field.value,
           disabled,
         },
-        field.label
-      )
+        field.label,
+      );
     } else {
-      return createElement('input', {
+      return createElement("input", {
         key: idx,
         type: field.type,
         name: field.name,
         id: field.name,
         placeholder: field.placeholder,
         disabled,
-      })
+      });
     }
-  })
+  });
 
-  return fieldComponents
+  return fieldComponents;
 }
 
-export default generateFormComponent
+export default generateFormComponent;

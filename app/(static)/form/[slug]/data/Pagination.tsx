@@ -1,15 +1,15 @@
-'use client'
+"use client";
 
-import { ChevronLeft, ChevronRight } from '@/lib/icons'
-import clsx from 'clsx'
-import Link from 'next/link'
-import { ReactNode } from 'react'
+import { ChevronLeft, ChevronRight } from "@/lib/icons";
+import clsx from "clsx";
+import Link from "next/link";
+import { ReactNode } from "react";
 
 type PaginationProps = {
-  slug: string
-  totalPages: number
-  currPage: number
-}
+  slug: string;
+  totalPages: number;
+  currPage: number;
+};
 
 export const Pagination = ({ slug, totalPages, currPage }: PaginationProps) => {
   const renderPageNumbers = () => {
@@ -23,13 +23,13 @@ export const Pagination = ({ slug, totalPages, currPage }: PaginationProps) => {
           >
             {number}
           </PageButton>
-        )
-      )
+        ),
+      );
     } else {
-      const startPage = Math.max(1, currPage - 1)
-      const endPage = Math.min(totalPages, currPage + 1)
+      const startPage = Math.max(1, currPage - 1);
+      const endPage = Math.min(totalPages, currPage + 1);
 
-      const pages = []
+      const pages = [];
       if (startPage > 1) {
         pages.push(
           <PageButton
@@ -38,13 +38,13 @@ export const Pagination = ({ slug, totalPages, currPage }: PaginationProps) => {
             active={currPage === 1}
           >
             {1}
-          </PageButton>
-        )
+          </PageButton>,
+        );
         pages.push(
           <button className="py-2 text-sm font-medium text-gray-700">
             ...
-          </button>
-        )
+          </button>,
+        );
       }
 
       for (let i = startPage; i <= endPage; i++) {
@@ -55,34 +55,34 @@ export const Pagination = ({ slug, totalPages, currPage }: PaginationProps) => {
             key={i}
           >
             {i}
-          </PageButton>
-        )
+          </PageButton>,
+        );
       }
 
       if (endPage < totalPages && endPage !== totalPages - 1) {
         pages.push(
           <button className="py-2 text-sm font-medium text-gray-700">
             ...
-          </button>
-        )
+          </button>,
+        );
       }
 
       if (endPage !== totalPages) {
         pages.push(
           <PageButton link={`/form/${slug}/data?page=${totalPages}`}>
             {totalPages}
-          </PageButton>
-        )
+          </PageButton>,
+        );
       }
 
-      return pages
+      return pages;
     }
-  }
+  };
 
   return (
     <nav className="flex items-center justify-center gap-2">
       <PageButton
-        key={'prev'}
+        key={"prev"}
         link={`/form/${slug}/data?page=${currPage - 1}`}
         disabled={currPage === 1}
       >
@@ -93,7 +93,7 @@ export const Pagination = ({ slug, totalPages, currPage }: PaginationProps) => {
       {renderPageNumbers()}
 
       <PageButton
-        key={'next'}
+        key={"next"}
         link={`/form/${slug}/data?page=${currPage + 1}`}
         disabled={totalPages === currPage}
       >
@@ -101,8 +101,8 @@ export const Pagination = ({ slug, totalPages, currPage }: PaginationProps) => {
         <ChevronRight width={18} />
       </PageButton>
     </nav>
-  )
-}
+  );
+};
 
 const PageButton = ({
   link,
@@ -110,22 +110,22 @@ const PageButton = ({
   active,
   disabled,
 }: {
-  link: string
-  children: ReactNode
-  active?: boolean
-  disabled?: boolean
+  link: string;
+  children: ReactNode;
+  active?: boolean;
+  disabled?: boolean;
 }) => {
   return (
     <Link
       href={link}
       className={clsx(
-        'inline-flex items-center justify-center rounded-md text-sm font-medium text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-gray-300 h-8 px-3 py-2 gap-2 pr-2.5',
+        "inline-flex items-center justify-center rounded-md text-sm font-medium text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-gray-300 h-8 px-3 py-2 gap-2 pr-2.5",
         active &&
-          'ring bg-gray-100 dark:bg-gray-800 ring-gray-200 dark:ring-gray-700 min-w-8 h-8 text-gray-900 dark:text-gray-100',
-        disabled && 'pointer-events-none opacity-50'
+          "ring bg-gray-100 dark:bg-gray-800 ring-gray-200 dark:ring-gray-700 min-w-8 h-8 text-gray-900 dark:text-gray-100",
+        disabled && "pointer-events-none opacity-50",
       )}
     >
       {children}
     </Link>
-  )
-}
+  );
+};

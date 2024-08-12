@@ -1,23 +1,23 @@
-import { SendVerificationRequestParams } from 'next-auth/providers'
-import { createTransport } from 'nodemailer'
+import { SendVerificationRequestParams } from "next-auth/providers";
+import { createTransport } from "nodemailer";
 
 export async function sendVerificationRequest(
-  params: SendVerificationRequestParams
+  params: SendVerificationRequestParams,
 ) {
-  const { identifier, url, provider, theme } = params
-  const { host } = new URL(url)
+  const { identifier, url, provider, theme } = params;
+  const { host } = new URL(url);
   // NOTE: You are not required to use `nodemailer`, use whatever you want.
-  const transport = createTransport(provider.server)
+  const transport = createTransport(provider.server);
   const result = await transport.sendMail({
     to: identifier,
     from: provider.from,
     subject: `Sign in to FormUlate`,
     text: text({ url, host }),
     html: html({ url, host, theme }),
-  })
-  const failed = result.rejected.concat(result.pending).filter(Boolean)
+  });
+  const failed = result.rejected.concat(result.pending).filter(Boolean);
   if (failed.length) {
-    throw new Error(`Email(s) (${failed.join(', ')}) could not be sent`)
+    throw new Error(`Email(s) (${failed.join(", ")}) could not be sent`);
   }
 }
 
@@ -31,7 +31,7 @@ export async function sendVerificationRequest(
  */
 
 function html(params: { url: string; host: string; theme: any }) {
-  const { url } = params
+  const { url } = params;
 
   return `
 <body
@@ -98,10 +98,10 @@ function html(params: { url: string; host: string; theme: any }) {
 		</tr>
 	</table>
 </body>
-`
+`;
 }
 
 /** Email Text body (fallback for email clients that don't render HTML, e.g. feature phones) */
 function text({ url, host }: { url: string; host: string }) {
-  return `Sign in to ${host}\n${url}\n\n`
+  return `Sign in to ${host}\n${url}\n\n`;
 }

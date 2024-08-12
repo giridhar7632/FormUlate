@@ -1,13 +1,13 @@
 //@ts-nocheck
-import { XataAdapter } from '@next-auth/xata-adapter'
-import NextAuth, { NextAuthConfig } from 'next-auth'
-import GitHub from 'next-auth/providers/github'
-import Google from 'next-auth/providers/google'
-import Email, { EmailConfig } from 'next-auth/providers/email'
-import { getXataClient } from './xata'
-import { sendVerificationRequest } from '@/utils/sendVerificationRequest'
+import { XataAdapter } from "@next-auth/xata-adapter";
+import NextAuth, { NextAuthConfig } from "next-auth";
+import GitHub from "next-auth/providers/github";
+import Google from "next-auth/providers/google";
+import Email, { EmailConfig } from "next-auth/providers/email";
+import { getXataClient } from "./xata";
+import { sendVerificationRequest } from "@/utils/sendVerificationRequest";
 
-const client = getXataClient()
+const client = getXataClient();
 export const authOptions: NextAuthConfig = {
   adapter: XataAdapter(client),
   providers: [
@@ -27,9 +27,9 @@ export const authOptions: NextAuthConfig = {
     }) as EmailConfig & { options: Record<string, unknown> },
   ],
   pages: {
-    signIn: '/auth/login',
-    verifyRequest: '/auth/verify-request',
-    error: '/auth/error',
+    signIn: "/auth/login",
+    verifyRequest: "/auth/verify-request",
+    error: "/auth/error",
   },
   callbacks: {
     async session({ session, user }) {
@@ -39,12 +39,12 @@ export const authOptions: NextAuthConfig = {
           ...session.user,
           id: user.id,
         },
-      }
+      };
     },
   },
-}
+};
 
 export const {
   handlers: { GET, POST },
   auth,
-} = NextAuth(authOptions)
+} = NextAuth(authOptions);

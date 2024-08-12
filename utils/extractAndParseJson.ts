@@ -1,5 +1,5 @@
 export function extractAndParseJson(input: string): Object {
-  return tryParseJSON(input.replace(/```json\s*/, '').replace(/\s*```/, ''))
+  return tryParseJSON(input.replace(/```json\s*/, "").replace(/\s*```/, ""));
 }
 
 // console.log(
@@ -9,21 +9,21 @@ export function extractAndParseJson(input: string): Object {
 // )
 
 function tryParseJSON(jsonString: string) {
-  const fixedJsonString = fixJSONFormatting(jsonString)
+  const fixedJsonString = fixJSONFormatting(jsonString);
   if (fixedJsonString) {
-    return JSON.parse(jsonString)
+    return JSON.parse(jsonString);
   }
 }
 
 function fixJSONFormatting(jsonString: string) {
   jsonString = jsonString
-    .replace(/\n/g, ' ')
-    .replace(/\r/g, ' ')
-    .replace(/\t/g, ' ')
-  jsonString = jsonString.replace(/,\s*}/g, '}')
-  jsonString = jsonString.replace('\n', ' ')
-  jsonString = jsonString.replace('\n ', ' ')
-  jsonString = jsonString.replace(' ', ' ')
+    .replace(/\n/g, " ")
+    .replace(/\r/g, " ")
+    .replace(/\t/g, " ");
+  jsonString = jsonString.replace(/,\s*}/g, "}");
+  jsonString = jsonString.replace("\n", " ");
+  jsonString = jsonString.replace("\n ", " ");
+  jsonString = jsonString.replace(" ", " ");
 
-  return jsonString
+  return jsonString;
 }

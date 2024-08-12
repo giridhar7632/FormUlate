@@ -1,12 +1,17 @@
-import Link from 'next/link'
-import Button from '@/components/Button'
-import { auth } from '@/lib/auth'
-import ProfileMenu from '@/components/ProfileMenu'
-import Image from 'next/image'
-import { getBlurDataUrl } from '@/utils/getBlurDataUrl'
+"use client";
 
-export default async function Home() {
-  const session = await auth()
+import Link from "next/link";
+import Button from "@/components/Button";
+import ProfileMenu from "@/components/ProfileMenu";
+import Image from "next/image";
+import { getBlurDataUrl } from "@/utils/getBlurDataUrl";
+import { useAuth } from "./Auth";
+// import { useEffect } from "react";
+// import { seedData } from "@/lib/firebase/firestore";
+
+export default function Home() {
+  const { user, loading } = useAuth() || {};
+
   return (
     <>
       <header className="px-4 lg:px-6 py-4 flex items-center">
@@ -20,15 +25,17 @@ export default async function Home() {
           <span className="sr-only">FormUlate</span>
         </Link>
         <nav className="ml-auto flex gap-4 sm:gap-6">
-          {session?.user ? (
+          {loading ? (
+            "..."
+          ) : user ? (
             <div className="flex items-center gap-2">
-              <Link className="hidden md:block" href={'/create'}>
+              <Link className="hidden md:block" href={"/create"}>
                 <Button>Create new form</Button>
               </Link>
-              <ProfileMenu {...session.user} />
+              <ProfileMenu {...user} />
             </div>
           ) : (
-            <Link href={'/auth/login'}>
+            <Link href={"/auth/login"}>
               <Button>Login</Button>
             </Link>
           )}
@@ -50,7 +57,7 @@ export default async function Home() {
                   generated with AI
                 </p>
                 <Link
-                  href={'/auth/login'}
+                  href={"/auth/login"}
                   className="space-x-4 mx-auto md:mx-0"
                 >
                   <Button variant="outline">Get Started</Button>
@@ -118,7 +125,7 @@ export default async function Home() {
         </section>
       </main>
       <footer className="flex flex-col gap-2 sm:flex-row py-6 w-full shrink-0 items-center px-4 md:px-6 border-t dark:border-gray-600">
-        <Link href={'/'} className="text-xs text-gray-500  ">
+        <Link href={"/"} className="text-xs text-gray-500  ">
           © FormUlate.
         </Link>
         <nav className="sm:ml-auto flex gap-4 sm:gap-6">
@@ -143,5 +150,5 @@ export default async function Home() {
         </nav>
       </footer>
     </>
-  )
+  );
 }

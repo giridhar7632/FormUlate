@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import Link from "next/link";
 
 export default function Terms() {
   return (
@@ -31,7 +31,7 @@ export default function Terms() {
 
       <h2 className="text-2xl font-bold">Contact</h2>
       <p>
-        If you have any questions about these Terms, please contact us at{' '}
+        If you have any questions about these Terms, please contact us at{" "}
         <Link
           className="text-blue-500 italic"
           href="mailto:giridhar.talla5139@gmail.com"
@@ -40,7 +40,7 @@ export default function Terms() {
         </Link>
       </p>
     </article>
-  )
+  );
 }
 
 // **Welcome to [Your Platform Name]!** These Terms of Service ("Terms") govern your use of our platform and services ("Services"). By accessing or using the Services, you agree to these Terms. Please read them carefully.

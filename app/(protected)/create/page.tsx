@@ -1,4 +1,4 @@
-import Prompt from './Prompt'
+import Prompt from "./Prompt";
 
 export default async function Page() {
   return (
@@ -11,5 +11,5 @@ export default async function Page() {
       </div>
       <Prompt />
     </>
-  )
+  );
 }

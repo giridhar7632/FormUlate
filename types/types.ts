@@ -1,97 +1,97 @@
 export type PageData = {
-  title: string
-  action: string
-  fields: FormField[]
-}
+  title: string;
+  action: string;
+  fields: FormField[];
+};
 
 export type FormField = {
-  id?: string
-  field?: string
-  type: string
-  name: string
-  label: string
-  value?: string
-  placeholder?: string
-  disabled?: boolean
-  required?: boolean
+  id?: string;
+  field?: string;
+  type: string;
+  name: string;
+  label: string;
+  value?: string;
+  placeholder?: string;
+  disabled?: boolean;
+  required?: boolean;
   options?: {
-    value: string
-    label: string
-    name?: string
-  }[]
-}
+    value: string;
+    label: string;
+    name?: string;
+  }[];
+};
 
 export type SetTableSchema = {
-  columns: Column[]
-}
+  columns: Column[];
+};
 
 export type Column = {
-  name: string
+  name: string;
   type:
-    | 'bool'
-    | 'int'
-    | 'float'
-    | 'string'
-    | 'text'
-    | 'email'
-    | 'multiple'
-    | 'link'
-    | 'object'
-    | 'datetime'
-    | 'vector'
-    | 'file[]'
-    | 'file'
-    | 'json'
-  link?: ColumnLink
-  vector?: ColumnVector
-  file?: ColumnFile
-  ['file[]']?: ColumnFile
-  notNull?: boolean
-  defaultValue?: string
-  unique?: boolean
-  columns?: Column[]
-}
+    | "bool"
+    | "int"
+    | "float"
+    | "string"
+    | "text"
+    | "email"
+    | "multiple"
+    | "link"
+    | "object"
+    | "datetime"
+    | "vector"
+    | "file[]"
+    | "file"
+    | "json";
+  link?: ColumnLink;
+  vector?: ColumnVector;
+  file?: ColumnFile;
+  ["file[]"]?: ColumnFile;
+  notNull?: boolean;
+  defaultValue?: string;
+  unique?: boolean;
+  columns?: Column[];
+};
 
 type ColumnLink = {
-  table: string
-}
+  table: string;
+};
 
 type ColumnVector = {
   /**
    * @maximum 10000
    * @minimum 2
    */
-  dimension: number
-}
+  dimension: number;
+};
 
 type ColumnFile = {
-  defaultPublicAccess?: boolean
-}
+  defaultPublicAccess?: boolean;
+};
 
 export type IconTypes = {
-  tag: string
+  tag: string;
   attr: {
-    viewBox: string
-    fill: string
-    stroke: string
-    strokeWidth: string
-    strokeLinecap: string
-    strokeLinejoin: string
-  }
+    viewBox: string;
+    fill: string;
+    stroke: string;
+    strokeWidth: string;
+    strokeLinecap: string;
+    strokeLinejoin: string;
+  };
   child: {
-    tag: string
+    tag: string;
     attr: {
-      points?: string
-      d?: string
-      stroke?: string
-      x1?: string
-      y1?: string
-      x2?: string
-      y2?: string
-    }
-  }[]
-}
+      points?: string;
+      d?: string;
+      stroke?: string;
+      x1?: string;
+      y1?: string;
+      x2?: string;
+      y2?: string;
+    };
+  }[];
+};
 
 export type IconPropsType = {
-  [key: string]: any
-}
+  [key: string]: any;
+};

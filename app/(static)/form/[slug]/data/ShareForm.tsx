@@ -1,39 +1,39 @@
-'use client'
+"use client";
 
-import { useEffect, useState } from 'react'
-import toast from 'react-hot-toast'
+import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
 export default function ShareForm({
   title,
   text,
   slug,
 }: {
-  title: string
-  text: string
-  slug: string
+  title: string;
+  text: string;
+  slug: string;
 }) {
-  const [url, setUrl] = useState('')
+  const [url, setUrl] = useState("");
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      setUrl(`${window.location.origin}/form/${slug}`)
+    if (typeof window !== "undefined") {
+      setUrl(`${window.location.origin}/form/${slug}`);
     } else {
-      setUrl(`https://formulate-six.vercel.app/form/${slug}`)
+      setUrl(`https://formulate-six.vercel.app/form/${slug}`);
     }
-  }, [slug])
+  }, [slug]);
 
   async function fn() {
-    if (typeof window !== 'undefined') {
-      console.log(window.navigator)
+    if (typeof window !== "undefined") {
+      console.log(window.navigator);
       if (!window.navigator.canShare) {
         toast.error(
-          'Web Share API is not supported in this browser. 😕\nPlease copy link and share manually!'
-        )
-        return
+          "Web Share API is not supported in this browser. 😕\nPlease copy link and share manually!",
+        );
+        return;
       }
 
       try {
-        await navigator.share({ title, text, url })
+        await navigator.share({ title, text, url });
       } catch (err) {
         // console.error(err)
       }
@@ -46,5 +46,5 @@ export default function ShareForm({
     >
       Share form
     </button>
-  )
+  );
 }

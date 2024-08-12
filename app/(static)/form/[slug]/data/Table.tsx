@@ -1,4 +1,4 @@
-import { ENTRIES_PER_PAGE } from '@/utils/constants'
+import { ENTRIES_PER_PAGE } from "@/utils/constants";
 
 const Table = async ({ data, page }: { data: any; page: number }) => {
   return (
@@ -35,7 +35,7 @@ const Table = async ({ data, page }: { data: any; page: number }) => {
         </tbody>
       </table>
     </div>
-  )
-}
+  );
+};
 
-export default Table
+export default Table;

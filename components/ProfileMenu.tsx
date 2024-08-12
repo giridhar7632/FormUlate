@@ -1,36 +1,41 @@
-'use client'
+"use client";
 
-import { Logout } from '@/lib/icons'
-import { Popover, Transition } from '@headlessui/react'
-import { signOut } from 'next-auth/react'
-import Image from 'next/image'
-import Link from 'next/link'
-import { useRouter } from 'next/navigation'
-import { Fragment } from 'react'
+import { signOut } from "@/lib/firebase/auth";
+import { Logout } from "@/lib/icons";
+import { Popover, Transition } from "@headlessui/react";
+// import { signOut } from 'next-auth/react'
+import Image from "next/image";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { Fragment } from "react";
 
 type ProfileMenuProps = {
-  name?: string | null | undefined
-  email?: string | null | undefined
-  image?: string | null | undefined
-}
+  displayName?: string | null | undefined;
+  email?: string | null | undefined;
+  photoURL?: string | null | undefined;
+};
 
-export default function ProfileMenu({ name, email, image }: ProfileMenuProps) {
-  const router = useRouter()
+export default function ProfileMenu({
+  displayName,
+  email,
+  photoURL,
+}: ProfileMenuProps) {
+  const router = useRouter();
   return (
     <Popover className="relative">
       {({ open }) => (
         <>
           <Popover.Button
             className={`
-                ${open ? '' : 'text-opacity-90'}
+                ${open ? "" : "text-opacity-90"}
                 mx-3 flex rounded-full bg-gray-800 text-sm focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600 md:mr-0`}
           >
             <Image
               width={48}
               height={48}
               className="h-12 w-12 rounded-full"
-              src={image || 'https://api.multiavatar.com/v.png'}
-              alt={name || 'Avatar'}
+              src={photoURL || "https://api.multiavatar.com/v.png"}
+              alt={displayName || "Avatar"}
             />
           </Popover.Button>
           <Transition
@@ -47,7 +52,7 @@ export default function ProfileMenu({ name, email, image }: ProfileMenuProps) {
                 <Link href="/profile">
                   <div className="px-4 py-2 text-sm text-gray-900 dark:text-gray-100 border-b border-gray-200 dark:border-gray-600">
                     <div className="text-xs text-gray-400">Logged in as:</div>
-                    <div className="font-semibold mt-2">{name}</div>
+                    <div className="font-semibold mt-2">{displayName}</div>
                     <div className="truncate text-gray-500">{email}</div>
                   </div>
                 </Link>
@@ -67,7 +72,12 @@ export default function ProfileMenu({ name, email, image }: ProfileMenuProps) {
                 </Link>
 
                 <button
-                  onClick={() => signOut({ callbackUrl: '/' })}
+                  onClick={async () => {
+                    try {
+                      await signOut();
+                      router.push("/");
+                    } catch (error) {}
+                  }}
                   className="flex w-full items-center gap-2 px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-900"
                 >
                   <Logout width={18} />
@@ -79,5 +89,5 @@ export default function ProfileMenu({ name, email, image }: ProfileMenuProps) {
         </>
       )}
     </Popover>
-  )
+  );
 }

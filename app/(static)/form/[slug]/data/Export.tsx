@@ -1,42 +1,42 @@
-'use client'
+"use client";
 
-import { bulkExportData } from '@/app/actions'
-import { Popover, Transition } from '@headlessui/react'
-import clsx from 'clsx'
-import { Fragment } from 'react'
-import toast from 'react-hot-toast'
-import * as XLSX from 'xlsx'
+import { bulkExportData } from "@/lib/firebase/firestore";
+import { Popover, Transition } from "@headlessui/react";
+import clsx from "clsx";
+import { Fragment } from "react";
+import toast from "react-hot-toast";
+import * as XLSX from "xlsx";
 
 export default function Export({ table, data }: { table: string; data: any }) {
   const handleExportToExcel = () => {
-    const worksheet = XLSX.utils.json_to_sheet(data)
-    const workbook = XLSX.utils.book_new()
+    const worksheet = XLSX.utils.json_to_sheet(data);
+    const workbook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(
       workbook,
       worksheet,
 
-      `Exported data`
-    )
-    XLSX.writeFile(workbook, `${table}.xlsx`)
-  }
+      `Exported data`,
+    );
+    XLSX.writeFile(workbook, `${table}.xlsx`);
+  };
 
   const handleBulkExport = async () => {
     try {
-      const bulkData = await bulkExportData(table)
-      const worksheet = XLSX.utils.json_to_sheet(bulkData)
-      const workbook = XLSX.utils.book_new()
+      const bulkData = await bulkExportData(table);
+      const worksheet = XLSX.utils.json_to_sheet(bulkData);
+      const workbook = XLSX.utils.book_new();
       XLSX.utils.book_append_sheet(
         workbook,
         worksheet,
 
-        `Bulk export`
-      )
-      XLSX.writeFile(workbook, `bulk-${table}.xlsx`)
+        `Bulk export`,
+      );
+      XLSX.writeFile(workbook, `bulk-${table}.xlsx`);
     } catch (error) {
-      console.log(error)
-      toast.error('Something went wrong! 😕')
+      console.log(error);
+      toast.error("Something went wrong! 😕");
     }
-  }
+  };
 
   return (
     <Popover className="relative">
@@ -44,8 +44,8 @@ export default function Export({ table, data }: { table: string; data: any }) {
         <>
           <Popover.Button
             className={clsx(
-              open && 'text-opacity-90',
-              'h-lg flex cursor-pointer items-center justify-center gap-2 rounded-xl px-4 py-3 leading-snug transition duration-150 hover:ring focus:ring text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 hover:ring-gray-200 dark:hover:ring-gray-700 focus:ring-gray-200 focus:border-gray-200 dark:focus:ring-gray-700 border-2 focus:outline-0 border-gray-200 dark:border-gray-600'
+              open && "text-opacity-90",
+              "h-lg flex cursor-pointer items-center justify-center gap-2 rounded-xl px-4 py-3 leading-snug transition duration-150 hover:ring focus:ring text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800 hover:ring-gray-200 dark:hover:ring-gray-700 focus:ring-gray-200 focus:border-gray-200 dark:focus:ring-gray-700 border-2 focus:outline-0 border-gray-200 dark:border-gray-600",
             )}
           >
             Export
@@ -79,5 +79,5 @@ export default function Export({ table, data }: { table: string; data: any }) {
         </>
       )}
     </Popover>
-  )
+  );
 }

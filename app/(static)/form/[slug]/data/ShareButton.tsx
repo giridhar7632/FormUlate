@@ -1,25 +1,25 @@
-'use client'
+"use client";
 
-import Button from '@/components/Button'
-import { Dialog, Transition } from '@headlessui/react'
-import React, { Fragment, useEffect, useState } from 'react'
-import copy from 'copy-text-to-clipboard'
-import toast from 'react-hot-toast'
+import Button from "@/components/Button";
+import { Dialog, Transition } from "@headlessui/react";
+import React, { Fragment, useEffect, useState } from "react";
+import copy from "copy-text-to-clipboard";
+import toast from "react-hot-toast";
 
 const ShareButton = ({ slug }: { slug: string }) => {
-  const [isOpen, setIsOpen] = useState(false)
-  const [fullLink, setFullLink] = useState('')
+  const [isOpen, setIsOpen] = useState(false);
+  const [fullLink, setFullLink] = useState("");
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      setFullLink(`${window.location.origin}/form/${slug}`)
+    if (typeof window !== "undefined") {
+      setFullLink(`${window.location.origin}/form/${slug}`);
     } else {
-      setFullLink(`https://formulate-six.vercel.app/form/${slug}`)
+      setFullLink(`https://formulate-six.vercel.app/form/${slug}`);
     }
-  }, [slug])
+  }, [slug]);
 
-  const handleClose = () => setIsOpen(false)
-  const handleOpen = () => setIsOpen(true)
+  const handleClose = () => setIsOpen(false);
+  const handleOpen = () => setIsOpen(true);
 
   return (
     <>
@@ -73,14 +73,14 @@ const ShareButton = ({ slug }: { slug: string }) => {
                       className="w-full"
                       onClick={() => {
                         try {
-                          copy(fullLink)
-                          toast.success('Copied to clipboard! 🎉')
-                          handleClose()
+                          copy(fullLink);
+                          toast.success("Copied to clipboard! 🎉");
+                          handleClose();
                         } catch (error) {
-                          console.error(error)
+                          console.error(error);
                           toast.error(
-                            'Failed to copy to clipboard! 😢\n Please try again.'
-                          )
+                            "Failed to copy to clipboard! 😢\n Please try again.",
+                          );
                         }
                       }}
                     >
@@ -104,7 +104,7 @@ const ShareButton = ({ slug }: { slug: string }) => {
         </Dialog>
       </Transition>
     </>
-  )
-}
+  );
+};
 
-export default ShareButton
+export default ShareButton;

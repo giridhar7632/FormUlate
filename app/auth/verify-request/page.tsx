@@ -1,6 +1,6 @@
-import Image from 'next/image'
-import Link from 'next/link'
-import Button from '@/components/Button'
+import Image from "next/image";
+import Link from "next/link";
+import Button from "@/components/Button";
 
 export default async function Page() {
   return (
@@ -16,9 +16,9 @@ export default async function Page() {
       <p className="text-center">
         ✨ {"Use that magic link we've sent to sign in to your account"}
       </p>
-      <Link className="mx-auto mt-6" href={'/'}>
+      <Link className="mx-auto mt-6" href={"/"}>
         <Button variant="secondary">Back to home</Button>
       </Link>
     </>
-  )
+  );
 }

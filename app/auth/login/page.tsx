@@ -1,6 +1,6 @@
-import Image from 'next/image'
-import { EmailLogin, SocialLogin } from '../Methods'
-import ErrorRedirect from './errorRedirect'
+import Image from "next/image";
+import { EmailLogin, SocialLogin } from "../Methods";
+import ErrorRedirect from "./errorRedirect";
 
 export default async function Login() {
   return (
@@ -23,5 +23,5 @@ export default async function Login() {
         </div>
       </div>
     </>
-  )
+  );
 }

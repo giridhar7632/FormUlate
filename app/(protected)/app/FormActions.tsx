@@ -1,31 +1,31 @@
-'use client'
+"use client";
 
-import copy from 'copy-text-to-clipboard'
+import copy from "copy-text-to-clipboard";
 
-import { Kebab } from '@/lib/icons'
-import { Popover, Transition } from '@headlessui/react'
-import clsx from 'clsx'
-import Link from 'next/link'
-import { Fragment, useEffect, useState } from 'react'
-import toast from 'react-hot-toast'
-import DeleteButton from './DeleteButton'
+import { Kebab } from "@/lib/icons";
+import { Popover, Transition } from "@headlessui/react";
+import clsx from "clsx";
+import Link from "next/link";
+import { Fragment, useEffect, useState } from "react";
+import toast from "react-hot-toast";
+import DeleteButton from "./DeleteButton";
 
 export default function FormActions({
   id,
   slug,
 }: {
-  id: string
-  slug: string
+  id: string;
+  slug: string;
 }) {
-  const [fullLink, setFullLink] = useState('')
+  const [fullLink, setFullLink] = useState("");
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      setFullLink(`${window.location.origin}/form/${slug}`)
+    if (typeof window !== "undefined") {
+      setFullLink(`${window.location.origin}/form/${slug}`);
     } else {
-      setFullLink(`https://formulate-six.vercel.app/form/${slug}`)
+      setFullLink(`https://formulate-six.vercel.app/form/${slug}`);
     }
-  }, [slug])
+  }, [slug]);
 
   return (
     <Popover className="relative">
@@ -33,8 +33,8 @@ export default function FormActions({
         <>
           <Popover.Button
             className={clsx(
-              open && 'text-opacity-90',
-              'h-lg cursor-pointer focus:outline-0 border border-gray-200 rounded-xl p-2 leading-snug transition duration-150 hover:ring focus:ring hover:bg-gray-100 hover:ring-gray-200 focus:ring-gray-200 dark:text-gray-500 dark:border-gray-600 dark:hover:bg-gray-800 dark:hover:ring-gray-700 dark:focus:ring-gray-700 text-gray-700'
+              open && "text-opacity-90",
+              "h-lg cursor-pointer focus:outline-0 border border-gray-200 rounded-xl p-2 leading-snug transition duration-150 hover:ring focus:ring hover:bg-gray-100 hover:ring-gray-200 focus:ring-gray-200 dark:text-gray-500 dark:border-gray-600 dark:hover:bg-gray-800 dark:hover:ring-gray-700 dark:focus:ring-gray-700 text-gray-700",
             )}
           >
             <Kebab height={16} />
@@ -59,13 +59,13 @@ export default function FormActions({
                 <button
                   onClick={() => {
                     try {
-                      copy(fullLink)
-                      toast.success('Copied to clipboard! 🎉')
+                      copy(fullLink);
+                      toast.success("Copied to clipboard! 🎉");
                     } catch (error) {
-                      console.error(error)
+                      console.error(error);
                       toast.error(
-                        'Failed to copy to clipboard! 😢\n Please try again.'
-                      )
+                        "Failed to copy to clipboard! 😢\n Please try again.",
+                      );
                     }
                   }}
                   className="flex w-full items-center gap-2 px-4 py-2 text-sm text-gray-700 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-900"
@@ -80,5 +80,5 @@ export default function FormActions({
         </>
       )}
     </Popover>
-  )
+  );
 }
