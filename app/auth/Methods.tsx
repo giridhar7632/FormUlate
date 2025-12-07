@@ -12,7 +12,6 @@ import {
 } from "@/lib/firebase/auth";
 import { useRouter, useSearchParams } from "next/navigation";
 import toast from "react-hot-toast";
-// import { signIn, signOut } from 'next-auth/react'
 
 export const SignOut: React.FC = () => {
   const router = useRouter();

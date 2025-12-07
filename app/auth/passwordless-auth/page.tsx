@@ -6,7 +6,7 @@ import {
   isSignInWithEmailLink,
   signInWithEmailLink,
 } from "firebase/auth";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import toast from "react-hot-toast";
 import Image from "next/image";
 import Link from "next/link";
@@ -26,9 +26,8 @@ export default function VerifyEmail() {
     if (isSignInWithEmailLink(getAuth(), window.location.href)) {
       setLoading(true);
       const auth = getAuth();
-      const actionCode = urlParams.get("oobCode") ?? "";
       const callback = urlParams.get("callbackUrl") ?? "/app";
-      signInWithEmailLink(auth, email, actionCode)
+      signInWithEmailLink(auth, email, window.location.href)
         .then((userCredential) => {
           console.log("User signed in:", userCredential);
           toast.success("Sign in successful!");

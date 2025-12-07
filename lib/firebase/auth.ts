@@ -54,15 +54,6 @@ export async function signInWithEmailLink(email: string, callbackUrl: string) {
         "&callbackUrl=" +
         callbackUrl,
       handleCodeInApp: true,
-      iOS: {
-        bundleId: "app.formulate.ios",
-      },
-      android: {
-        packageName: "app.formulate.android",
-        installApp: true,
-        minimumVersion: "12",
-      },
-      dynamicLinkDomain: "localhost:3000",
     };
 
     await sendSignInLinkToEmail(auth, email, actionCodeSettings);

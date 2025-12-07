@@ -3,7 +3,6 @@
 import { signOut } from "@/lib/firebase/auth";
 import { Logout } from "@/lib/icons";
 import { Popover, Transition } from "@headlessui/react";
-// import { signOut } from 'next-auth/react'
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";

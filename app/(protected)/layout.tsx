@@ -1,11 +1,9 @@
 import Link from "next/link";
 import Button from "@/components/Button";
-import { redirect, useRouter } from "next/navigation";
+import { redirect } from "next/navigation";
 import ProfileMenu from "@/components/ProfileMenu";
 import Image from "next/image";
 import { ThemeSwitch } from "@/components/Theme";
-import { useAuth } from "@/app/Auth";
-import { useEffect } from "react";
 import { cookies } from "next/headers";
 import { firebaseAdmin } from "@/lib/firebase/admin";
 import { getUserData } from "../actions";
@@ -15,7 +13,7 @@ export default async function AuthLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const cookieStore = cookies();
+  const cookieStore = await cookies();
   console.log("cookie", cookieStore.get("token"));
   const token = await firebaseAdmin
     .auth()

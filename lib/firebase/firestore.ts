@@ -16,7 +16,7 @@ import {
 import { db } from "./clientApp";
 import { FormField, PageData } from "@/types/types";
 import { ENTRIES_PER_PAGE } from "@/utils/constants";
-import { revalidatePath } from "next/cache";
+// import { revalidatePath } from "next/cache";
 
 export async function getUserData(uid: string) {
   try {
@@ -193,7 +193,7 @@ export async function deleteForm(id: string, slug: string) {
     // const promises = snapshot.docs.map((doc) => deleteDoc(doc.ref));
     // await Promise.all(promises);
     console.log("Form data deleted!");
-    revalidatePath(`/app`);
+    // revalidatePath(`/app`);
     return { message: "Form deleted!" };
   } catch (error) {
     console.error("Error deleting form:", error);
