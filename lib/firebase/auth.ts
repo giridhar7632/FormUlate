@@ -19,11 +19,11 @@ export async function signInWithGoogle() {
 
   try {
     const result = await signInWithPopup(auth, provider);
-    const credential = GoogleAuthProvider.credentialFromResult(result);
-    const token = credential?.accessToken;
-    if(token){
-      setCookie(null, 'token', token, { path: "/" })
-    }
+    // const credential = GoogleAuthProvider.credentialFromResult(result);
+    // const token = credential?.accessToken;
+    // if(token){
+    //   setCookie(null, 'token', token, { path: "/" })
+    // }
 
     return result;
   } catch (error: any) {
@@ -41,11 +41,11 @@ export async function signInWithGitHub() {
 
   try {
     const result = await signInWithPopup(auth, provider);
-    const credential = GithubAuthProvider.credentialFromResult(result);
-    const token = credential?.accessToken;
-    if(token){
-      setCookie(null, 'token', token, { path: "/" })
-    }
+    // const credential = GithubAuthProvider.credentialFromResult(result);
+    // const token = credential?.accessToken;
+    // if(token){
+    //   setCookie(null, 'token', token, { path: "/" })
+    // }
 
     return result;
   } catch (error: any) {

@@ -15,20 +15,20 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<any>(null);
   const [loading, setLoading] = useState(true);
 
-  // useEffect(() => {
-  //   return onIdTokenChanged(auth, async (user) => {
-  //     setLoading(true);
-  //     if (!user) {
-  //       setUser(null);
-  //       nookies.set(undefined, "token", "", { path: "/" });
-  //     } else {
-  //       const token = await user.getIdToken();
-  //       setUser(user);
-  //       nookies.set(undefined, "token", token, { path: "/" });
-  //     }
-  //     setLoading(false);
-  //   });
-  // }, []);
+  useEffect(() => {
+    return onIdTokenChanged(auth, async (user) => {
+      setLoading(true);
+      if (!user) {
+        setUser(null);
+        nookies.set(undefined, "token", "", { path: "/" });
+      } else {
+        const token = await user.getIdToken();
+        setUser(user);
+        nookies.set(undefined, "token", token, { path: "/" });
+      }
+      setLoading(false);
+    });
+  }, []);
 
   useEffect(() => {
     const handle = setInterval(async () => {
