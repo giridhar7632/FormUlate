@@ -8,6 +8,7 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { auth } from "./clientApp";
+import { cookies } from "next/headers";
 
 export function onAuthStateChanged(cb: any) {
   return _onAuthStateChanged(auth, cb);
@@ -17,8 +18,14 @@ export async function signInWithGoogle() {
   const provider = new GoogleAuthProvider();
 
   try {
-    const res = await signInWithPopup(auth, provider);
-    return res;
+    const result = await signInWithPopup(auth, provider);
+    const credential = GoogleAuthProvider.credentialFromResult(result);
+    const token = credential?.accessToken;
+    if(token){
+      (await cookies()).set("token", token);
+    }
+
+    return result;
   } catch (error: any) {
     console.error("Error signing in with Google", error);
     if (error.code === "auth/account-exists-with-different-credential") {
@@ -33,8 +40,14 @@ export async function signInWithGitHub() {
   const provider = new GithubAuthProvider();
 
   try {
-    const res = await signInWithPopup(auth, provider);
-    return res;
+    const result = await signInWithPopup(auth, provider);
+    const credential = GithubAuthProvider.credentialFromResult(result);
+    const token = credential?.accessToken;
+    if(token){
+      (await cookies()).set("token", token);
+    }
+
+    return result;
   } catch (error: any) {
     console.error("Error signing in with GitHub", error);
     if (error.code === "auth/account-exists-with-different-credential") {
