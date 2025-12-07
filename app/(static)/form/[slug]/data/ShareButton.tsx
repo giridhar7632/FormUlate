@@ -1,7 +1,7 @@
 "use client";
 
 import Button from "@/components/Button";
-import { Dialog, Transition } from "@headlessui/react";
+import { Dialog, DialogPanel, DialogTitle, Transition, TransitionChild } from "@headlessui/react";
 import React, { Fragment, useEffect, useState } from "react";
 import copy from "copy-text-to-clipboard";
 import toast from "react-hot-toast";
@@ -29,10 +29,9 @@ const ShareButton = ({ slug }: { slug: string }) => {
       >
         Copy link
       </button>
-      <Transition appear show={isOpen} as={Fragment}>
-        <Dialog as="div" className="relative z-10" onClose={handleClose}>
-          <Transition.Child
-            as={Fragment}
+      <Transition appear show={isOpen}>
+        <Dialog as="div" className="relative z-[100]" onClose={handleClose}>
+          <TransitionChild
             enter="ease-out duration-300"
             enterFrom="opacity-0"
             enterTo="opacity-100"
@@ -40,13 +39,12 @@ const ShareButton = ({ slug }: { slug: string }) => {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <div className="z-100 fixed inset-0 bg-black bg-opacity-25" />
-          </Transition.Child>
+            <div className="fixed inset-0 bg-black/40 backdrop-blur-sm" />
+          </TransitionChild>
 
           <div className="fixed inset-0 overflow-y-auto">
             <div className="flex min-h-full items-center justify-center p-4 text-center">
-              <Transition.Child
-                as={Fragment}
+              <TransitionChild
                 enter="ease-out duration-300"
                 enterFrom="opacity-0 scale-95"
                 enterTo="opacity-100 scale-100"
@@ -54,13 +52,13 @@ const ShareButton = ({ slug }: { slug: string }) => {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-xl bg-white dark:bg-gray-800 p-6 text-left align-middle shadow-xl transition-all">
-                  <Dialog.Title
+                <DialogPanel className="w-full max-w-md transform overflow-hidden rounded-xl bg-white dark:bg-gray-800 p-6 text-left align-middle shadow-xl transition-all">
+                  <DialogTitle
                     as="h3"
                     className="mb-5 text-lg font-semibold leading-6 text-gray-800 dark:text-gray-100"
                   >
                     Share form link
-                  </Dialog.Title>
+                  </DialogTitle>
                   <div className="my-2 flex flex-col items-center gap-2">
                     <input
                       name="link"
@@ -97,8 +95,8 @@ const ShareButton = ({ slug }: { slug: string }) => {
                       Cancel
                     </Button>
                   </div> */}
-                </Dialog.Panel>
-              </Transition.Child>
+                </DialogPanel>
+              </TransitionChild>
             </div>
           </div>
         </Dialog>

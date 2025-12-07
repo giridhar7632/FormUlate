@@ -27,6 +27,10 @@ export default function VerifyEmail() {
       setLoading(true);
       const auth = getAuth();
       const callback = urlParams.get("callbackUrl") ?? "/app";
+      console.log({
+        email,
+        href: window.location.href,
+      });
       signInWithEmailLink(auth, email, window.location.href)
         .then((userCredential) => {
           console.log("User signed in:", userCredential);

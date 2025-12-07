@@ -9,7 +9,7 @@ import { firebaseConfig } from "./config";
 import { getAuth } from "firebase/auth";
 
 export async function getAuthenticatedAppForUser() {
-  let idToken = headers().get("Authorization")?.split("Bearer ")[1];
+  let idToken = (await headers()).get("Authorization")?.split("Bearer ")[1];
   console.log({ idToken });
   // if (!idToken) {
   //   const cookieStore = cookies();

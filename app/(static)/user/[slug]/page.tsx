@@ -5,9 +5,10 @@ import { getUserData } from "@/app/actions";
 export default async function Profile({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
-  const user = await getUserData(params.slug);
+  const { slug } = await params
+  const user = await getUserData(slug);
 
   return (
     <div className="w-92 sm:w-96 flex flex-col border items-center mx-auto bg-white border-gray-200 dark:bg-gray-800 dark:border-gray-600 rounded-2xl p-6 md:p-12">

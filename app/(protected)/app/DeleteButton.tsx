@@ -2,11 +2,11 @@
 
 import Button from "@/components/Button";
 import { deleteForm } from "@/lib/firebase/firestore";
-import { Dialog, Transition } from "@headlessui/react";
-import React, { Fragment, useState } from "react";
+import { Dialog, DialogPanel, DialogTitle, Transition, TransitionChild } from "@headlessui/react";
+import React, { Dispatch, Fragment, SetStateAction, useState } from "react";
 import toast from "react-hot-toast";
 
-const DeleteButton = ({ slug, id }: { slug: string; id: string }) => {
+const DeleteButton = ({ slug, id, removeForm }: { slug: string; id: string; removeForm: (id: string) => void }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleClose = () => setIsOpen(false);
@@ -15,6 +15,7 @@ const DeleteButton = ({ slug, id }: { slug: string; id: string }) => {
   async function handleDelete() {
     try {
       const res = await deleteForm(id, slug);
+      removeForm(id)
       setIsOpen(false);
       toast.success(res?.message || "Form deleted!");
     } catch (error) {
@@ -32,8 +33,8 @@ const DeleteButton = ({ slug, id }: { slug: string; id: string }) => {
         Delete form
       </button>
       <Transition appear show={isOpen} as={Fragment}>
-        <Dialog as="div" className="relative z-10" onClose={handleClose}>
-          <Transition.Child
+        <Dialog as="div" className="relative z-[100]" onClose={handleClose}>
+          <TransitionChild
             as={Fragment}
             enter="ease-out duration-300"
             enterFrom="opacity-0"
@@ -42,12 +43,12 @@ const DeleteButton = ({ slug, id }: { slug: string; id: string }) => {
             leaveFrom="opacity-100"
             leaveTo="opacity-0"
           >
-            <div className="z-100 fixed inset-0 bg-black bg-opacity-25" />
-          </Transition.Child>
+            <div className="fixed inset-0 bg-black/40 backdrop-blur-sm" />
+          </TransitionChild>
 
           <div className="fixed inset-0 overflow-y-auto">
             <div className="flex min-h-full items-center justify-center p-4 text-center">
-              <Transition.Child
+              <TransitionChild
                 as={Fragment}
                 enter="ease-out duration-300"
                 enterFrom="opacity-0 scale-95"
@@ -56,13 +57,13 @@ const DeleteButton = ({ slug, id }: { slug: string; id: string }) => {
                 leaveFrom="opacity-100 scale-100"
                 leaveTo="opacity-0 scale-95"
               >
-                <Dialog.Panel className="w-full max-w-md transform overflow-hidden rounded-xl bg-white dark:bg-gray-800 p-6 text-left align-middle shadow-xl transition-all">
-                  <Dialog.Title
+                <DialogPanel className="w-full max-w-md transform overflow-hidden rounded-xl bg-white dark:bg-gray-800 p-6 text-left align-middle shadow-xl transition-all">
+                  <DialogTitle
                     as="h3"
                     className="mb-5 text-lg font-semibold leading-6 text-gray-800 dark:text-gray-100"
                   >
                     Delete form
-                  </Dialog.Title>
+                  </DialogTitle>
                   <div className="my-2 flex flex-col items-center gap-2">
                     <p>
                       Are you sure you want to delete this form? This will also
@@ -86,8 +87,8 @@ const DeleteButton = ({ slug, id }: { slug: string; id: string }) => {
                       Delete
                     </Button>
                   </div>
-                </Dialog.Panel>
-              </Transition.Child>
+                </DialogPanel>
+              </TransitionChild>
             </div>
           </div>
         </Dialog>

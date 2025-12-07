@@ -1,87 +1,103 @@
 {
-  "title": "Luggage Information Form",
-  "action": "create",
-  "fields": [
-    {
-      "field": "input",
-      "type": "text",
-      "name": "name",
-      "label": "Your Name",
-      "placeholder": "John Doe",
-      "required": true
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string",
+      "description": "Title of the form"
     },
-    {
-      "field": "input",
-      "type": "email",
-      "name": "email",
-      "label": "Your Email",
-      "placeholder": "johndoe@example.com",
-      "required": true
+    "action": {
+      "type": "string",
+      "description": "The action intent: create, update, or delete",
+      "enum": [
+        "create",
+        "update"
+      ]
     },
-    {
-      "field": "select",
-      "type": "dropdown",
-      "name": "luggageType",
-      "label": "Type of Luggage",
-      "options": [
-        {
-          "value": "suitcase",
-          "label": "Suitcase"
+    "fields": {
+      "type": "array",
+      "description": "List of form fields",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "field": {
+            "type": "string",
+            "description": "HTML element (e.g., input, select, textarea)"
+          },
+          "name": {
+            "type": "string"
+          },
+          "label": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string"
+          },
+          "placeholder": {
+            "type": "string"
+          },
+          "disabled": {
+            "type": "boolean"
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "options": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "value": {
+                  "type": "string"
+                },
+                "label": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "value",
+                "label"
+              ],
+              "propertyOrdering": [
+                "value",
+                "label",
+                "name"
+              ]
+            }
+          }
         },
-        {
-          "value": "backpack",
-          "label": "Backpack"
-        },
-        {
-          "value": "duffel",
-          "label": "Duffel Bag"
-        },
-        {
-          "value": "other",
-          "label": "Other"
-        }
-      ],
-      "required": true
-    },
-    {
-      "field": "input",
-      "type": "text",
-      "name": "luggageBrand",
-      "label": "Luggage Brand",
-      "placeholder": "Samsonite",
-      "required": false
-    },
-    {
-      "field": "input",
-      "type": "text",
-      "name": "luggageModel",
-      "label": "Luggage Model",
-      "placeholder": "Horizon 2.0",
-      "required": false
-    },
-    {
-      "field": "input",
-      "type": "number",
-      "name": "luggageWeight",
-      "label": "Luggage Weight (in kg)",
-      "placeholder": "20",
-      "required": true
-    },
-    {
-      "field": "input",
-      "type": "number",
-      "name": "luggageDimensions",
-      "label": "Luggage Dimensions (in cm)",
-      "placeholder": "55x40x25",
-      "required": true
-    },
-    {
-      "field": "textarea",
-      "type": "text",
-      "name": "luggageDescription",
-      "label": "Luggage Description",
-      "placeholder": "Any special features or markings on your luggage?",
-      "required": false
+        "required": [
+          "field",
+          "name",
+          "label"
+        ],
+        "propertyOrdering": [
+          "id",
+          "field",
+          "name",
+          "label",
+          "value",
+          "placeholder",
+          "disabled",
+          "required",
+          "options"
+        ]
+      }
     }
+  },
+  "required": [
+    "title",
+    "action",
+    "fields"
+  ],
+  "propertyOrdering": [
+    "title",
+    "action",
+    "fields"
   ]
 }

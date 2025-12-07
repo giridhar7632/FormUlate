@@ -97,6 +97,7 @@ export async function getFormsByUser(userId: string) {
 }
 
 export async function getFormBySlug(db: any, slug: string) {
+  console.log('SLUG: ', slug)
   if (!slug) {
     console.error("Error: Invalid ID received: ", slug);
     throw new Error("Form does not exist!");

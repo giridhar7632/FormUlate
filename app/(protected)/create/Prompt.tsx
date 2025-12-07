@@ -9,7 +9,7 @@ import { generateSlug } from "@/utils/generateSlug";
 import { useRouter } from "next/navigation";
 import toast, { CheckmarkIcon } from "react-hot-toast";
 import Spinner from "@/components/Spinner";
-import { extractAndParseJson } from "@/utils/extractAndParseJson";
+// import { extractAndParseJson } from "@/utils/extractAndParseJson";
 import Input from "@/components/Input";
 import { PageData } from "@/types/types";
 import { createDataStructure, addPage } from "@/lib/firebase/firestore";
@@ -34,11 +34,11 @@ const Prompt = () => {
     console.log("trail", cnt);
     try {
       res = await generateJson(res);
-      return extractAndParseJson(res);
+      return res;
     } catch (error) {
       console.log(error);
-      if (cnt < 5) {
-        return await fn(res, cnt + 1); // Use 'await' here
+      if (cnt < 3) {
+        return await fn(res, cnt + 1);
       } else {
         throw new Error(
           "Sorry! Gemini was unable to generate the form at the moment 😕",
@@ -54,7 +54,7 @@ const Prompt = () => {
     try {
       if (prompt !== "") {
         setGeneratingForm("started");
-        let res = (await fn(prompt)) as PageData;
+        let res = (await fn('Title: ' + title + ' Description: ' + prompt)) as PageData;
 
         console.log({ parsed: res });
         setGeneratingForm("completed");
@@ -135,7 +135,7 @@ const Prompt = () => {
           <Input
             label="Title of the form"
             name="title"
-            type="text"
+            fieldType="text"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             disabled={pending}
@@ -145,7 +145,7 @@ const Prompt = () => {
           <Input
             label="Description"
             name="description"
-            type="text"
+            fieldType="text"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
             disabled={pending}

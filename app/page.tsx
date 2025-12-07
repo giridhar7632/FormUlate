@@ -1,16 +1,32 @@
-"use client";
-
 import Link from "next/link";
 import Button from "@/components/Button";
 import ProfileMenu from "@/components/ProfileMenu";
 import Image from "next/image";
 import { getBlurDataUrl } from "@/utils/getBlurDataUrl";
-import { useAuth } from "./Auth";
+import { firebaseAdmin } from "@/lib/firebase/admin";
+import { cookies } from "next/headers";
+import { getUserData } from "./actions";
 // import { useEffect } from "react";
 // import { seedData } from "@/lib/firebase/firestore";
 
-export default function Home() {
-  const { user, loading } = useAuth() || {};
+export default async function Home() {
+  const cookieStore = await cookies();
+  // console.log("home cookie", cookieStore.get("token"));
+  const token = cookieStore.get("token")?.value || "";
+  let uid;
+  try {
+    // Verify the ID token on the server-side
+    const res = await firebaseAdmin.auth().verifyIdToken(token);
+    uid = res.uid;
+  } catch (error) {
+    console.error("Error verifying ID token:", error);
+    // Handle verification error (e.g., redirect to login)
+  }
+
+  let user;
+  if (uid) {
+    user = await (await getUserData(uid)).toJSON();
+  }
 
   return (
     <>
@@ -25,12 +41,10 @@ export default function Home() {
           <span className="sr-only">FormUlate</span>
         </Link>
         <nav className="ml-auto flex gap-4 sm:gap-6">
-          {loading ? (
-            "..."
-          ) : user ? (
+          {user ? (
             <div className="flex items-center gap-2">
-              <Link className="hidden md:block" href={"/create"}>
-                <Button>Create new form</Button>
+              <Link className="hidden md:block" href={"/app"}>
+                <Button>Dashboard</Button>
               </Link>
               <ProfileMenu {...user} />
             </div>
@@ -57,7 +71,7 @@ export default function Home() {
                   generated with AI
                 </p>
                 <Link
-                  href={"/auth/login"}
+                  href={user ? "/app" : "/auth/login"}
                   className="space-x-4 mx-auto md:mx-0"
                 >
                   <Button variant="outline">Get Started</Button>

@@ -7,6 +7,7 @@ import { ThemeSwitch } from "@/components/Theme";
 import { cookies } from "next/headers";
 import { firebaseAdmin } from "@/lib/firebase/admin";
 import { getUserData } from "../actions";
+import { AuthProvider } from "@/app/Auth";
 
 export default async function AuthLayout({
   children,
@@ -14,7 +15,7 @@ export default async function AuthLayout({
   children: React.ReactNode;
 }) {
   const cookieStore = await cookies();
-  console.log("cookie", cookieStore.get("token"));
+  // console.log("cookie", cookieStore.get("token"));
   const token = await firebaseAdmin
     .auth()
     .verifyIdToken(cookieStore.get("token")?.value ?? "");
@@ -32,6 +33,8 @@ export default async function AuthLayout({
   if (!uid) redirect("/auth/login");
 
   return (
+
+    <AuthProvider>
     <div className="max-w-5xl min-h-screen px-4 lg:px-0 mx-auto overflow-x-hidden">
       <nav className="flex py-4 items-center justify-between px-2">
         <Link className="flex items-center justify-center" href="/">
@@ -58,5 +61,6 @@ export default async function AuthLayout({
         {children}
       </main>
     </div>
+    </AuthProvider>
   );
 }

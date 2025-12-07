@@ -46,6 +46,7 @@ export const EmailLogin = () => {
           if (!email) throw new Error("Email is required");
           await signInWithEmailLink(email, callbackUrl || `/app`);
           console.log("Email sent");
+          toast.success("Email sent successfully!");
           formRef.current?.reset();
         } catch (error: any) {
           toast.error(error.message);
@@ -56,7 +57,7 @@ export const EmailLogin = () => {
       <Input
         name={"email"}
         label={"Email"}
-        type={"email"}
+        fieldType={"email"}
         value={email}
         onChange={(e) => setEmail(e.target.value)}
         placeholder={"Email"}

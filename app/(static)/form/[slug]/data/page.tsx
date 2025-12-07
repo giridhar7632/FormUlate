@@ -27,9 +27,10 @@ export async function generateMetadata(
   parent: ResolvingMetadata,
 ): Promise<Metadata> {
   const { firebaseServerApp } = await getAuthenticatedAppForUser();
+  const { slug } = await params
   const form = await getFormBySlug(
     getFirestore(firebaseServerApp),
-    params.slug,
+    slug,
   );
 
   if (!form) {
@@ -61,10 +62,10 @@ export default async function Data({
   params,
   searchParams,
 }: {
-  params: { slug: string };
-  searchParams: { page: string };
+  params: Promise<{ slug: string }>;
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
 }) {
-  const cookieStore = cookies();
+  const cookieStore = await cookies();
   const cookie = cookieStore.get("token")?.value || "";
   if (!cookie) redirect("/auth/login");
   console.log({ cookie });
@@ -79,19 +80,21 @@ export default async function Data({
   let form;
   const { firebaseServerApp } = await getAuthenticatedAppForUser();
   const firestore = getFirestore(firebaseServerApp);
+
+  const { slug } = await params
   try {
-    form = await getFormBySlug(firestore, params.slug);
+    form = await getFormBySlug(firestore, slug);
   } catch (error: any) {
-    redirect(`/form/${params.slug}/error?error=${error.message || ""}`);
+    redirect(`/form/${slug}/error?error=${error.message || ""}`);
   }
   if (form?.createdBy?.id !== uid) {
-    redirect(`/form/${params.slug}/error`);
+    redirect(`/form/${slug}/error`);
   }
-  const pageNumber = parseInt(searchParams.page) || 1;
+  const pageNumber = parseInt((await searchParams).page as string) || 1;
 
-  const recordPagePromise = getRecords(firestore, params.slug, pageNumber);
+  const recordPagePromise = getRecords(firestore, slug, pageNumber);
 
-  const recordCountPromise = getRecordCount(firestore, params.slug);
+  const recordCountPromise = getRecordCount(firestore, slug);
 
   const [recordsPage, recordCount] = await Promise.all([
     recordPagePromise,
@@ -124,10 +127,10 @@ export default async function Data({
           <ShareForm
             title={form?.name}
             text="Hey! please submit your response here: "
-            slug={params.slug}
+            slug={slug}
           />
-          <ShareButton slug={params.slug} />
-          <Export table={params.slug} data={recordsPage} />
+          <ShareButton slug={slug} />
+          <Export table={slug} data={recordsPage} />
         </div>
       </div>
       <div className="my-6">
@@ -144,7 +147,7 @@ export default async function Data({
       </div>
       <div className="my-4">
         <Pagination
-          slug={params.slug}
+          slug={slug}
           currPage={pageNumber}
           totalPages={page.totalNumberOfPages}
         />

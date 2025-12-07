@@ -15,6 +15,9 @@ export default function Page() {
   const [error, setError] = useState("");
   const router = useRouter();
   // const forms = await getFormsByUser()
+  function removeForm(id: string) {
+    setForms((prevForms) => prevForms.filter((form) => form.id !== id));
+  }
   useEffect(() => {
     if (!loading && user) {
       setLoadingForms(true);
@@ -69,7 +72,7 @@ export default function Page() {
                   created on: {form.createdAt}
                 </p>
               </Link>
-              <FormActions id={form.id} slug={form.slug as string} />
+              <FormActions id={form.id} removeForm={removeForm} slug={form.slug as string} />
             </div>
           ))
         ) : (

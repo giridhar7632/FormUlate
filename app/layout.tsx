@@ -3,7 +3,6 @@ import { Prompt } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "react-hot-toast";
 import { ThemeProvider } from "@/components/Theme";
-import { AuthProvider } from "@/app/Auth";
 
 const prompt = Prompt({ subsets: ["latin"], weight: ["400", "500", "700"] });
 
@@ -51,8 +50,7 @@ export default async function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-        <body className={`${prompt.className} dark:bg-gray-900`}>
-          <AuthProvider>
+        <body className={`${prompt.className} bg-gray-100 dark:bg-gray-900`}>
             <ThemeProvider
               attribute="class"
               defaultTheme="system"
@@ -62,7 +60,6 @@ export default async function RootLayout({
               {children}
               <Toaster />
             </ThemeProvider>
-          </AuthProvider>
         </body>
       </html>
   );

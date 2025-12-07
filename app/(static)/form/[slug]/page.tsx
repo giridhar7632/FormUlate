@@ -11,9 +11,8 @@ import {
 } from "@/lib/firebase/serverApp";
 import { getFormBySlug } from "@/lib/firebase/firestore";
 export type PramsProps = {
-  params: { slug: string };
-  searchParams: { [key: string]: string | string[] | undefined };
-};
+  params: Promise<{ slug: string }>
+}
 
 // export async function generateStaticParams() {
 //   const forms = await xata.db.forms.getAll();
@@ -28,9 +27,10 @@ export async function generateMetadata(
   parent: ResolvingMetadata,
 ): Promise<Metadata> {
   const { firebaseServerApp } = await getAuthenticatedAppForUser();
+  const { slug } = await params
   const form = await getFormBySlug(
     getFirestore(firebaseServerApp),
-    params.slug,
+    slug,
   );
 
   if (!form) {
@@ -58,11 +58,12 @@ export async function generateMetadata(
   };
 }
 
-export default async function Page({ params }: PramsProps) {
+export default async function FormPage({ params }: PramsProps) {
   const { firebaseServerApp } = await getAuthenticatedAppForUser();
+  const { slug } = await params
   const form = await getFormBySlug(
     getFirestore(firebaseServerApp),
-    params.slug,
+    slug,
   );
 
   return form ? (
@@ -80,7 +81,7 @@ export default async function Page({ params }: PramsProps) {
       <p className="text-sm my-2">{form.description}</p>
       <div className="h-1 my-6 border border-gray-200 dark:border-gray-600"></div>
       <Form
-        table={params.slug}
+        table={slug}
         owner={form?.createdBy?.name?.split(" ")[0] as string}
         fields={form?.page.fields}
       />

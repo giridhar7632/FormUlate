@@ -30,7 +30,6 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     });
   }, []);
 
-  // force refresh the token every 10 minutes
   useEffect(() => {
     const handle = setInterval(async () => {
       const user = getAuth().currentUser;

@@ -2,16 +2,11 @@ import Link from "next/link";
 import Image from "next/image";
 import { ThemeSwitch } from "@/components/Theme";
 import ProfileMenu from "@/components/ProfileMenu";
-import { useAuth } from "../Auth";
-import { getAuthenticatedAppForUser } from "@/lib/firebase/serverApp";
 import { cookies } from "next/headers";
 import { firebaseAdmin } from "@/lib/firebase/admin";
 import { getUserData } from "../actions";
-import { redirect } from "next/navigation";
-// import Button from "@/components/Button"
-// import ProfileMenu from "@/components/ProfileMenu"
 
-export default async function AuthLayout({
+export default async function ProtectedLayout({
   children,
 }: {
   children: React.ReactNode;
@@ -27,9 +22,6 @@ export default async function AuthLayout({
     console.error("Error verifying ID token:", error);
     // Handle verification error (e.g., redirect to login)
   }
-  // if (!uid) {
-  //   redirect("/login");
-  // }
 
   let user;
   if (uid) {
