@@ -15,14 +15,25 @@ export default async function AuthLayout({
   children: React.ReactNode;
 }) {
   const cookieStore = await cookies();
-  // console.log("cookie", cookieStore.get("token"));
-  const token = await firebaseAdmin
-    .auth()
-    .verifyIdToken(cookieStore.get("token")?.value ?? "");
+  let loggedIn = false
+  let user;
+  // console.log("auth cookie", cookieStore.get("token"));
+  const token = cookieStore.get("token")?.value || "";
+  try {
+    // Verify the ID token on the server-side
+    const { uid } = await firebaseAdmin.auth().verifyIdToken(token);
+    if (uid) {
+      loggedIn = true
+      user = (await getUserData(uid)).toJSON();
+    }
+  } catch (error) {
+    console.error("Error verifying ID token:", error);
+    // Handle verification error (e.g., redirect to login)
+  }
 
-  // the user is authenticated!
-  const { uid } = token;
-  const user = (await getUserData(uid)).toJSON();
+  if (loggedIn) {
+    redirect("/app");
+  }
 
   // if (loading)
   //   return (
@@ -30,7 +41,7 @@ export default async function AuthLayout({
   //       <main className="flex-1 py-24">Loading...</main>
   //     </div>
   //   );
-  if (!uid) redirect("/auth/login");
+  if (!loggedIn) redirect("/auth/login");
 
   return (
 
@@ -47,7 +58,7 @@ export default async function AuthLayout({
           <span className="sr-only">FormUlate</span>
         </Link>
         <div className="flex items-center justify-end gap-3">
-          {user ? (
+          {loggedIn ? (
             <ProfileMenu {...user} />
           ) : (
             <Link href={"/auth/login"}>

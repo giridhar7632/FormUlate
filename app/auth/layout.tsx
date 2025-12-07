@@ -9,18 +9,23 @@ export default async function AuthLayout({
   children: React.ReactNode;
 }) {
   const cookieStore = await cookies();
+  let loggedIn = false
   // console.log("auth cookie", cookieStore.get("token"));
   const token = cookieStore.get("token")?.value || "";
-  // try {
+  try {
     // Verify the ID token on the server-side
     const { uid } = await firebaseAdmin.auth().verifyIdToken(token);
     if (uid) {
-      redirect("/app");
+      loggedIn = true
     }
-  // } catch (error) {
-  //   console.error("Error verifying ID token:", error);
-  //   // Handle verification error (e.g., redirect to login)
-  // }
+  } catch (error) {
+    console.error("Error verifying ID token:", error);
+    // Handle verification error (e.g., redirect to login)
+  }
+
+  if (loggedIn) {
+    redirect("/app");
+  }
 
   return (
     <div className="max-w-5xl min-h-screen px-4 lg:px-0 mx-auto overflow-x-hidden flex w-full h-full flex-col items-center justify-between ">
