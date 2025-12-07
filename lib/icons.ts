@@ -1,5 +1,5 @@
 import { IconTypes, IconPropsType } from "@/types/types";
-import React from "react";
+import React, { JSX } from "react";
 
 function GenerateIcon(data: IconTypes, props: IconPropsType): JSX.Element {
   return React.createElement(

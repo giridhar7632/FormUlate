@@ -83,13 +83,13 @@ const UserForm = ({ id, image, name, email }: UserFormProps) => {
       <Input
         name="name"
         label="Name"
-        type="text"
+        fieldType="text"
         placeholder={name || "Add your name"}
       />
       <Input
         name="email"
         label="Email"
-        type="email"
+        fieldType="email"
         placeholder={email || "email"}
         disabled
       />
