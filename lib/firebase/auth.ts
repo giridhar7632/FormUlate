@@ -8,7 +8,7 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { auth } from "./clientApp";
-import { cookies } from "next/headers";
+import { setCookie } from "nookies";
 
 export function onAuthStateChanged(cb: any) {
   return _onAuthStateChanged(auth, cb);
@@ -22,7 +22,7 @@ export async function signInWithGoogle() {
     const credential = GoogleAuthProvider.credentialFromResult(result);
     const token = credential?.accessToken;
     if(token){
-      (await cookies()).set("token", token);
+      setCookie(null, 'token', token, { path: "/" })
     }
 
     return result;
@@ -44,7 +44,7 @@ export async function signInWithGitHub() {
     const credential = GithubAuthProvider.credentialFromResult(result);
     const token = credential?.accessToken;
     if(token){
-      (await cookies()).set("token", token);
+      setCookie(null, 'token', token, { path: "/" })
     }
 
     return result;
