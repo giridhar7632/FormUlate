@@ -25,7 +25,7 @@ export default async function Home() {
 
   let user;
   if (uid) {
-    user = await (await getUserData(uid)).toJSON();
+    user = (await getUserData(uid)).toJSON();
   }
 
   return (

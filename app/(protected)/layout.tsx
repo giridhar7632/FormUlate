@@ -7,9 +7,8 @@ import { ThemeSwitch } from "@/components/Theme";
 import { cookies } from "next/headers";
 import { firebaseAdmin } from "@/lib/firebase/admin";
 import { getUserData } from "../actions";
-import { AuthProvider } from "@/app/Auth";
 
-export default async function AuthLayout({
+export default async function ProtectedLayout({
   children,
 }: {
   children: React.ReactNode;
@@ -17,7 +16,7 @@ export default async function AuthLayout({
   const cookieStore = await cookies();
   let loggedIn = false
   let user;
-  // console.log("auth cookie", cookieStore.get("token"));
+  // console.log("protected cookie", cookieStore.get("token"));
   const token = cookieStore.get("token")?.value || "";
   try {
     // Verify the ID token on the server-side
@@ -31,10 +30,6 @@ export default async function AuthLayout({
     // Handle verification error (e.g., redirect to login)
   }
 
-  if (loggedIn) {
-    redirect("/app");
-  }
-
   // if (loading)
   //   return (
   //     <div className="max-w-5xl min-h-screen px-4 lg:px-0 mx-auto overflow-x-hidden flex w-full h-full flex-col items-center justify-between ">
@@ -44,8 +39,6 @@ export default async function AuthLayout({
   if (!loggedIn) redirect("/auth/login");
 
   return (
-
-    <AuthProvider>
     <div className="max-w-5xl min-h-screen px-4 lg:px-0 mx-auto overflow-x-hidden">
       <nav className="flex py-4 items-center justify-between px-2">
         <Link className="flex items-center justify-center" href="/">
@@ -72,6 +65,5 @@ export default async function AuthLayout({
         {children}
       </main>
     </div>
-    </AuthProvider>
   );
 }
